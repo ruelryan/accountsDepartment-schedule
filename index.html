@@ -3,645 +3,209 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accounts Department Volunteers — July 10-12, 2026</title>
+<title>Accounts Department Volunteers &mdash; July 10-12, 2026</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background: #f0f2f5;
-    color: #333;
-    line-height: 1.6;
+    color: #1a1a2e;
+    line-height: 1.5;
 }
-.container { max-width: 1000px; margin: 0 auto; padding: 15px; }
+.container { max-width: 960px; margin: 0 auto; padding: 12px; }
+
+/* ── Header ── */
 header {
-    background: linear-gradient(135deg, #0a1628 0%, #1a2744 50%, #0d1f3c 100%);
-    color: #fff; padding: 30px 20px; text-align: center;
-    border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, #0f1b2d 0%, #1b2a4a 50%, #0d1a33 100%);
+    color: #fff; padding: 24px 16px; text-align: center;
+    border-radius: 14px; margin-bottom: 20px;
+    box-shadow: 0 4px 24px rgba(15,27,45,0.25);
 }
-header h1 { font-size: 1.8em; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
-header .subtitle { color: #d4a843; font-size: 1em; font-weight: 300; }
+header h1 { font-size: clamp(1.25rem, 5vw, 1.75rem); font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px; }
+header .subtitle { color: #d4a843; font-size: clamp(0.8rem, 3vw, 0.95rem); font-weight: 300; }
 header .badge {
-    display: inline-block; background: #d4a843; color: #0a1628;
-    padding: 4px 14px; border-radius: 20px; font-size: 0.8em; font-weight: 600; margin-top: 10px;
+    display: inline-block; background: #d4a843; color: #0f1b2d;
+    padding: 3px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; margin-top: 8px;
 }
-.nav-bar { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+
+/* ── Search Bar ── */
+.search-bar {
+    background: #fff; border-radius: 14px; padding: 16px 20px;
+    margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.search-bar label {
+    display: block; font-size: 0.78rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.8px; color: #888; margin-bottom: 8px;
+}
+.search-input-wrap {
+    display: flex; align-items: center; gap: 10px;
+    background: #f5f6f8; border: 2px solid #e0e2e6; border-radius: 12px;
+    padding: 0 16px; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input-wrap:focus-within {
+    border-color: #1b2a4a; box-shadow: 0 0 0 3px rgba(27,42,74,0.12);
+}
+.search-input-wrap .icon {
+    font-size: 1.1rem; color: #999; flex-shrink: 0;
+}
+.search-input-wrap input {
+    flex: 1; border: none; background: transparent; padding: 14px 0;
+    font-size: 1rem; outline: none; color: #1a1a2e;
+}
+.search-input-wrap input::placeholder { color: #bbb; }
+.search-clear {
+    display: none; background: none; border: none; color: #999;
+    font-size: 1.2rem; cursor: pointer; padding: 4px; line-height: 1;
+}
+.search-clear.visible { display: block; }
+.search-status {
+    font-size: 0.82rem; color: #888; margin-top: 8px; min-height: 1.2em;
+}
+.search-status strong { color: #1b2a4a; }
+.search-status .clear-link {
+    color: #1b2a4a; text-decoration: underline; cursor: pointer; font-weight: 500; margin-left: 6px;
+}
+
+/* ── Tabs ── */
+.nav-bar { display: flex; gap: 8px; margin-bottom: 16px; }
 .tab-btn {
-    flex: 1; min-width: 120px; padding: 14px 10px;
-    background: #e8ecf1; border: none; border-radius: 10px;
-    cursor: pointer; font-size: 0.95em; font-weight: 600;
-    color: #555; transition: all 0.2s; text-align: center; line-height: 1.3;
+    flex: 1; padding: 12px 8px;
+    background: #e8ecf1; border: none; border-radius: 12px;
+    cursor: pointer; font-size: 0.88rem; font-weight: 600;
+    color: #666; transition: all 0.2s; text-align: center; line-height: 1.3;
 }
-.tab-btn small { font-weight: 400; font-size: 0.85em; color: #888; }
-.tab-btn.tab-active { background: #0a1628; color: #fff; box-shadow: 0 3px 10px rgba(10,22,40,0.3); }
+.tab-btn small { font-weight: 400; font-size: 0.78rem; color: #999; }
+.tab-btn.tab-active { background: #0f1b2d; color: #fff; box-shadow: 0 3px 12px rgba(15,27,45,0.25); }
 .tab-btn.tab-active small { color: #d4a843; }
-.tab-btn:hover:not(.tab-active) { background: #d0d5de; }
+.tab-btn:hover:not(.tab-active) { background: #d5dae3; }
+
+/* ── Day Panels ── */
 .day-panel { display: none; }
+.day-panel.active { display: block; }
 .day-title {
-    color: #0a1628; font-size: 1.3em; margin-bottom: 15px;
+    color: #0f1b2d; font-size: clamp(1.05rem, 4vw, 1.25rem); margin-bottom: 12px;
     padding-bottom: 8px; border-bottom: 3px solid #d4a843;
 }
+
+/* ── Shift Cards ── */
 .shift-card {
-    background: #fff; border-radius: 10px; margin-bottom: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden;
+    background: #fff; border-radius: 12px; margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden;
+    transition: opacity 0.25s ease, transform 0.25s ease, max-height 0.4s ease;
 }
-.shift-header { background: #0a1628; color: #fff; padding: 10px 16px; font-weight: 600; font-size: 0.95em; }
-.shift-body { padding: 14px 16px; display: grid; grid-template-columns: 1fr 2fr; gap: 16px; }
-@media (max-width: 600px) { .shift-body { grid-template-columns: 1fr; } }
+.shift-card.filtered-out {
+    opacity: 0; transform: scale(0.95); max-height: 0 !important;
+    margin-bottom: 0; overflow: hidden; pointer-events: none;
+}
+.shift-card.highlighted {
+    box-shadow: 0 0 0 3px #d4a843, 0 4px 16px rgba(212,168,67,0.25);
+}
+.shift-header {
+    background: #0f1b2d; color: #fff; padding: 10px 14px;
+    font-weight: 600; font-size: 0.9rem;
+}
+.shift-body {
+    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+}
+@media (max-width: 500px) {
+    .shift-body { grid-template-columns: 1fr; gap: 10px; }
+}
 .section-mini h4 {
-    color: #555; font-size: 0.8em; text-transform: uppercase;
-    letter-spacing: 1px; margin-bottom: 8px; border-bottom: 1px solid #eee; padding-bottom: 4px;
+    color: #666; font-size: 0.72rem; text-transform: uppercase;
+    letter-spacing: 0.8px; margin-bottom: 6px; border-bottom: 1px solid #eee; padding-bottom: 4px;
 }
-.name-list { display: flex; flex-wrap: wrap; gap: 6px; }
-.name-tag { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 500; }
+.name-list { display: flex; flex-wrap: wrap; gap: 5px; }
+.name-tag {
+    display: inline-block; padding: 4px 11px; border-radius: 20px;
+    font-size: 0.82rem; font-weight: 500; white-space: nowrap;
+}
 .brother-tag { background: #dce8f5; color: #1a4972; }
 .sister-tag { background: #fce8e8; color: #a04040; }
-.box-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; }
-@media (min-width: 600px) { .box-grid { grid-template-columns: repeat(3, 1fr); } }
-.box-row { display: flex; align-items: center; gap: 8px; padding: 3px 0; font-size: 0.85em; }
+
+/* ── Box Grid ── */
+.box-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 3px; }
+@media (max-width: 400px) {
+    .box-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.box-row { display: flex; align-items: center; gap: 6px; padding: 2px 0; font-size: 0.82rem; }
 .box-num {
-    display: inline-block; background: #d4a843; color: #0a1628;
-    font-weight: 700; font-size: 0.75em; padding: 2px 8px;
-    border-radius: 10px; min-width: 48px; text-align: center;
+    display: inline-block; background: #d4a843; color: #0f1b2d;
+    font-weight: 700; font-size: 0.7rem; padding: 1px 7px;
+    border-radius: 8px; min-width: 44px; text-align: center; flex-shrink: 0;
 }
 .box-name { color: #444; }
-.counters-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+/* ── Counters & Special Roles ── */
+.counters-section,
+.special-roles-section {
+    background: #fff; border-radius: 12px; padding: 16px 18px;
+    margin-top: 8px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: opacity 0.25s ease, transform 0.25s ease, max-height 0.4s ease;
 }
-.section-title { color: #0a1628; font-size: 1.2em; margin-bottom: 4px; }
-.section-desc { color: #888; font-size: 0.85em; margin-bottom: 10px; }
-.search-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+.counters-section.filtered-out,
+.special-roles-section.filtered-out {
+    opacity: 0; transform: scale(0.95); max-height: 0 !important;
+    margin-top: 0; margin-bottom: 0; overflow: hidden; pointer-events: none;
+    padding: 0 18px;
 }
-.search-section input {
-    width: 100%; padding: 10px 14px; border: 2px solid #ddd;
-    border-radius: 8px; font-size: 1em; margin-bottom: 12px; transition: border 0.2s;
+.counters-section.highlighted,
+.special-roles-section.highlighted {
+    box-shadow: 0 0 0 3px #d4a843, 0 4px 16px rgba(212,168,67,0.25);
 }
-.search-section input:focus { border-color: #0a1628; outline: none; }
-.search-table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
-.search-table th {
-    text-align: left; padding: 8px 10px; background: #f5f6f8;
-    color: #555; font-size: 0.8em; text-transform: uppercase;
-    letter-spacing: 0.5px; border-bottom: 2px solid #ddd;
-}
-.search-table td { padding: 6px 10px; border-bottom: 1px solid #eee; vertical-align: top; }
-.search-name { font-weight: 600; white-space: nowrap; }
-.search-role { font-size: 0.8em; white-space: nowrap; }
-.search-assign { font-size: 0.85em; color: #666; }
-.stats-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 15px; }
-.stat-card { background: #f8f9fb; border-radius: 8px; padding: 14px; text-align: center; }
-.stat-card .stat-num { font-size: 1.8em; font-weight: 700; color: #0a1628; }
-.stat-card .stat-label { font-size: 0.8em; color: #888; margin-top: 2px; }
-.stat-card.brother-stat .stat-num { color: #1a4972; }
-.stat-card.sister-stat .stat-num { color: #a04040; }
-.usage-table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
-.usage-table th {
-    text-align: left; padding: 6px 10px; background: #f5f6f8;
-    color: #555; font-size: 0.75em; text-transform: uppercase;
-    letter-spacing: 0.5px; border-bottom: 2px solid #ddd;
-}
-.usage-table td { padding: 5px 10px; border-bottom: 1px solid #eee; }
-.usage-table .brother { color: #1a4972; font-weight: 600; }
-.usage-table .sister { color: #a04040; font-weight: 600; }
-footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
+.section-title { color: #0f1b2d; font-size: 1.1rem; margin-bottom: 3px; }
+.section-desc { color: #999; font-size: 0.8rem; margin-bottom: 10px; }
+.special-roles-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.special-role-item { display: flex; align-items: center; gap: 5px; }
+.special-role-desc { color: #888; font-size: 0.82rem; font-style: italic; }
+
+/* ── Footer ── */
+footer { text-align: center; padding: 16px; color: #bbb; font-size: 0.75rem; }
+
+/* ── Print ── */
 @media print {
     body { background: #fff; }
     .container { max-width: 100%; padding: 0; }
-    header { background: #0a1628 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .tab-btn { display: none; }
+    header { background: #0f1b2d !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .tab-btn, .nav-bar, .search-bar, .search-status { display: none; }
     .day-panel { display: block !important; }
-    .nav-bar { display: none; }
-    .search-section { display: none; }
-    .stats-section { display: none; }
     .shift-card { break-inside: avoid; }
-    .counters-section { break-inside: avoid; }
+    .counters-section, .special-roles-section { break-inside: avoid; }
+    .shift-card.filtered-out, .counters-section.filtered-out, .special-roles-section.filtered-out {
+        opacity: 1 !important; transform: none !important; max-height: none !important;
+        margin: inherit !important; overflow: visible !important; pointer-events: auto !important;
+        padding: inherit !important;
+    }
 }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-  background: #fff;
-  border: 2px solid #c9a84c;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 20px 0;
-}
-.special-roles-section h3 {
-  color: #1a3a5c;
-  margin-bottom: 12px;
-  font-size: 1.1rem;
-}
-.special-roles-grid {
-  display: grid;
-  gap: 10px;
-}
-.special-role-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  background: #f8f6f0;
-  border-radius: 8px;
-  font-size: 0.95rem;
-}
-.special-role-item .name-tag {
-  font-weight: 600;
-  color: #1a3a5c;
-  white-space: nowrap;
-}
-.special-role-item .special-role-desc {
-  color: #6b6b6b;
-  font-style: italic;
-}
-.section-desc {
-  color: #6b6b6b;
-  font-size: 0.85rem;
-  margin-bottom: 10px;
-}
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
-
-.special-roles-section {
-    background: #fff; border-radius: 10px; padding: 18px 20px;
-    margin-top: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.special-role-item { display: flex; align-items: center; gap: 6px; }
-.special-role-desc { color: #888; font-size: 0.85em; font-style: italic; }
 </style>
 </head>
 <body>
 <div class="container">
 <header>
     <h1>Accounts Department Volunteers</h1>
-    <div class="subtitle">July 10–12, 2026 • Three-Day Program</div>
-    <div class="badge">11 Brothers • 37 Sisters</div>
+    <div class="subtitle">July 10&ndash;12, 2026 &bull; Three-Day Program</div>
+    <div class="badge">11 Brothers &bull; 37 Sisters</div>
 </header>
+<div class="search-bar">
+    <label for="searchInput">Find Your Schedule</label>
+    <div class="search-input-wrap">
+        <span class="icon">&#x1F50D;</span>
+        <input type="text" id="searchInput" oninput="searchNames()" placeholder="Type your name&hellip;" autocomplete="off">
+        <button class="search-clear" id="searchClear" onclick="clearSearch()">&times;</button>
+    </div>
+    <div class="search-status" id="searchStatus"></div>
+</div>
 <nav class="nav-bar" role="tablist">
-<button class="tab-btn tab-active" role="tab" aria-selected="true" onclick="showDay('fri')">Friday<br><small>July 10, 2026</small></button>
-<button class="tab-btn " role="tab" aria-selected="false" onclick="showDay('sat')">Saturday<br><small>July 11, 2026</small></button>
-<button class="tab-btn " role="tab" aria-selected="false" onclick="showDay('sun')">Sunday<br><small>July 12, 2026</small></button>
+<button class="tab-btn" role="tab" aria-selected="false" onclick="showDay('fri')">Friday<br><small>July 10, 2026</small></button>
+<button class="tab-btn" role="tab" aria-selected="false" onclick="showDay('sat')">Saturday<br><small>July 11, 2026</small></button>
+<button class="tab-btn" role="tab" aria-selected="false" onclick="showDay('sun')">Sunday<br><small>July 12, 2026</small></button>
 </nav>
-<div id="day-fri" class="day-panel" role="tabpanel" style="display: block">
-<h2 class="day-title">Friday — July 10, 2026</h2>
-<div class="shift-card">
+<div id="day-fri" class="day-panel" role="tabpanel">
+<h2 class="day-title">Friday &mdash; July 10, 2026</h2>
+<div class="shift-card" data-names="daveryl quiban jemrel besere lymarie sermillas kyla marie pagaran rozyville miro jonamae degamon johna mae eme ellah tangog de paz zared mae laran scheirylene cacao danelyn casicas vea quiban">
 <div class="shift-header"><span class="shift-time">8:20am - Opening Song (Morning)</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -652,7 +216,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="charles russel sanico joshe miguel panonce schiera jane cacao jona mae case palero jerlie mae morandante">
 <div class="shift-header"><span class="shift-time">Morning Session</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -663,7 +227,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="daveryl quiban ethan razon lady jane gay johna mae eme merlie jean matunog freuss reign ponce elah manto marithony clemente kyla marie pagaran analyn clemente jercel butalon jera butalon">
 <div class="shift-header"><span class="shift-time">Closing Song (Morning) - 12:55pm</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -674,7 +238,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="vince syriel sanico charles russel sanico elexie balaga ellah tangog de paz jonamae degamon zared mae laran rozyville miro quenette jean de paz erhian gail razon princess nikee xyle aves jesyl salinas danelyn casicas">
 <div class="shift-header"><span class="shift-time">12:55pm - Opening Song (Afternoon)</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -685,7 +249,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="joshe miguel panonce ethan razon jercel butalon nicole  altura lady jane gay">
 <div class="shift-header"><span class="shift-time">Afternoon Session</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -696,7 +260,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="jemrel besere cyros rexes madura jamilah karen mausisa jona mae case palero marithony clemente jerian nituda jesyl salinas faith talavera mary grace dasal scheirylene cacao erhian gail razon schiera jane cacao">
 <div class="shift-header"><span class="shift-time">Closing Song (Afternoon) - End</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -708,9 +272,9 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 
 </div>
-<div id="day-sat" class="day-panel" role="tabpanel" style="display: none">
-<h2 class="day-title">Saturday — July 11, 2026</h2>
-<div class="shift-card">
+<div id="day-sat" class="day-panel" role="tabpanel">
+<h2 class="day-title">Saturday &mdash; July 11, 2026</h2>
+<div class="shift-card" data-names="cyros rexes madura charles russel sanico jamilah karen mausisa faith talavera lymarie sermillas kyla marie pagaran danelyn casicas freuss reign ponce ellah tangog de paz jesyl salinas elexie balaga princess nikee xyle aves">
 <div class="shift-header"><span class="shift-time">8:20am - Opening Song (Morning)</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -721,7 +285,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="jedloyd rosalejos daveryl quiban scheirylene cacao jera butalon elah manto">
 <div class="shift-header"><span class="shift-time">Morning Session</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -732,7 +296,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="vince syriel sanico charles russel sanico faith talavera ellah tangog de paz haidee bulanon merlie jean matunog johna mae eme mary grace dasal analyn clemente cyra mae elexie balaga lady jane gay">
 <div class="shift-header"><span class="shift-time">Closing Song (Morning) - 12:55pm</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -743,7 +307,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="jedloyd rosalejos jeddan jusay quenette jean de paz zared mae laran elah manto princess nikee xyle aves rozyville miro erhian gail razon jona mae case palero freuss reign ponce jerlie mae morandante marithony clemente">
 <div class="shift-header"><span class="shift-time">12:55pm - Opening Song (Afternoon)</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -754,7 +318,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="daveryl quiban joshe miguel panonce danelyn casicas jera butalon jercel butalon">
 <div class="shift-header"><span class="shift-time">Afternoon Session</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -765,7 +329,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="jeddan jusay ethan razon anja raye casicas jonamae degamon lady jane gay kyla marie pagaran marithony clemente johna mae eme analyn clemente zared mae laran merlie jean matunog schiera jane cacao">
 <div class="shift-header"><span class="shift-time">Closing Song (Afternoon) - End</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -777,9 +341,9 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 
 </div>
-<div id="day-sun" class="day-panel" role="tabpanel" style="display: none">
-<h2 class="day-title">Sunday — July 12, 2026</h2>
-<div class="shift-card">
+<div id="day-sun" class="day-panel" role="tabpanel">
+<h2 class="day-title">Sunday &mdash; July 12, 2026</h2>
+<div class="shift-card" data-names="jemrel besere cyros rexes madura schiera jane cacao jerian nituda haidee bulanon lady jane gay jera butalon vea quiban kyla marie pagaran faith talavera ellah tangog de paz freuss reign ponce">
 <div class="shift-header"><span class="shift-time">8:20am - Opening Song (Morning)</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -790,7 +354,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="vince syriel sanico charles russel sanico lymarie sermillas cyra mae jona mae case palero">
 <div class="shift-header"><span class="shift-time">Morning Session</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -801,7 +365,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="cyros rexes madura jedloyd rosalejos princess nikee xyle aves jonamae degamon faith talavera analyn clemente elexie balaga ellah tangog de paz elah manto danelyn casicas rozyville miro freuss reign ponce">
 <div class="shift-header"><span class="shift-time">Closing Song (Morning) - 12:55pm</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -812,7 +376,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="jeddan jusay daveryl quiban marithony clemente jerlie mae morandante johna mae eme zared mae laran erhian gail razon mary grace dasal jercel butalon quenette jean de paz merlie jean matunog nicole  altura">
 <div class="shift-header"><span class="shift-time">12:55pm - Opening Song (Afternoon)</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -823,7 +387,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="joshe miguel panonce ethan razon jerian nituda anja raye casicas schiera jane cacao">
 <div class="shift-header"><span class="shift-time">Afternoon Session</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -834,7 +398,7 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="shift-card">
+<div class="shift-card" data-names="daveryl quiban jedloyd rosalejos jona mae case palero jerlie mae morandante mary grace dasal jamilah karen mausisa lymarie sermillas johna mae eme erhian gail razon elexie balaga analyn clemente princess nikee xyle aves">
 <div class="shift-header"><span class="shift-time">Closing Song (Afternoon) - End</span></div>
 <div class="shift-body">
 <div class="section-mini"><h4>Key Brothers</h4>
@@ -846,13 +410,13 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 
 </div>
-<div class="counters-section">
+<div class="counters-section" data-names="jaye kayla rosal andie balicastro vince syriel sanico jemrel besere john carlo jusay scheirylene cacao keziah bautista karylle altura">
 <h2 class="section-title">Counters — Sunday, July 12</h2>
 <p class="section-desc">Count after afternoon session ends</p>
 <div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Andie Balicastro</span><span class="name-tag brother-tag">Vince Syriel Sanico</span><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">John Carlo Jusay</span><span class="name-tag sister-tag">Scheirylene Cacao</span><span class="name-tag sister-tag">Keziah Bautista</span><span class="name-tag sister-tag">Karylle Altura</span></div>
 </div>
 
-<div class="special-roles-section">
+<div class="special-roles-section" data-names="dale lao flores gomer dohiling">
 <h2 class="section-title">Special Roles</h2>
 <p class="section-desc">These volunteers serve in non-shift capacities</p>
 <div class="special-roles-grid">
@@ -861,86 +425,82 @@ footer { text-align: center; padding: 20px; color: #999; font-size: 0.8em; }
 </div>
 </div>
 
-<div class="search-section">
-    <h2 class="section-title">Search Volunteer Schedule</h2>
-    <input type="text" id="searchInput" onkeyup="searchNames()" placeholder="Type a name to search..." autocomplete="off">
-    <div style="max-height: 400px; overflow-y: auto;">
-    <table class="search-table" id="searchTable">
-        <thead><tr><th>Name</th><th>Role</th><th>Assignments</th></tr></thead>
-        <tbody>
-<tr class="search-row"><td class="search-name">Andie Balicastro</td><td class="search-role">Brother</td><td class="search-assign">Sunday - Counter; Sunday - Counter</td></tr>
-<tr class="search-row"><td class="search-name">Charles Russel Sanico</td><td class="search-role">Brother</td><td class="search-assign">Friday - Key Brother (12:55pm - Opening Song (Afternoon)); Friday - Key Brother (Morning Session); Saturday - Key Brother (Closing Song (Morning) - 12:55pm); Saturday - Key Brother (8:20am - Opening Song (Morning)); Sunday - Key Brother (Morning Session)</td></tr>
-<tr class="search-row"><td class="search-name">Cyros Rexes Madura</td><td class="search-role">Brother</td><td class="search-assign">Friday - Key Brother (Closing Song (Afternoon) - End); Saturday - Key Brother (8:20am - Opening Song (Morning)); Sunday - Key Brother (Closing Song (Morning) - 12:55pm); Sunday - Key Brother (8:20am - Opening Song (Morning))</td></tr>
-<tr class="search-row"><td class="search-name">Daveryl Quiban</td><td class="search-role">Brother</td><td class="search-assign">Friday - Key Brother (8:20am - Opening Song (Morning)); Friday - Key Brother (Closing Song (Morning) - 12:55pm); Saturday - Key Brother (Morning Session); Saturday - Key Brother (Afternoon Session); Sunday - Key Brother (Closing Song (Afternoon) - End); Sunday - Key Brother (12:55pm - Opening Song (Afternoon))</td></tr>
-<tr class="search-row"><td class="search-name">Ethan Razon</td><td class="search-role">Brother</td><td class="search-assign">Friday - Key Brother (Closing Song (Morning) - 12:55pm); Friday - Key Brother (Afternoon Session); Saturday - Key Brother (Closing Song (Afternoon) - End); Sunday - Key Brother (Afternoon Session)</td></tr>
-<tr class="search-row"><td class="search-name">Jeddan Jusay</td><td class="search-role">Brother</td><td class="search-assign">Saturday - Key Brother (12:55pm - Opening Song (Afternoon)); Saturday - Key Brother (Closing Song (Afternoon) - End); Sunday - Key Brother (12:55pm - Opening Song (Afternoon))</td></tr>
-<tr class="search-row"><td class="search-name">Jedloyd Rosalejos</td><td class="search-role">Brother</td><td class="search-assign">Saturday - Key Brother (12:55pm - Opening Song (Afternoon)); Saturday - Key Brother (Morning Session); Sunday - Key Brother (Closing Song (Afternoon) - End); Sunday - Key Brother (Closing Song (Morning) - 12:55pm)</td></tr>
-<tr class="search-row"><td class="search-name">Jemrel Besere</td><td class="search-role">Brother</td><td class="search-assign">Friday - Key Brother (8:20am - Opening Song (Morning)); Friday - Key Brother (Closing Song (Afternoon) - End); Sunday - Key Brother (8:20am - Opening Song (Morning)); Sunday - Counter; Sunday - Counter</td></tr>
-<tr class="search-row"><td class="search-name">John Carlo Jusay</td><td class="search-role">Brother</td><td class="search-assign">Sunday - Counter; Sunday - Counter</td></tr>
-<tr class="search-row"><td class="search-name">Joshe Miguel Panonce</td><td class="search-role">Brother</td><td class="search-assign">Friday - Key Brother (Morning Session); Friday - Key Brother (Afternoon Session); Saturday - Key Brother (Afternoon Session); Sunday - Key Brother (Afternoon Session)</td></tr>
-<tr class="search-row"><td class="search-name">Vince Syriel Sanico</td><td class="search-role">Brother</td><td class="search-assign">Friday - Key Brother (12:55pm - Opening Song (Afternoon)); Saturday - Key Brother (Closing Song (Morning) - 12:55pm); Sunday - Key Brother (Morning Session); Sunday - Counter; Sunday - Counter</td></tr>
-<tr class="search-row"><td class="search-name">Analyn Clemente</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (Closing Song (Afternoon) - End); Sunday - Box (Closing Song (Afternoon) - End); Sunday - Box (Closing Song (Morning) - 12:55pm)</td></tr>
-<tr class="search-row"><td class="search-name">Anja Raye Casicas</td><td class="search-role">Sister</td><td class="search-assign">Saturday - Box (Closing Song (Afternoon) - End); Sunday - Box (Afternoon Session)</td></tr>
-<tr class="search-row"><td class="search-name">Cyra Mae</td><td class="search-role">Sister</td><td class="search-assign">Saturday - Box (Closing Song (Morning) - 12:55pm); Sunday - Box (Morning Session)</td></tr>
-<tr class="search-row"><td class="search-name">Danelyn Casicas</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (8:20am - Opening Song (Morning)); Friday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (8:20am - Opening Song (Morning)); Saturday - Box (Afternoon Session); Sunday - Box (Closing Song (Morning) - 12:55pm)</td></tr>
-<tr class="search-row"><td class="search-name">Elah Manto</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (Morning Session); Sunday - Box (Closing Song (Morning) - 12:55pm)</td></tr>
-<tr class="search-row"><td class="search-name">Elexie Balaga</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (8:20am - Opening Song (Morning)); Sunday - Box (Closing Song (Afternoon) - End); Sunday - Box (Closing Song (Morning) - 12:55pm)</td></tr>
-<tr class="search-row"><td class="search-name">Ellah Tangog De Paz</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (8:20am - Opening Song (Morning)); Friday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (8:20am - Opening Song (Morning)); Sunday - Box (Closing Song (Morning) - 12:55pm); Sunday - Box (8:20am - Opening Song (Morning))</td></tr>
-<tr class="search-row"><td class="search-name">Erhian Gail Razon</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (12:55pm - Opening Song (Afternoon)); Friday - Box (Closing Song (Afternoon) - End); Saturday - Box (12:55pm - Opening Song (Afternoon)); Sunday - Box (Closing Song (Afternoon) - End); Sunday - Box (12:55pm - Opening Song (Afternoon))</td></tr>
-<tr class="search-row"><td class="search-name">Faith Talavera</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Afternoon) - End); Saturday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (8:20am - Opening Song (Morning)); Sunday - Box (Closing Song (Morning) - 12:55pm); Sunday - Box (8:20am - Opening Song (Morning))</td></tr>
-<tr class="search-row"><td class="search-name">Freuss Reign Ponce</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (8:20am - Opening Song (Morning)); Sunday - Box (Closing Song (Morning) - 12:55pm); Sunday - Box (8:20am - Opening Song (Morning))</td></tr>
-<tr class="search-row"><td class="search-name">Haidee Bulanon</td><td class="search-role">Sister</td><td class="search-assign">Saturday - Box (Closing Song (Morning) - 12:55pm); Sunday - Box (8:20am - Opening Song (Morning))</td></tr>
-<tr class="search-row"><td class="search-name">Jamilah Karen Mausisa</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Afternoon) - End); Saturday - Box (8:20am - Opening Song (Morning)); Sunday - Box (Closing Song (Afternoon) - End)</td></tr>
-<tr class="search-row"><td class="search-name">Jaye Kayla Rosal</td><td class="search-role">Sister</td><td class="search-assign">Sunday - Counter; Sunday - Counter</td></tr>
-<tr class="search-row"><td class="search-name">Jera Butalon</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (Morning Session); Saturday - Box (Afternoon Session); Sunday - Box (8:20am - Opening Song (Morning))</td></tr>
-<tr class="search-row"><td class="search-name">Jercel Butalon</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Morning) - 12:55pm); Friday - Box (Afternoon Session); Saturday - Box (Afternoon Session); Sunday - Box (12:55pm - Opening Song (Afternoon))</td></tr>
-<tr class="search-row"><td class="search-name">Jerian Nituda</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Afternoon) - End); Sunday - Box (8:20am - Opening Song (Morning)); Sunday - Box (Afternoon Session)</td></tr>
-<tr class="search-row"><td class="search-name">Jerlie Mae Morandante</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Morning Session); Saturday - Box (12:55pm - Opening Song (Afternoon)); Sunday - Box (Closing Song (Afternoon) - End); Sunday - Box (12:55pm - Opening Song (Afternoon))</td></tr>
-<tr class="search-row"><td class="search-name">Jesyl Salinas</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (12:55pm - Opening Song (Afternoon)); Friday - Box (Closing Song (Afternoon) - End); Saturday - Box (8:20am - Opening Song (Morning))</td></tr>
-<tr class="search-row"><td class="search-name">Johna Mae Eme</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (8:20am - Opening Song (Morning)); Friday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (Closing Song (Afternoon) - End); Sunday - Box (Closing Song (Afternoon) - End); Sunday - Box (12:55pm - Opening Song (Afternoon))</td></tr>
-<tr class="search-row"><td class="search-name">Jona Mae Case Palero</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Afternoon) - End); Friday - Box (Morning Session); Saturday - Box (12:55pm - Opening Song (Afternoon)); Sunday - Box (Closing Song (Afternoon) - End); Sunday - Box (Morning Session)</td></tr>
-<tr class="search-row"><td class="search-name">Jonamae Degamon</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (8:20am - Opening Song (Morning)); Friday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (Closing Song (Afternoon) - End); Sunday - Box (Closing Song (Morning) - 12:55pm)</td></tr>
-<tr class="search-row"><td class="search-name">Karylle Altura</td><td class="search-role">Sister</td><td class="search-assign">Sunday - Counter; Sunday - Counter</td></tr>
-<tr class="search-row"><td class="search-name">Keziah Bautista</td><td class="search-role">Sister</td><td class="search-assign">Sunday - Counter; Sunday - Counter</td></tr>
-<tr class="search-row"><td class="search-name">Kyla Marie Pagaran</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (8:20am - Opening Song (Morning)); Friday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (Closing Song (Afternoon) - End); Saturday - Box (8:20am - Opening Song (Morning)); Sunday - Box (8:20am - Opening Song (Morning))</td></tr>
-<tr class="search-row"><td class="search-name">Lady Jane Gay</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Morning) - 12:55pm); Friday - Box (Afternoon Session); Saturday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (Closing Song (Afternoon) - End); Sunday - Box (8:20am - Opening Song (Morning))</td></tr>
-<tr class="search-row"><td class="search-name">Lymarie Sermillas</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (8:20am - Opening Song (Morning)); Saturday - Box (8:20am - Opening Song (Morning)); Sunday - Box (Closing Song (Afternoon) - End); Sunday - Box (Morning Session)</td></tr>
-<tr class="search-row"><td class="search-name">Marithony Clemente</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Morning) - 12:55pm); Friday - Box (Closing Song (Afternoon) - End); Saturday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (Closing Song (Afternoon) - End); Sunday - Box (12:55pm - Opening Song (Afternoon))</td></tr>
-<tr class="search-row"><td class="search-name">Mary Grace Dasal</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Afternoon) - End); Saturday - Box (Closing Song (Morning) - 12:55pm); Sunday - Box (Closing Song (Afternoon) - End); Sunday - Box (12:55pm - Opening Song (Afternoon))</td></tr>
-<tr class="search-row"><td class="search-name">Merlie Jean Matunog</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (Closing Song (Morning) - 12:55pm); Saturday - Box (Closing Song (Afternoon) - End); Sunday - Box (12:55pm - Opening Song (Afternoon))</td></tr>
-<tr class="search-row"><td class="search-name">Nicole  Altura</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Afternoon Session); Sunday - Box (12:55pm - Opening Song (Afternoon))</td></tr>
-<tr class="search-row"><td class="search-name">Princess Nikee Xyle Aves</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (8:20am - Opening Song (Morning)); Sunday - Box (Closing Song (Afternoon) - End); Sunday - Box (Closing Song (Morning) - 12:55pm)</td></tr>
-<tr class="search-row"><td class="search-name">Quenette Jean De Paz</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (12:55pm - Opening Song (Afternoon)); Sunday - Box (12:55pm - Opening Song (Afternoon))</td></tr>
-<tr class="search-row"><td class="search-name">Rozyville Miro</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (8:20am - Opening Song (Morning)); Friday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (12:55pm - Opening Song (Afternoon)); Sunday - Box (Closing Song (Morning) - 12:55pm)</td></tr>
-<tr class="search-row"><td class="search-name">Scheirylene Cacao</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (8:20am - Opening Song (Morning)); Friday - Box (Closing Song (Afternoon) - End); Saturday - Box (Morning Session); Sunday - Counter; Sunday - Counter</td></tr>
-<tr class="search-row"><td class="search-name">Schiera Jane Cacao</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (Closing Song (Afternoon) - End); Friday - Box (Morning Session); Saturday - Box (Closing Song (Afternoon) - End); Sunday - Box (8:20am - Opening Song (Morning)); Sunday - Box (Afternoon Session)</td></tr>
-<tr class="search-row"><td class="search-name">Vea Quiban</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (8:20am - Opening Song (Morning)); Sunday - Box (8:20am - Opening Song (Morning))</td></tr>
-<tr class="search-row"><td class="search-name">Zared Mae Laran</td><td class="search-role">Sister</td><td class="search-assign">Friday - Box (8:20am - Opening Song (Morning)); Friday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (12:55pm - Opening Song (Afternoon)); Saturday - Box (Closing Song (Afternoon) - End); Sunday - Box (12:55pm - Opening Song (Afternoon))</td></tr>
-        </tbody>
-    </table>
-    </div>
-</div>
-<footer>Generated with conflict checking enabled</footer>
+<footer>Generated with conflict checking &mdash; Accounts Department</footer>
 </div>
 <script>
 function showDay(day) {
-    document.querySelectorAll(".day-panel").forEach(p => p.style.display = "none");
+    document.querySelectorAll(".day-panel").forEach(p => p.classList.remove("active"));
     document.querySelectorAll(".tab-btn").forEach(b => {
         b.classList.remove("tab-active");
         b.setAttribute("aria-selected", "false");
     });
-    document.getElementById("day-" + day).style.display = "block";
+    document.getElementById("day-" + day).classList.add("active");
     event.currentTarget.classList.add("tab-active");
     event.currentTarget.setAttribute("aria-selected", "true");
+    // Re-run search on day switch to keep filtered state
+    searchNames();
 }
+
+// Show first day panel by default
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("day-fri").classList.add("active");
+});
+
 function searchNames() {
     const input = document.getElementById("searchInput");
-    const filter = input.value.toUpperCase();
-    const rows = document.querySelectorAll(".search-row");
-    rows.forEach(row => {
-        const name = row.querySelector(".search-name").textContent.toUpperCase();
-        row.style.display = name.includes(filter) ? "" : "none";
+    const filter = input.value.trim().toLowerCase();
+    const status = document.getElementById("searchStatus");
+    const clearBtn = document.getElementById("searchClear");
+
+    // Show/hide clear button
+    clearBtn.classList.toggle("visible", filter.length > 0);
+
+    // Target all filterable sections
+    const sections = document.querySelectorAll(
+        ".shift-card, .counters-section, .special-roles-section"
+    );
+
+    if (!filter) {
+        // Show everything
+        sections.forEach(el => {
+            el.classList.remove("filtered-out", "highlighted");
+        });
+        status.innerHTML = '';
+        return;
+    }
+
+    let matchCount = 0;
+    sections.forEach(el => {
+        const names = (el.getAttribute("data-names") || "").toLowerCase();
+        if (names.includes(filter)) {
+            el.classList.remove("filtered-out");
+            el.classList.add("highlighted");
+            matchCount++;
+        } else {
+            el.classList.add("filtered-out");
+            el.classList.remove("highlighted");
+        }
     });
+
+    if (matchCount > 0) {
+        status.innerHTML = 'Showing <strong>' + matchCount + '</strong> section(s) for "<strong>' +
+            escHtml(filter) + '</strong>" <span class="clear-link" onclick="clearSearch()">Show all</span>';
+    } else {
+        status.innerHTML = 'No sections found for "<strong>' +
+            escHtml(filter) + '</strong>" <span class="clear-link" onclick="clearSearch()">Clear</span>';
+    }
+}
+
+function clearSearch() {
+    document.getElementById("searchInput").value = '';
+    searchNames();
+    document.getElementById("searchInput").focus();
+}
+
+function escHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
 }
 </script>
 </body>
