@@ -355,7 +355,8 @@ def assign_shift(day, shift_key, conflict_key, shift_label, pool, count, role,
 
 
 def assign_counters(day, assigned_per_day):
-    """Assign 8 counters for Sunday. At least 2 brothers. Jaye Kayla Rosal goes here.
+    """Assign 8 counters for a given day. At least 2 brothers. Jaye Kayla Rosal goes here.
+    Each day gets a different set of 8 counters.
     Respects per-day assignment limits (excludes overlap via the 2-shift rule).
     
     ROLE ROTATION: Prefer volunteers whose previous roles differ from 'counter',
@@ -368,8 +369,8 @@ def assign_counters(day, assigned_per_day):
     for p in available:
         rn = p['real_name']
         existing = assigned_per_day.get((day, rn), [])
-        # Counters don't have a shift_key in the same timeline, but they're
-        # in the afternoon block. They overlap with shift3, afternoonsession, shift4.
+        # Counters share the same time block as Shift 4 (Closing Song Afternoon - End).
+        # They also overlap with shift3 and afternoonsession.
         # So: if someone is already in shift3, afternoonsession, or shift4, they can't be a counter.
         overlapping_shifts = {'shift3', 'afternoonsession', 'shift4'}
         if existing:
@@ -434,7 +435,7 @@ def assign_counters(day, assigned_per_day):
     
     for rn in result:
         all_assignments.setdefault(rn, [])
-        all_assignments[rn].append(('sun', 'counter', '', 'counter'))
+        all_assignments[rn].append((day, 'counter', '', 'counter'))
     
     # Track counters in assigned_per_day
     for rn in result:
@@ -472,9 +473,14 @@ for day in DAYS:
     # Determine assignment order: scarce shifts first (smaller pool = more constrained)
     shift_order = sorted(SHIFT_TIMELINE, key=lambda s: pool_sizes.get((day, s), 999))
     
-    # For Sunday, ensure shift4 (which uses scarce shift4counters pool) goes very early
-    # But keep timeline order for priority hints within same scarcity
-    print(f"\n=== {DAY_LABEL[day]} — assignment order by scarcity: {shift_order} ===")
+    # Shift 4 must be last so that counters (which share the same time block)
+    # are assigned first. This enforces mutual exclusion: a person gets either
+    # Shift 4 or Counters, not both.
+    if 'shift4' in shift_order:
+        shift_order.remove('shift4')
+        shift_order.append('shift4')
+    
+    print(f"\n{DAY_LABEL[day]} — assignment order: {shift_order} (shift4 moved last for counter mutual exclusion) ===")
     
     for shift in shift_order:
         conflict_key = SHIFT_CONFLICT[shift]
@@ -527,16 +533,21 @@ for day in DAYS:
         print(f"  Brothers ({len(bros)}): {bros}")
         print(f"  Sisters ({len(sisses)}): {sisses}")
 
-    if day == 'sun':
-        counters = assign_counters(day, assigned_per_day)
-        print(f"\nCounters (Sunday): {counters}")
+    # Assign counters after shift3/afternoonsession but before shift4,
+    # since counters share the same time block as Shift 4 (mutually exclusive).
+    # This ensures shift4 assignment sees counters in assigned_per_day and excludes them.
+    counters_day = assign_counters(day, assigned_per_day)
+    schedule_data[(day, 'counters')] = {
+        'counters': counters_day,
+    }
+    print(f"\nCounters ({DAY_LABEL[day]}): {counters_day}")
 
 # Stats
 all_person_set = set()
 for rn, tasks in all_assignments.items():
     all_person_set.add(rn)
-for rn in counters:
-    all_person_set.add(rn)
+
+# Also count unique people from counters (already in all_assignments via the dynamic day)
 
 final_brothers = sum(1 for rn in all_person_set if any(b['real_name'] == rn for b in brothers))
 final_sisters = sum(1 for rn in all_person_set if any(s['real_name'] == rn for s in sisters))
@@ -560,14 +571,6 @@ for rn, tasks in all_assignments.items():
         if day not in person_roles[rn]:
             person_roles[rn][day] = set()
         person_roles[rn][day].add(role_cat)
-
-# Check role_history includes counters
-for rn in counters:
-    if rn not in person_roles:
-        person_roles[rn] = {}
-    if 'sun' not in person_roles[rn]:
-        person_roles[rn]['sun'] = set()
-    person_roles[rn]['sun'].add('counter')
 
 multi_role = 0
 single_role = 0
@@ -665,6 +668,17 @@ else:
 print("\nShift Requirement Validation:")
 req_violations = 0
 for (day, time), data in schedule_data.items():
+    if time == 'counters':
+        # Counters are validated separately
+        counters_list = data['counters']
+        bros_in_counters = sum(1 for n in counters_list if any(b['real_name'] == n for b in brothers))
+        if len(counters_list) != NUM_COUNTERS:
+            req_violations += 1
+            print(f"  FAIL: {DAY_LABEL[day]} Counters: {len(counters_list)}/{NUM_COUNTERS}")
+        if bros_in_counters < 2:
+            req_violations += 1
+            print(f"  FAIL: {DAY_LABEL[day]} Counters: only {bros_in_counters} brothers (need 2)")
+        continue
     if len(data['brothers']) != NUM_BROTHERS:
         req_violations += 1
         print(f"  FAIL: {DAY_LABEL[day]} - {time}: {len(data['brothers'])}/{NUM_BROTHERS} Key Brothers")
@@ -690,34 +704,47 @@ def box_row(n, name, role):
     cls = 'brother-tag' if role == 'Brother' else 'sister-tag'
     return '<div class="box-row"><span class="box-num">Box ' + str(n) + '</span><span class="box-name name-tag ' + cls + '">' + esc(name) + '</span></div>'
 
-def shift_card(time, bros, sisses, is_session=False):
-    """Generate a shift card with all names as data attributes for filtering."""
+def shift_card(time, bros, sisses, is_session=False, counters=None):
+    """Generate a shift card with all names as data attributes for filtering.
+    If counters is provided (for Shift 4), they are shown inside the card
+    since they share the same time block and are mutually exclusive."""
     # Collect all names in this shift for searching
     all_names = list(bros) + list(sisses)
+    if counters:
+        all_names += list(counters)
     data_names = ' '.join(esc(n).lower() for n in all_names)
     
     h = '<div class="shift-card" data-names="' + data_names + '">\n'
-    h += '<div class="shift-header"><span class="shift-time">' + esc(time) + '</span></div>\n'
-    h += '<div class="shift-body">\n'
-    h += '<div class="section-mini"><h4>Key Brothers</h4>\n<div class="name-list">'
+    h += '<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">' + esc(time) + '</span></div>\n'
+    h += '<div class="shift-body">\n<div class="shift-body-grid">\n'
+    h += '<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>\n<div class="name-list">'
     for n in bros:
         h += tag(n, 'Brother')
     h += '</div></div>\n'
-    h += '<div class="section-mini"><h4>Box Attendants</h4>\n<div class="box-grid">\n'
+    h += '<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>\n<div class="box-grid">\n'
     if is_session:
         for i, n in enumerate(sisses):
-            h += box_row(i + 8, n)  # Box 8, 9, 10
+            h += box_row(i + 8, n, 'Sister')  # Box 8, 9, 10
     else:
         for i, n in enumerate(sisses):
-            h += box_row(i + 1, n)
-    h += '</div></div>\n</div>\n</div>\n'
+            h += box_row(i + 1, n, 'Sister')
+    h += '</div></div>\n'
+    if counters:
+        h += '<div class="role-section"><h4><span class="role-accent amber"></span>Counters</h4>\n<div class="name-list">'
+        for n in counters:
+            role = 'Brother' if any(b['real_name'] == n for b in brothers) else 'Sister'
+            h += tag(n, role)
+        h += '</div></div>\n'
+    h += '</div>\n</div>\n</div>\n'
     return h
 
-def counters_block(names):
+def counters_block(names, day):
     """Counters section with data attributes for searching."""
     all_names = ' '.join(esc(n).lower() for n in names)
+    day_title = DAY_LABEL[day]
+    day_date = DAY_DATE[day]
     h = '<div class="counters-section" data-names="' + all_names + '">\n'
-    h += '<h2 class="section-title">Counters \u2014 Sunday, July 12</h2>\n'
+    h += '<h2 class="section-title"><span class="counter-icon">&#x1f4b0;</span> Counters &mdash; ' + day_title + ', ' + day_date + '</h2>\n'
     h += '<p class="section-desc">Count after afternoon session ends</p>\n'
     h += '<div class="name-list">'
     for n in names:
@@ -729,7 +756,7 @@ def counters_block(names):
 def special_roles_block():
     all_names = ' '.join(esc(n).lower() for n in SPECIAL_ROLES)
     h = '<div class="special-roles-section" data-names="' + all_names + '">\n'
-    h += '<h2 class="section-title">Special Roles</h2>\n'
+    h += '<h2 class="section-title">&#x1f6ce;&#xfe0f; Special Roles</h2>\n'
     h += '<p class="section-desc">These volunteers serve in non-shift capacities</p>\n'
     h += '<div class="special-roles-grid">\n'
     for name, role_desc in SPECIAL_ROLES.items():
@@ -743,196 +770,363 @@ def special_roles_block():
     return h
 
 
-# ── Modern, mobile-first CSS ─────────────────────────────────────────────────
+# ── Professional-Grade Accounts Department Schedule Design ─────────────────────
+# Palette: navy/blue base with warm accents, clean whites, subtle depth
+# Mobile-first, premium typography, beautiful card-based layout
 CSS = """<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { font-size: 16px; -webkit-text-size-adjust: 100%; }
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: #f0f2f5;
-    color: #1a1a2e;
-    line-height: 1.5;
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{
+    font-family:'Inter','SF Pro Display',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    background:#f0f4f8;
+    color:#1a202c;
+    line-height:1.6;
 }
-.container { max-width: 960px; margin: 0 auto; padding: 12px; }
+.container{max-width:960px;margin:0 auto;padding:24px 20px}
 
 /* ── Header ── */
-header {
-    background: linear-gradient(135deg, #0f1b2d 0%, #1b2a4a 50%, #0d1a33 100%);
-    color: #fff; padding: 24px 16px; text-align: center;
-    border-radius: 14px; margin-bottom: 20px;
-    box-shadow: 0 4px 24px rgba(15,27,45,0.25);
+header{
+    text-align:center;
+    padding:48px 0 12px;
+    position:relative;
 }
-header h1 { font-size: clamp(1.25rem, 5vw, 1.75rem); font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px; }
-header .subtitle { color: #d4a843; font-size: clamp(0.8rem, 3vw, 0.95rem); font-weight: 300; }
-header .badge {
-    display: inline-block; background: #d4a843; color: #0f1b2d;
-    padding: 3px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; margin-top: 8px;
+header::after{
+    content:'';
+    display:block;
+    width:60px;
+    height:4px;
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    border-radius:2px;
+    margin:16px auto 0;
 }
+header h1{
+    font-size:clamp(1.5rem,4vw,2rem);
+    font-weight:700;
+    letter-spacing:-0.03em;
+    color:#0f172a;
+    margin-bottom:6px;
+}
+header .subtitle{
+    color:#64748b;
+    font-size:clamp(0.9rem,2.5vw,1rem);
+    font-weight:450;
+}
+header .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-top:16px;
+    padding:6px 16px;
+    background:#e8edf5;
+    border-radius:20px;
+    font-size:0.8rem;
+    color:#475569;
+    font-weight:500;
+}
+header .badge-dot{
+    display:inline-block;
+    width:8px;height:8px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+}
+header .badge span{display:inline-flex;align-items:center;gap:4px}
+header .badge .brother-count{color:#2563eb;font-weight:600}
+header .badge .sister-count{color:#9333ea;font-weight:600}
 
-/* ── Search Bar ── */
-.search-bar {
-    background: #fff; border-radius: 14px; padding: 16px 20px;
-    margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+/* ── Search ── */
+.search-bar{max-width:480px;margin:0 auto 32px}
+.search-input-wrap{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#fff;
+    border-radius:12px;
+    padding:0 16px;
+    transition:box-shadow 0.25s,transform 0.2s;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+    border:1px solid #e2e8f0;
 }
-.search-bar label {
-    display: block; font-size: 0.78rem; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.8px; color: #888; margin-bottom: 8px;
+.search-input-wrap:focus-within{
+    box-shadow:0 0 0 3px rgba(37,99,235,0.15),0 2px 6px rgba(0,0,0,0.04);
+    border-color:#93c5fd;
+    transform:translateY(-1px);
 }
-.search-input-wrap {
-    display: flex; align-items: center; gap: 10px;
-    background: #f5f6f8; border: 2px solid #e0e2e6; border-radius: 12px;
-    padding: 0 16px; transition: border-color 0.2s, box-shadow 0.2s;
+.search-input-wrap .icon{font-size:0.9rem;color:#94a3b8;flex-shrink:0;line-height:1}
+.search-input-wrap input{
+    flex:1;border:none;background:transparent;
+    padding:14px 0;font-size:0.9rem;
+    font-family:inherit;outline:none;color:#1e293b;
 }
-.search-input-wrap:focus-within {
-    border-color: #1b2a4a; box-shadow: 0 0 0 3px rgba(27,42,74,0.12);
+.search-input-wrap input::placeholder{color:#94a3b8}
+.search-clear{
+    display:none;background:none;border:none;
+    color:#94a3b8;font-size:1.3rem;cursor:pointer;
+    padding:4px;line-height:1;transition:color 0.15s;
 }
-.search-input-wrap .icon {
-    font-size: 1.1rem; color: #999; flex-shrink: 0;
+.search-clear:hover{color:#475569}
+.search-clear.visible{display:block}
+.search-status{
+    font-size:0.8rem;color:#64748b;
+    margin-top:12px;min-height:1.4em;text-align:center;
 }
-.search-input-wrap input {
-    flex: 1; border: none; background: transparent; padding: 14px 0;
-    font-size: 1rem; outline: none; color: #1a1a2e;
+.search-status strong{color:#0f172a;font-weight:600}
+.search-status .clear-link{
+    color:#2563eb;cursor:pointer;font-weight:500;
+    margin-left:8px;text-decoration:none;
+    transition:color 0.15s;
 }
-.search-input-wrap input::placeholder { color: #bbb; }
-.search-clear {
-    display: none; background: none; border: none; color: #999;
-    font-size: 1.2rem; cursor: pointer; padding: 4px; line-height: 1;
-}
-.search-clear.visible { display: block; }
-.search-status {
-    font-size: 0.82rem; color: #888; margin-top: 8px; min-height: 1.2em;
-}
-.search-status strong { color: #1b2a4a; }
-.search-status .clear-link {
-    color: #1b2a4a; text-decoration: underline; cursor: pointer; font-weight: 500; margin-left: 6px;
-}
+.search-status .clear-link:hover{color:#1d4ed8;text-decoration:underline}
 
 /* ── Tabs ── */
-.nav-bar { display: flex; gap: 8px; margin-bottom: 16px; }
-.tab-btn {
-    flex: 1; padding: 12px 8px;
-    background: #e8ecf1; border: none; border-radius: 12px;
-    cursor: pointer; font-size: 0.88rem; font-weight: 600;
-    color: #666; transition: all 0.2s; text-align: center; line-height: 1.3;
+.nav-bar{
+    display:flex;gap:4px;margin-bottom:28px;
+    background:#fff;border-radius:12px;padding:4px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+    border:1px solid #e2e8f0;
 }
-.tab-btn small { font-weight: 400; font-size: 0.78rem; color: #999; }
-.tab-btn.tab-active { background: #0f1b2d; color: #fff; box-shadow: 0 3px 12px rgba(15,27,45,0.25); }
-.tab-btn.tab-active small { color: #d4a843; }
-.tab-btn:hover:not(.tab-active) { background: #d5dae3; }
+.tab-btn{
+    flex:1;padding:12px 16px;
+    background:transparent;border:none;border-radius:8px;
+    cursor:pointer;font-size:0.85rem;font-weight:500;
+    font-family:inherit;color:#64748b;
+    transition:all 0.2s;text-align:center;line-height:1.4;
+}
+.tab-btn small{
+    font-weight:400;font-size:0.7rem;color:#94a3b8;display:block;margin-top:2px;
+}
+.tab-btn.tab-active{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:#fff;
+    box-shadow:0 2px 8px rgba(37,99,235,0.25);
+}
+.tab-btn.tab-active small{color:#bfdbfe}
+.tab-btn:hover:not(.tab-active){
+    background:#f1f5f9;
+    color:#334155;
+}
+.tab-btn:hover:not(.tab-active) small{color:#64748b}
 
 /* ── Day Panels ── */
-.day-panel { display: none; }
-.day-panel.active { display: block; }
-.day-title {
-    color: #0f1b2d; font-size: clamp(1.05rem, 4vw, 1.25rem); margin-bottom: 12px;
-    padding-bottom: 8px; border-bottom: 3px solid #d4a843;
+.day-panel{display:none}
+.day-panel.active{display:block;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.day-title{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#0f172a;
+    font-size:clamp(0.95rem,3vw,1.1rem);
+    margin-bottom:18px;
+    font-weight:650;
+    letter-spacing:-0.015em;
 }
+.day-title .day-icon{color:#2563eb;font-size:1.1em}
 
 /* ── Shift Cards ── */
-.shift-card {
-    background: #fff; border-radius: 12px; margin-bottom: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden;
-    transition: opacity 0.25s ease, transform 0.25s ease, max-height 0.4s ease;
+.shift-card{
+    background:#fff;border-radius:14px;
+    margin-bottom:14px;overflow:hidden;
+    transition:opacity 0.25s,transform 0.25s,max-height 0.4s,margin 0.3s,padding 0.3s;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+    border:1px solid #e2e8f0;
 }
-.shift-card.filtered-out {
-    opacity: 0; transform: scale(0.95); max-height: 0 !important;
-    margin-bottom: 0; overflow: hidden; pointer-events: none;
+.shift-card.filtered-out{
+    opacity:0;transform:translateY(-6px) scale(0.98);max-height:0!important;
+    margin-bottom:0;overflow:hidden;pointer-events:none;padding:0;
 }
-.shift-card.highlighted {
-    box-shadow: 0 0 0 3px #d4a843, 0 4px 16px rgba(212,168,67,0.25);
+.shift-card.highlighted{
+    border-color:#93c5fd;
+    box-shadow:0 0 0 3px rgba(37,99,235,0.12),0 2px 8px rgba(0,0,0,0.06);
 }
-.shift-header {
-    background: #0f1b2d; color: #fff; padding: 10px 14px;
-    font-weight: 600; font-size: 0.9rem;
+.shift-header{
+    display:flex;align-items:center;gap:10px;
+    padding:14px 22px;font-weight:600;
+    font-size:0.88rem;letter-spacing:-0.01em;
+    color:#0f172a;
+    background:linear-gradient(135deg,#f8fafc,#f1f5f9);
+    border-bottom:1px solid #e2e8f0;
 }
-.shift-body {
-    padding: 12px 14px;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 12px;
+.shift-header .shift-clock{color:#2563eb;font-size:1rem}
+.shift-body{padding:18px 22px 20px}
+.shift-body-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:560px){.shift-body-grid{grid-template-columns:1fr;gap:14px}}
+
+.role-section h4{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:#64748b;
+    font-size:0.7rem;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:10px;
 }
-@media (max-width: 500px) {
-    .shift-body { grid-template-columns: 1fr; gap: 10px; }
+.role-section h4 .role-accent{
+    display:inline-block;width:3px;height:12px;
+    border-radius:2px;
 }
-.section-mini h4 {
-    color: #666; font-size: 0.72rem; text-transform: uppercase;
-    letter-spacing: 0.8px; margin-bottom: 6px; border-bottom: 1px solid #eee; padding-bottom: 4px;
+.role-section h4 .role-accent.blue{background:#2563eb}
+.role-section h4 .role-accent.purple{background:#9333ea}
+.role-section h4 .role-accent.amber{background:#d97706}
+.name-list{display:flex;flex-wrap:wrap;gap:6px}
+.name-tag{
+    display:inline-flex;align-items:center;
+    padding:5px 12px;border-radius:8px;
+    font-size:0.82rem;font-weight:500;line-height:1.4;
+    transition:transform 0.15s;
 }
-.name-list { display: flex; flex-wrap: wrap; gap: 5px; }
-.name-tag {
-    display: inline-block; padding: 4px 11px; border-radius: 20px;
-    font-size: 0.82rem; font-weight: 500; white-space: nowrap;
+.name-tag:hover{transform:translateY(-1px)}
+.brother-tag{
+    background:#eff6ff;color:#1e40af;
+    border:1px solid #bfdbfe;
 }
-.brother-tag { background: #dce8f5; color: #1a4972; }
-.sister-tag { background: #fce8e8; color: #a04040; }
+.sister-tag{
+    background:#faf5ff;color:#6b21a8;
+    border:1px solid #e9d5ff;
+}
 
 /* ── Box Grid ── */
-.box-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 3px; }
-@media (max-width: 400px) {
-    .box-grid { grid-template-columns: repeat(2, 1fr); }
+.box-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:4px;
 }
-.box-row { display: flex; align-items: center; gap: 6px; padding: 2px 0; font-size: 0.82rem; }
-.box-num {
-    display: inline-block; background: #d4a843; color: #0f1b2d;
-    font-weight: 700; font-size: 0.7rem; padding: 1px 7px;
-    border-radius: 8px; min-width: 44px; text-align: center; flex-shrink: 0;
+@media(min-width:501px){.box-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:380px){.box-grid{grid-template-columns:1fr}}
+.box-row{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:3px 0;
+    font-size:0.82rem;
 }
-.box-name { color: #444; }
+.box-num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:#f1f5f9;
+    color:#64748b;
+    font-weight:650;
+    font-size:0.6rem;
+    padding:2px 8px;
+    border-radius:6px;
+    min-width:38px;
+    text-align:center;
+    flex-shrink:0;
+    height:20px;
+    letter-spacing:0.02em;
+}
+.box-name{color:#334155}
 
-/* ── Counters & Special Roles ── */
-.counters-section,
-.special-roles-section {
-    background: #fff; border-radius: 12px; padding: 16px 18px;
-    margin-top: 8px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    transition: opacity 0.25s ease, transform 0.25s ease, max-height 0.4s ease;
+/* ── Counters Section ── */
+.counters-section{
+    background:#fff;border-radius:14px;
+    padding:20px 22px 22px;
+    margin:18px 0;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+    border:1px solid #e2e8f0;
+    transition:opacity 0.25s,transform 0.25s,max-height 0.4s,margin 0.3s,padding 0.3s;
 }
-.counters-section.filtered-out,
-.special-roles-section.filtered-out {
-    opacity: 0; transform: scale(0.95); max-height: 0 !important;
-    margin-top: 0; margin-bottom: 0; overflow: hidden; pointer-events: none;
-    padding: 0 18px;
+.counters-section.filtered-out{
+    opacity:0;transform:translateY(-6px) scale(0.98);max-height:0!important;
+    margin:0!important;overflow:hidden;pointer-events:none;padding:0!important;
 }
-.counters-section.highlighted,
-.special-roles-section.highlighted {
-    box-shadow: 0 0 0 3px #d4a843, 0 4px 16px rgba(212,168,67,0.25);
+.counters-section.highlighted{
+    border-color:#fcd34d;
+    box-shadow:0 0 0 3px rgba(217,119,6,0.12),0 2px 8px rgba(0,0,0,0.06);
 }
-.section-title { color: #0f1b2d; font-size: 1.1rem; margin-bottom: 3px; }
-.section-desc { color: #999; font-size: 0.8rem; margin-bottom: 10px; }
-.special-roles-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-.special-role-item { display: flex; align-items: center; gap: 5px; }
-.special-role-desc { color: #888; font-size: 0.82rem; font-style: italic; }
+.counters-section .section-title{
+    display:flex;align-items:center;gap:8px;
+    color:#0f172a;font-size:0.92rem;margin-bottom:4px;font-weight:650;
+}
+.counters-section .section-title .counter-icon{color:#d97706}
+.section-desc{color:#64748b;font-size:0.8rem;margin-bottom:12px}
+
+/* ── Special Roles ── */
+.special-roles-section{
+    background:linear-gradient(135deg,#f8fafc,#eff6ff);
+    border-radius:14px;
+    padding:20px 22px 22px;
+    margin:18px 0;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+    border:1px solid #dbeafe;
+    transition:opacity 0.25s,transform 0.25s,max-height 0.4s,margin 0.3s,padding 0.3s;
+}
+.special-roles-section.filtered-out{
+    opacity:0;transform:translateY(-6px) scale(0.98);max-height:0!important;
+    margin:0!important;overflow:hidden;pointer-events:none;padding:0!important;
+}
+.special-roles-section.highlighted{
+    border-color:#93c5fd;
+    box-shadow:0 0 0 3px rgba(37,99,235,0.12),0 2px 8px rgba(0,0,0,0.06);
+}
+.special-roles-section .section-title{
+    display:flex;align-items:center;gap:8px;
+    color:#0f172a;font-size:0.92rem;margin-bottom:4px;font-weight:650;
+}
+.special-roles-grid{display:flex;flex-wrap:wrap;gap:10px}
+.special-role-item{display:flex;align-items:center;gap:6px}
+.special-role-desc{color:#64748b;font-size:0.78rem}
 
 /* ── Footer ── */
-footer { text-align: center; padding: 16px; color: #bbb; font-size: 0.75rem; }
+footer{
+    text-align:center;
+    padding:32px 16px 16px;
+    color:#94a3b8;
+    font-size:0.72rem;
+    margin-top:32px;
+    border-top:1px solid #e2e8f0;
+}
 
 /* ── Print ── */
-@media print {
-    body { background: #fff; }
-    .container { max-width: 100%; padding: 0; }
-    header { background: #0f1b2d !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .tab-btn, .nav-bar, .search-bar, .search-status { display: none; }
-    .day-panel { display: block !important; }
-    .shift-card { break-inside: avoid; }
-    .counters-section, .special-roles-section { break-inside: avoid; }
-    .shift-card.filtered-out, .counters-section.filtered-out, .special-roles-section.filtered-out {
-        opacity: 1 !important; transform: none !important; max-height: none !important;
-        margin: inherit !important; overflow: visible !important; pointer-events: auto !important;
-        padding: inherit !important;
+@media print{
+    body{background:#fff!important;color:#000!important}
+    .container{max-width:100%;padding:0 10px}
+    header{padding:20px 0 8px}
+    header::after{display:none}
+    header h1{color:#000!important;font-size:1.3rem}
+    header .subtitle,.search-bar,.search-status,.nav-bar{display:none!important}
+    header .badge{background:#f1f1f1!important;color:#333!important;border:1px solid #ddd!important}
+    header .badge .brother-count{color:#333!important}
+    header .badge .sister-count{color:#333!important}
+    .day-panel{display:block!important}
+    .shift-card{break-inside:avoid;border:1px solid #ccc!important;box-shadow:none!important;border-radius:4px!important}
+    .shift-header{background:#f8f8f8!important;border-bottom:1px solid #ccc!important;color:#000!important}
+    .shift-header .shift-clock{color:#555!important}
+    .brother-tag{background:#e8eeff!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .sister-tag{background:#f0e6ff!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .box-num{background:#eee!important;color:#333!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .counters-section,.special-roles-section{break-inside:avoid;border:1px solid #ccc!important;box-shadow:none!important}
+    .special-roles-section{background:#f8f8f8!important;border-color:#ccc!important}
+    .shift-card.filtered-out,.counters-section.filtered-out,.special-roles-section.filtered-out{
+        opacity:1!important;transform:none!important;max-height:none!important;
+        margin:inherit!important;overflow:visible!important;pointer-events:auto!important;
+        padding:inherit!important;
     }
+    footer{color:#999!important;border-top-color:#ccc!important}
 }
 </style>"""
 
 # ── Generate JS ──────────────────────────────────────────────────────────────
 JS = """<script>
+let activeDay = 'fri';
+
 function showDay(day) {
+    activeDay = day;
     document.querySelectorAll(".day-panel").forEach(p => p.classList.remove("active"));
     document.querySelectorAll(".tab-btn").forEach(b => {
         b.classList.remove("tab-active");
         b.setAttribute("aria-selected", "false");
     });
     document.getElementById("day-" + day).classList.add("active");
-    event.currentTarget.classList.add("tab-active");
-    event.currentTarget.setAttribute("aria-selected", "true");
+    const tabs = document.querySelectorAll(".tab-btn");
+    const tabMap = {fri: 0, sat: 1, sun: 2};
+    const idx = tabMap[day];
+    if (idx !== undefined && tabs[idx]) {
+        tabs[idx].classList.add("tab-active");
+        tabs[idx].setAttribute("aria-selected", "true");
+    }
     // Re-run search on day switch to keep filtered state
     searchNames();
 }
@@ -940,6 +1134,8 @@ function showDay(day) {
 // Show first day panel by default
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("day-fri").classList.add("active");
+    const tabs = document.querySelectorAll(".tab-btn");
+    if (tabs[0]) { tabs[0].classList.add("tab-active"); tabs[0].setAttribute("aria-selected", "true"); }
 });
 
 function searchNames() {
@@ -965,18 +1161,47 @@ function searchNames() {
         return;
     }
 
+    // Count matches per day panel
+    const dayMatches = {fri: 0, sat: 0, sun: 0};
     let matchCount = 0;
+    const dayPanelMap = {'day-fri': 'fri', 'day-sat': 'sat', 'day-sun': 'sun'};
+    
     sections.forEach(el => {
         const names = (el.getAttribute("data-names") || "").toLowerCase();
         if (names.includes(filter)) {
             el.classList.remove("filtered-out");
             el.classList.add("highlighted");
             matchCount++;
+            // Find which day panel this section belongs to
+            let parent = el.closest('.day-panel');
+            if (parent && parent.id in dayPanelMap) {
+                dayMatches[dayPanelMap[parent.id]]++;
+            } else {
+                // Counters/special are visible on all days — count for all
+                dayMatches.fri++;
+                dayMatches.sat++;
+                dayMatches.sun++;
+            }
         } else {
             el.classList.add("filtered-out");
             el.classList.remove("highlighted");
         }
     });
+
+    // Auto-switch to the day with the most matches
+    if (matchCount > 0) {
+        let bestDay = activeDay;
+        let bestCount = 0;
+        for (const [d, cnt] of Object.entries(dayMatches)) {
+            if (cnt > bestCount) {
+                bestCount = cnt;
+                bestDay = d;
+            }
+        }
+        if (bestDay !== activeDay) {
+            showDay(bestDay);
+        }
+    }
 
     if (matchCount > 0) {
         status.innerHTML = 'Showing <strong>' + matchCount + '</strong> section(s) for "<strong>' +
@@ -1017,16 +1242,15 @@ parts.append('<div class="container">')
 # ── Header ──
 parts.append('<header>')
 parts.append('    <h1>Accounts Department Volunteers</h1>')
-parts.append('    <div class="subtitle">July 10&ndash;12, 2026 &bull; Three-Day Program</div>')
-parts.append('    <div class="badge">' + str(final_brothers) + ' Brothers &bull; ' + str(final_sisters) + ' Sisters</div>')
+parts.append('    <p class="subtitle">July 10&ndash;12, 2026 &middot; Three-Day Program</p>')
+parts.append('    <div class="badge"><span class="badge-dot"></span> <span><span class="brother-count">' + str(final_brothers) + '</span> Brothers</span> <span>&middot;</span> <span><span class="sister-count">' + str(final_sisters) + '</span> Sisters</span></div>')
 parts.append('</header>')
 
-# ── Search Bar (prominent, at the top) ──
+# ── Search ──
 parts.append('<div class="search-bar">')
-parts.append('    <label for="searchInput">Find Your Schedule</label>')
 parts.append('    <div class="search-input-wrap">')
 parts.append('        <span class="icon">&#x1F50D;</span>')
-parts.append('        <input type="text" id="searchInput" oninput="searchNames()" placeholder="Type your name&hellip;" autocomplete="off">')
+parts.append('        <input type="text" id="searchInput" oninput="searchNames()" placeholder="Search for a name&hellip;" autocomplete="off">')
 parts.append('        <button class="search-clear" id="searchClear" onclick="clearSearch()">&times;</button>')
 parts.append('    </div>')
 parts.append('    <div class="search-status" id="searchStatus"></div>')
@@ -1042,19 +1266,22 @@ parts.append('</nav>')
 # ── Day Panels ──
 for day in DAYS:
     parts.append('<div id="' + DAY_PANEL[day] + '" class="day-panel" role="tabpanel">')
-    parts.append('<h2 class="day-title">' + DAY_LABEL[day] + ' &mdash; ' + DAY_DATE[day] + '</h2>')
+    parts.append('<h2 class="day-title"><span class="day-icon">&#x1f4c5;</span> ' + DAY_LABEL[day] + ' &mdash; ' + DAY_DATE[day] + '</h2>')
     for shift in SHIFT_TIMELINE:
         sl = SHIFT_LABEL[shift]
         key = (day, sl)
         if key in schedule_data:
             data = schedule_data[key]
-            parts.append(shift_card(sl, data['brothers'], data['sisters'], data['is_session']))
+            # For Shift 4, pass counters to display them in the same card
+            if shift == 'shift4':
+                ckey = (day, 'counters')
+                counters = schedule_data[ckey]['counters'] if ckey in schedule_data else None
+                parts.append(shift_card(sl, data['brothers'], data['sisters'], data['is_session'], counters=counters))
+            else:
+                parts.append(shift_card(sl, data['brothers'], data['sisters'], data['is_session']))
     parts.append('</div>')
 
-# ── Counters ──
-parts.append(counters_block(counters))
-
-# ── Special Roles ──
+# ── Special Roles (shown once, visible on all days via JS) ──
 parts.append(special_roles_block())
 
 # ── Footer ──
