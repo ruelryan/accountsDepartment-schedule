@@ -10,22 +10,22 @@ html { font-size: 16px; -webkit-text-size-adjust: 100%; }
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background: #f8f6fa;
-    color: #1e3a5f;
+    color: #2d1b4e;
     line-height: 1.5;
 }
 .container { max-width: 960px; margin: 0 auto; padding: 12px; }
 
 /* ── Header ── */
 header {
-    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #1d4ed8 100%);
+    background: linear-gradient(135deg, #2d1b4e 0%, #6b2fa0 50%, #8b3a8b 100%);
     color: #fff; padding: 28px 16px; text-align: center;
     border-radius: 16px; margin-bottom: 20px;
     box-shadow: 0 4px 24px rgba(107,47,160,0.25);
 }
 header h1 { font-size: clamp(1.25rem, 5vw, 1.75rem); font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px; }
-header .subtitle { color: #dbeafe; font-size: clamp(0.8rem, 3vw, 0.95rem); font-weight: 300; }
+header .subtitle { color: #e8d5f5; font-size: clamp(0.8rem, 3vw, 0.95rem); font-weight: 300; }
 header .badge {
-    display: inline-block; background: #dbeafe; color: #1e3a5f;
+    display: inline-block; background: #e8d5f5; color: #2d1b4e;
     padding: 3px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; margin-top: 8px;
 }
 
@@ -33,11 +33,11 @@ header .badge {
 .search-bar {
     background: #fff; border-radius: 16px; padding: 20px 24px;
     margin-bottom: 16px; box-shadow: 0 2px 12px rgba(107,47,160,0.08);
-    border: 1px solid #eff6ff;
+    border: 1px solid #ede5f5;
 }
 .search-bar label {
     display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 1px; color: #3b82f6; margin-bottom: 10px;
+    letter-spacing: 1px; color: #8b6fa0; margin-bottom: 10px;
 }
 .search-input-wrap {
     display: flex; align-items: center; gap: 10px;
@@ -45,47 +45,47 @@ header .badge {
     padding: 0 16px; transition: border-color 0.2s, box-shadow 0.2s;
 }
 .search-input-wrap:focus-within {
-    border-color: #1d4ed8; box-shadow: 0 0 0 3px rgba(139,58,139,0.12);
+    border-color: #8b3a8b; box-shadow: 0 0 0 3px rgba(139,58,139,0.12);
 }
 .search-input-wrap .icon {
-    font-size: 1.1rem; color: #60a5fa; flex-shrink: 0;
+    font-size: 1.1rem; color: #b08fc4; flex-shrink: 0;
 }
 .search-input-wrap input {
     flex: 1; border: none; background: transparent; padding: 14px 0;
-    font-size: 1rem; outline: none; color: #1e3a5f;
+    font-size: 1rem; outline: none; color: #2d1b4e;
 }
 .search-input-wrap input::placeholder { color: #c8b8d8; }
 .search-clear {
-    display: none; background: none; border: none; color: #60a5fa;
+    display: none; background: none; border: none; color: #b08fc4;
     font-size: 1.2rem; cursor: pointer; padding: 4px; line-height: 1;
 }
 .search-clear.visible { display: block; }
 .search-status {
-    font-size: 0.82rem; color: #3b82f6; margin-top: 10px; min-height: 1.2em;
+    font-size: 0.82rem; color: #8b6fa0; margin-top: 10px; min-height: 1.2em;
 }
-.search-status strong { color: #2563eb; }
+.search-status strong { color: #6b2fa0; }
 .search-status .clear-link {
-    color: #2563eb; text-decoration: underline; cursor: pointer; font-weight: 500; margin-left: 6px;
+    color: #6b2fa0; text-decoration: underline; cursor: pointer; font-weight: 500; margin-left: 6px;
 }
 
 /* ── Tabs ── */
 .nav-bar { display: flex; gap: 8px; margin-bottom: 16px; }
 .tab-btn {
     flex: 1; padding: 12px 8px;
-    background: #eff6ff; border: none; border-radius: 12px;
+    background: #ede5f5; border: none; border-radius: 12px;
     cursor: pointer; font-size: 0.88rem; font-weight: 600;
     color: #6b5b7a; transition: all 0.2s; text-align: center; line-height: 1.3;
 }
 .tab-btn small { font-weight: 400; font-size: 0.78rem; color: #9b8baa; }
-.tab-btn.tab-active { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; box-shadow: 0 3px 12px rgba(107,47,160,0.25); }
-.tab-btn.tab-active small { color: #dbeafe; }
+.tab-btn.tab-active { background: linear-gradient(135deg, #6b2fa0, #8b3a8b); color: #fff; box-shadow: 0 3px 12px rgba(107,47,160,0.25); }
+.tab-btn.tab-active small { color: #e8d5f5; }
 .tab-btn:hover:not(.tab-active) { background: #e0d5ec; }
 
 /* ── Day Panels ── */
 .day-panel { display: none; }
 .day-panel.active { display: block; }
 .day-title {
-    color: #1e3a5f; font-size: clamp(1.05rem, 4vw, 1.25rem); margin-bottom: 12px;
+    color: #2d1b4e; font-size: clamp(1.05rem, 4vw, 1.25rem); margin-bottom: 12px;
     padding-bottom: 8px; border-bottom: 3px solid #d4b8e8;
     font-weight: 600;
 }
@@ -107,7 +107,7 @@ header .badge {
     border-color: #b888d8;
 }
 .shift-header {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    background: linear-gradient(135deg, #6b2fa0, #8b3a8b);
     color: #fff; padding: 10px 14px;
     font-weight: 600; font-size: 0.9rem;
 }
@@ -121,7 +121,7 @@ header .badge {
     .shift-body { grid-template-columns: 1fr; gap: 10px; }
 }
 .section-mini h4 {
-    color: #3b82f6; font-size: 0.72rem; text-transform: uppercase;
+    color: #8b6fa0; font-size: 0.72rem; text-transform: uppercase;
     letter-spacing: 0.8px; margin-bottom: 6px; border-bottom: 1px solid #f0eaf5; padding-bottom: 4px;
 }
 .name-list { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -129,7 +129,7 @@ header .badge {
     display: inline-block; padding: 4px 12px; border-radius: 20px;
     font-size: 0.82rem; font-weight: 500; white-space: nowrap;
 }
-.brother-tag { background: #eff6ff; color: #4a2070; }
+.brother-tag { background: #ede5f5; color: #4a2070; }
 .sister-tag { background: #fce8f0; color: #a04060; }
 
 /* ── Box Grid ── */
@@ -139,7 +139,7 @@ header .badge {
 }
 .box-row { display: flex; align-items: center; gap: 6px; padding: 2px 0; font-size: 0.82rem; }
 .box-num {
-    display: inline-block; background: #dbeafe; color: #4a2070;
+    display: inline-block; background: #e8d5f5; color: #4a2070;
     font-weight: 700; font-size: 0.7rem; padding: 1px 7px;
     border-radius: 8px; min-width: 44px; text-align: center; flex-shrink: 0;
 }
@@ -164,11 +164,11 @@ header .badge {
     box-shadow: 0 0 0 3px #b888d8, 0 4px 16px rgba(139,58,139,0.2);
     border-color: #b888d8;
 }
-.section-title { color: #1e3a5f; font-size: 1.1rem; margin-bottom: 3px; font-weight: 600; }
+.section-title { color: #2d1b4e; font-size: 1.1rem; margin-bottom: 3px; font-weight: 600; }
 .section-desc { color: #9b8baa; font-size: 0.8rem; margin-bottom: 10px; }
 .special-roles-grid { display: flex; flex-wrap: wrap; gap: 8px; }
 .special-role-item { display: flex; align-items: center; gap: 5px; }
-.special-role-desc { color: #3b82f6; font-size: 0.82rem; font-style: italic; }
+.special-role-desc { color: #8b6fa0; font-size: 0.82rem; font-style: italic; }
 
 /* ── Footer ── */
 footer { text-align: center; padding: 16px; color: #c8b8d8; font-size: 0.75rem; }
@@ -177,7 +177,7 @@ footer { text-align: center; padding: 16px; color: #c8b8d8; font-size: 0.75rem; 
 @media print {
     body { background: #fff; }
     .container { max-width: 100%; padding: 0; }
-    header { background: #1e3a5f !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    header { background: #2d1b4e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .tab-btn, .nav-bar, .search-bar, .search-status { display: none; }
     .day-panel { display: block !important; }
     .shift-card { break-inside: avoid; }
@@ -195,7 +195,7 @@ footer { text-align: center; padding: 16px; color: #c8b8d8; font-size: 0.75rem; 
 <header>
     <h1>Accounts Department Volunteers</h1>
     <div class="subtitle">July 10&ndash;12, 2026 &bull; Three-Day Program</div>
-    <div class="badge">11 Brothers &bull; 38 Sisters</div>
+    <div class="badge">13 Brothers &bull; 39 Sisters</div>
 </header>
 <div class="search-bar">
     <label for="searchInput">Find Your Schedule</label>
@@ -279,6 +279,12 @@ footer { text-align: center; padding: 16px; color: #c8b8d8; font-size: 0.75rem; 
 </div>
 </div>
 
+<div class="counters-section" data-names="jaye kayla rosal ethan razon rinard fandiño remdrant mepania andie balicastro kristel serena erika mae malbas cyra mae">
+<h2 class="section-title">Counters — Friday, July 10, 2026</h2>
+<p class="section-desc">Count after afternoon session ends</p>
+<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Ethan Razon</span><span class="name-tag brother-tag">Rinard Fandiño</span><span class="name-tag brother-tag">Remdrant Mepania</span><span class="name-tag brother-tag">Andie Balicastro</span><span class="name-tag sister-tag">Kristel Serena</span><span class="name-tag sister-tag">Erika Mae Malbas</span><span class="name-tag sister-tag">Cyra Mae</span></div>
+</div>
+
 </div>
 <div id="day-sat" class="day-panel" role="tabpanel">
 <h2 class="day-title">Saturday &mdash; July 11, 2026</h2>
@@ -346,6 +352,12 @@ footer { text-align: center; padding: 16px; color: #c8b8d8; font-size: 0.75rem; 
 <div class="box-grid">
 <div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Jamilah Karen Mausisa</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Anja Raye Casicas</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Elah Manto</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Lymarie Sermillas</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Zared Mae Laran</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Princess Nikee Xyle Aves</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Danelyn Casicas</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Schiera Jane Cacao</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Merlie Jean Matunog</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div></div></div>
 </div>
+</div>
+
+<div class="counters-section" data-names="jaye kayla rosal jeddan jusay daveryl quiban john carlo jusay vince syriel sanico erhian gail razon haidee bulanon relyn carino">
+<h2 class="section-title">Counters — Saturday, July 11, 2026</h2>
+<p class="section-desc">Count after afternoon session ends</p>
+<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Jeddan Jusay</span><span class="name-tag brother-tag">Daveryl Quiban</span><span class="name-tag brother-tag">John Carlo Jusay</span><span class="name-tag brother-tag">Vince Syriel Sanico</span><span class="name-tag sister-tag">Erhian Gail Razon</span><span class="name-tag sister-tag">Haidee Bulanon</span><span class="name-tag sister-tag">Relyn Carino</span></div>
 </div>
 
 </div>
@@ -417,13 +429,13 @@ footer { text-align: center; padding: 16px; color: #c8b8d8; font-size: 0.75rem; 
 </div>
 </div>
 
-</div>
-<div class="counters-section" data-names="jaye kayla rosal jemrel besere ethan razon rinard fandiño remdrant mepania jona mae case palero kristel serena erika mae malbas">
-<h2 class="section-title">Counters — Sunday, July 12</h2>
+<div class="counters-section" data-names="jaye kayla rosal jemrel besere cyros rexes madura charles russel sanico ethan razon jona mae case palero jeorgiana rose butalon jercel butalon">
+<h2 class="section-title">Counters — Sunday, July 12, 2026</h2>
 <p class="section-desc">Count after afternoon session ends</p>
-<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Ethan Razon</span><span class="name-tag brother-tag">Rinard Fandiño</span><span class="name-tag brother-tag">Remdrant Mepania</span><span class="name-tag sister-tag">Jona Mae Case Palero</span><span class="name-tag sister-tag">Kristel Serena</span><span class="name-tag sister-tag">Erika Mae Malbas</span></div>
+<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Cyros Rexes Madura</span><span class="name-tag brother-tag">Charles Russel Sanico</span><span class="name-tag brother-tag">Ethan Razon</span><span class="name-tag sister-tag">Jona Mae Case Palero</span><span class="name-tag sister-tag">Jeorgiana Rose Butalon</span><span class="name-tag sister-tag">Jercel Butalon</span></div>
 </div>
 
+</div>
 <div class="special-roles-section" data-names="dale lao flores gomer dohiling">
 <h2 class="section-title">Special Roles</h2>
 <p class="section-desc">These volunteers serve in non-shift capacities</p>
