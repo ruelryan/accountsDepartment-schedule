@@ -24,6 +24,7 @@ volunteers = []
 with open('/opt/data/volunteers.csv', newline='', encoding='utf-8') as f:
     reader = csv.reader(f)
     next(reader)  # skip blank header
+    next(reader)  # skip column-name header row
     for row in reader:
         if len(row) < 5:
             continue
@@ -31,7 +32,9 @@ with open('/opt/data/volunteers.csv', newline='', encoding='utf-8') as f:
         messenger_name = row[2].strip()
         real_name = row[3].strip()
         role = row[4].strip()
-        if not num or not real_name:
+        if not num or not num.isdigit():
+            continue
+        if not real_name:
             continue
         volunteers.append({
             'messenger': messenger_name,
@@ -60,6 +63,11 @@ sisters = [v for v in volunteers if v['role'] == 'Sister']
 print(f"Volunteers: {len(volunteers)} total, {len(brothers)} brothers, {len(sisters)} sisters")
 
 messenger_to_real = {v['messenger']: v['real_name'] for v in volunteers}
+
+# Manual overrides for names that appear in conflicts but don't match volunteer names directly
+MANUAL_MAP = {
+    'Rio Lloren': None,  # not a volunteer, skip
+}
 
 # ── Load conflict data ───────────────────────────────────────────────────────
 COL_NAMES = [
@@ -141,7 +149,7 @@ DAY_PANEL = {'fri': 'day-fri', 'sat': 'day-sat', 'sun': 'day-sun'}
 # Consecutive entries in this list OVERLAP (back-to-back)
 SHIFT_TIMELINE = ['shift1', 'morningsession', 'shift2', 'shift3', 'afternoonsession', 'shift4']
 
-# Timeline index for each shift — used for overlap detection
+# Timeline index for each shift -- used for overlap detection
 TIMELINE_INDEX = {s: i for i, s in enumerate(SHIFT_TIMELINE)}
 
 SHIFT_CONFLICT = {
@@ -169,7 +177,7 @@ NUM_BOX_FULL = 10      # shifts 1-4: boxes 1-10
 NUM_BOX_SESSION = 3     # morning/afternoon session: boxes 8,9,10
 
 # ── People excluded from ALL duties ──────────────────────────────────────────
-EXCLUDED = {'Ruel Ryan Rosal'}  # Account Overseer — no duties
+EXCLUDED = {'Ruel Ryan Rosal'}  # Account Overseer -- no duties
 
 # ── People with restricted assignments ───────────────────────────────────────
 RESTRICTED_TO_COUNTERS = {'Jaye Kayla Rosal'}
@@ -482,6 +490,13 @@ for day in DAYS:
     
     print(f"\n{DAY_LABEL[day]} — assignment order: {shift_order} (shift4 moved last for counter mutual exclusion) ===")
     
+    # ── Key Brother Sharing ──────────────────────────────────────────────────
+    # Same 2 key brothers work Shift 1 AND Morning Session together.
+    # Same 2 key brothers work Shift 3 AND Afternoon Session together.
+    # Shift 2 and Shift 4 each have their own 2 key brothers.
+    shared_shift1_bros = None
+    shared_shift3_bros = None
+    
     for shift in shift_order:
         conflict_key = SHIFT_CONFLICT[shift]
         sl = SHIFT_LABEL[shift]
@@ -497,8 +512,23 @@ for day in DAYS:
                 most_scarce = scares[0][0]
                 save_hint = SHIFT_CONFLICT[most_scarce]
 
-        bros = assign_shift(day, shift, conflict_key, sl, brothers, NUM_BROTHERS,
-                            'brother', assigned_per_day, prefer_saving_key=save_hint)
+        # ── Key Brother Sharing Logic ────────────────────────────────────────
+        if shift == 'morningsession':
+            # Reuse Shift 1's key brothers (already assigned)
+            bros = shared_shift1_bros if shared_shift1_bros is not None else []
+            print(f"  Shared KBs from shift1 for morningsession: {bros}")
+        elif shift == 'afternoonsession':
+            # Reuse Shift 3's key brothers (already assigned)
+            bros = shared_shift3_bros if shared_shift3_bros is not None else []
+            print(f"  Shared KBs from shift3 for afternoonsession: {bros}")
+        else:
+            bros = assign_shift(day, shift, conflict_key, sl, brothers, NUM_BROTHERS,
+                                'brother', assigned_per_day, prefer_saving_key=save_hint)
+            # Store for sharing
+            if shift == 'shift1':
+                shared_shift1_bros = list(bros)
+            elif shift == 'shift3':
+                shared_shift3_bros = list(bros)
 
         if shift in ('morningsession', 'afternoonsession'):
             box_count = NUM_BOX_SESSION
@@ -511,11 +541,14 @@ for day in DAYS:
                               'sister', assigned_per_day, prefer_saving_key=sisters_save_hint)
 
         # Record assignments in per-day tracker
-        for rn in bros:
-            key = (day, rn)
-            if key not in assigned_per_day:
-                assigned_per_day[key] = []
-            assigned_per_day[key].append(shift)
+        # For shared brothers (morningsession/afternoonsession), skip recording
+        # since they're already recorded under shift1/shift3
+        if shift not in ('morningsession', 'afternoonsession'):
+            for rn in bros:
+                key = (day, rn)
+                if key not in assigned_per_day:
+                    assigned_per_day[key] = []
+                assigned_per_day[key].append(shift)
         for rn in sisses:
             key = (day, rn)
             if key not in assigned_per_day:
@@ -529,8 +562,14 @@ for day in DAYS:
         }
         
         session_label = " [Session - Boxes 8,9,10]" if shift in ('morningsession', 'afternoonsession') else ""
+        # For shared KB shifts, note the sharing source
+        kb_note = ""
+        if shift == 'morningsession':
+            kb_note = " (shared with Shift 1)"
+        elif shift == 'afternoonsession':
+            kb_note = " (shared with Shift 3)"
         print(f"\n{DAY_LABEL[day]} - {sl}{session_label}")
-        print(f"  Brothers ({len(bros)}): {bros}")
+        print(f"  Brothers ({len(bros)}){kb_note}: {bros}")
         print(f"  Sisters ({len(sisses)}): {sisses}")
 
     # Assign counters after shift3/afternoonsession but before shift4,
@@ -770,66 +809,28 @@ def special_roles_block():
     return h
 
 
-# ── PricingFocus Dashboard Style ──────────────────────────────────────────────
-# Clean white, blue accent (#2563eb), card-based layout matching PricingFocus dashboard
+# ── Netlify-Inspired Design ─────────────────────────────────────────────────
+# Signature teal-to-purple gradient (#00c7b7 → #7c3aed), clean cards, system font
 CSS = """<style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{font-size:16px;-webkit-text-size-adjust:100%}
 body{
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    background:#f8f9fa;
-    color:#1e293b;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;
+    background:#f0f2f5;
+    color:#0d1b2a;
     line-height:1.5;
 }
 .container{max-width:1040px;margin:0 auto;padding:24px 16px}
 
-/* ── Header ── */
-.topbar{
-    background:#fff;
-    border-bottom:1px solid #e2e8f0;
-    padding:16px 32px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:8px;
+/* ── Header with Teal-to-Purple Gradient ── */
+header{
+    text-align:center;
+    padding:48px 0 32px;
 }
-.topbar h1{font-size:18px;font-weight:600;color:#0f172a}
-.topbar h1 span{color:#2563eb}
-.topbar .sub{font-size:13px;color:#64748b}
-header{text-align:center;padding:32px 0 8px}
-header h1{font-size:20px;font-weight:600;color:#0f172a}
-header .subtitle{font-size:13px;color:#64748b;margin-top:4px}
-header .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    margin-top:12px;
-    padding:4px 14px;
-    background:#f1f5f9;
-    border-radius:100px;
-    font-size:12px;
-    color:#64748b;
-    font-weight:500;
+header h1{
+    font-size:24px;font-weight:700;color:#0d1b2a;
+    margin-bottom:4px;
 }
-header .badge-dot{
-    display:inline-block;
-    width:6px;height:6px;
-    border-radius:50%;
-    background:#2563eb;
-}
-header .badge .brother-count{color:#2563eb;font-weight:600}
-header .badge .sister-count{color:#2563eb;font-weight:600}
-
-/* ── Stats Row ── */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
-.stat-card{
-    background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;
-}
-.stat-card .num{font-size:24px;font-weight:700;letter-spacing:-.02em;color:#0f172a}
-.stat-card .lbl{font-size:12px;color:#64748b;margin-top:2px}
-.stat-card.blue .num{color:#2563eb}
-@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
 
 /* ── Search ── */
 .search-bar{max-width:480px;margin:0 auto 28px}
@@ -838,20 +839,20 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     align-items:center;
     gap:8px;
     background:#fff;
-    border-radius:10px;
+    border-radius:12px;
     padding:0 14px;
     transition:box-shadow 0.2s;
     border:1px solid #e2e8f0;
 }
 .search-input-wrap:focus-within{
-    box-shadow:0 0 0 3px rgba(37,99,235,0.15);
-    border-color:#93c5fd;
+    box-shadow:0 0 0 3px rgba(0,199,183,0.15);
+    border-color:#00c7b7;
 }
 .search-input-wrap .icon{font-size:14px;color:#94a3b8;flex-shrink:0}
 .search-input-wrap input{
     flex:1;border:none;background:transparent;
     padding:12px 0;font-size:14px;
-    font-family:inherit;outline:none;color:#1e293b;
+    font-family:inherit;outline:none;color:#0d1b2a;
 }
 .search-input-wrap input::placeholder{color:#94a3b8}
 .search-clear{
@@ -865,35 +866,60 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     font-size:12px;color:#64748b;
     margin-top:10px;min-height:1.4em;text-align:center;
 }
-.search-status strong{color:#0f172a;font-weight:600}
+.search-status strong{color:#0d1b2a;font-weight:600}
 .search-status .clear-link{
-    color:#2563eb;cursor:pointer;font-weight:500;
+    color:#00c7b7;cursor:pointer;font-weight:500;
     margin-left:8px;
 }
 .search-status .clear-link:hover{text-decoration:underline}
 
-/* ── Tabs ── */
+/* ── Search Name Display ── */
+.search-result-name{
+    text-align:center;
+    margin:0 auto 20px;
+    min-height:0;
+    overflow:hidden;
+    transition:min-height 0.25s ease,margin 0.25s ease,opacity 0.2s ease;
+    opacity:0;
+    max-height:0;
+}
+.search-result-name.visible{
+    opacity:1;
+    max-height:60px;
+    min-height:32px;
+}
+.search-result-name h2{
+    font-size:22px;font-weight:700;color:#0d1b2a;
+    margin:0;
+}
+.search-result-name h2 span{
+    background:linear-gradient(135deg,#00c7b7,#7c3aed);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+}
+
+/* ── Tabs (Netlify Pill Style) ── */
 .nav-bar{
-    display:flex;gap:4px;margin-bottom:24px;
-    background:#fff;border-radius:10px;padding:4px;
-    border:1px solid #e2e8f0;
+    display:flex;gap:6px;margin-bottom:24px;justify-content:center;
 }
 .tab-btn{
-    flex:1;padding:10px 14px;
-    background:transparent;border:none;border-radius:8px;
+    padding:10px 28px;
+    background:#fff;border:1px solid #e2e8f0;border-radius:100px;
     cursor:pointer;font-size:13px;font-weight:500;
     font-family:inherit;color:#64748b;
-    transition:all 0.15s;text-align:center;
+    transition:all 0.2s;text-align:center;
 }
 .tab-btn small{
     font-weight:400;font-size:11px;color:#94a3b8;display:block;margin-top:2px;
 }
 .tab-btn.tab-active{
-    background:#2563eb;
-    color:#fff;
+    background:linear-gradient(135deg,#00c7b7,#7c3aed);
+    color:#fff;border-color:transparent;
+    box-shadow:0 4px 14px rgba(0,199,183,0.25);
 }
-.tab-btn.tab-active small{color:#bfdbfe}
-.tab-btn:hover:not(.tab-active){background:#f1f5f9;color:#334155}
+.tab-btn.tab-active small{color:rgba(255,255,255,0.8)}
+.tab-btn:hover:not(.tab-active){border-color:#00c7b7;color:#0d1b2a}
 
 /* ── Day Panels ── */
 .day-panel{display:none}
@@ -906,7 +932,7 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
 
 /* ── Shift Cards ── */
 .shift-card{
-    background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+    background:#fff;border:1px solid #e2e8f0;border-radius:12px;
     margin-bottom:10px;overflow:hidden;
     transition:opacity 0.2s,transform 0.2s,max-height 0.35s,margin 0.25s,padding 0.25s;
 }
@@ -915,17 +941,17 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     margin-bottom:0;overflow:hidden;pointer-events:none;padding:0;
 }
 .shift-card.highlighted{
-    border-color:#2563eb;
-    box-shadow:0 0 0 2px rgba(37,99,235,0.12);
+    border-color:#00c7b7;
+    box-shadow:0 0 0 2px rgba(0,199,183,0.15);
 }
 .shift-header{
     display:flex;align-items:center;gap:8px;
     padding:12px 18px;font-weight:600;
-    font-size:13px;color:#0f172a;
-    background:#f8fafc;
+    font-size:13px;color:#0d1b2a;
+    background:linear-gradient(135deg,rgba(0,199,183,0.06),rgba(124,58,237,0.06));
     border-bottom:1px solid #e2e8f0;
 }
-.shift-header .shift-clock{color:#2563eb;font-size:14px}
+.shift-header .shift-clock{color:#7c3aed;font-size:14px}
 .shift-body{padding:14px 18px 16px}
 .shift-body-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 @media(max-width:560px){.shift-body-grid{grid-template-columns:1fr;gap:10px}}
@@ -937,16 +963,17 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
 .name-list{display:flex;flex-wrap:wrap;gap:5px}
 .name-tag{
     display:inline-flex;align-items:center;
-    padding:4px 10px;border-radius:6px;
+    padding:6px 14px;border-radius:8px;
     font-size:13px;font-weight:500;line-height:1.4;
+    min-width:0;height:auto;
 }
 .brother-tag{
-    background:#eff6ff;color:#1e40af;
-    border:1px solid #bfdbfe;
+    background:rgba(0,199,183,0.08);color:#0f5e5a;
+    border:1px solid rgba(0,199,183,0.25);
 }
 .sister-tag{
-    background:#faf5ff;color:#6b21a8;
-    border:1px solid #e9d5ff;
+    background:rgba(124,58,237,0.08);color:#5b21b6;
+    border:1px solid rgba(124,58,237,0.2);
 }
 
 /* ── Box Grid ── */
@@ -966,7 +993,7 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
 
 /* ── Counters Section ── */
 .counters-section{
-    background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+    background:#fff;border:1px solid #e2e8f0;border-radius:12px;
     padding:16px 18px 18px;margin:14px 0;
     transition:opacity 0.2s,transform 0.2s,max-height 0.35s,margin 0.25s,padding 0.25s;
 }
@@ -975,18 +1002,18 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     margin:0!important;overflow:hidden;pointer-events:none;padding:0!important;
 }
 .counters-section.highlighted{
-    border-color:#2563eb;
-    box-shadow:0 0 0 2px rgba(37,99,235,0.12);
+    border-color:#00c7b7;
+    box-shadow:0 0 0 2px rgba(0,199,183,0.12);
 }
 .counters-section .section-title{
-    font-size:13px;font-weight:600;color:#0f172a;margin-bottom:2px;
+    font-size:13px;font-weight:600;color:#0d1b2a;margin-bottom:2px;
 }
-.counters-section .section-title .counter-icon{color:#2563eb}
+.counters-section .section-title .counter-icon{color:#7c3aed}
 .section-desc{font-size:12px;color:#64748b;margin-bottom:10px}
 
 /* ── Special Roles ── */
 .special-roles-section{
-    background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+    background:#fff;border:1px solid #e2e8f0;border-radius:12px;
     padding:16px 18px 18px;margin:14px 0;
     transition:opacity 0.2s,transform 0.2s,max-height 0.35s,margin 0.25s,padding 0.25s;
 }
@@ -995,11 +1022,11 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     margin:0!important;overflow:hidden;pointer-events:none;padding:0!important;
 }
 .special-roles-section.highlighted{
-    border-color:#2563eb;
-    box-shadow:0 0 0 2px rgba(37,99,235,0.12);
+    border-color:#00c7b7;
+    box-shadow:0 0 0 2px rgba(0,199,183,0.12);
 }
 .special-roles-section .section-title{
-    font-size:13px;font-weight:600;color:#0f172a;margin-bottom:2px;
+    font-size:13px;font-weight:600;color:#0d1b2a;margin-bottom:2px;
 }
 .special-roles-grid{display:flex;flex-wrap:wrap;gap:8px}
 .special-role-item{display:flex;align-items:center;gap:4px}
@@ -1021,13 +1048,12 @@ footer{
     .container{max-width:100%;padding:0 10px}
     header{padding:20px 0 8px}
     header h1{font-size:16px}
-    header .subtitle,.search-bar,.search-status,.nav-bar{display:none!important}
-    header .badge{background:#f1f1f1!important;color:#333!important;border:1px solid #ddd!important}
+    header .search-bar,.search-status,.search-result-name,.nav-bar{display:none!important}
     .day-panel{display:block!important}
-    .shift-card{break-inside:avoid;border:1px solid #ccc!important;border-radius:6px!important}
+    .shift-card{break-inside:avoid;border:1px solid #ccc!important;border-radius:8px!important}
     .shift-header{background:#f8f8f8!important;border-bottom:1px solid #ccc!important}
-    .brother-tag{background:#e8eeff!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    .sister-tag{background:#f0e6ff!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .brother-tag{background:rgba(0,199,183,0.08)!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .sister-tag{background:rgba(124,58,237,0.08)!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .box-num{background:#eee!important;color:#333!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .counters-section,.special-roles-section{break-inside:avoid;border:1px solid #ccc!important}
     .shift-card.filtered-out,.counters-section.filtered-out,.special-roles-section.filtered-out{
@@ -1040,121 +1066,145 @@ footer{
 </style>"""
 
 # ── Generate JS ──────────────────────────────────────────────────────────────
-JS = """<script>
-let activeDay = 'fri';
+# Build the VOLUNTEER_NAMES JSON array from all unique volunteers
+all_real_names = sorted(set(v['real_name'] for v in volunteers))
+volunteer_names_str = ',\n    '.join('"' + esc(n) + '"' for n in all_real_names)
 
-function showDay(day) {
-    activeDay = day;
-    document.querySelectorAll(".day-panel").forEach(p => p.classList.remove("active"));
-    document.querySelectorAll(".tab-btn").forEach(b => {
-        b.classList.remove("tab-active");
-        b.setAttribute("aria-selected", "false");
-    });
-    document.getElementById("day-" + day).classList.add("active");
-    const tabs = document.querySelectorAll(".tab-btn");
-    const tabMap = {fri: 0, sat: 1, sun: 2};
-    const idx = tabMap[day];
-    if (idx !== undefined && tabs[idx]) {
-        tabs[idx].classList.add("tab-active");
-        tabs[idx].setAttribute("aria-selected", "true");
-    }
-    // Re-run search on day switch to keep filtered state
-    searchNames();
-}
-
-// Show first day panel by default
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("day-fri").classList.add("active");
-    const tabs = document.querySelectorAll(".tab-btn");
-    if (tabs[0]) { tabs[0].classList.add("tab-active"); tabs[0].setAttribute("aria-selected", "true"); }
-});
-
-function searchNames() {
-    const input = document.getElementById("searchInput");
-    const filter = input.value.trim().toLowerCase();
-    const status = document.getElementById("searchStatus");
-    const clearBtn = document.getElementById("searchClear");
-
-    // Show/hide clear button
-    clearBtn.classList.toggle("visible", filter.length > 0);
-
-    // Target all filterable sections
-    const sections = document.querySelectorAll(
-        ".shift-card, .counters-section, .special-roles-section"
-    );
-
-    if (!filter) {
-        // Show everything
-        sections.forEach(el => {
-            el.classList.remove("filtered-out", "highlighted");
-        });
-        status.innerHTML = '';
-        return;
-    }
-
-    // Count matches per day panel
-    const dayMatches = {fri: 0, sat: 0, sun: 0};
-    let matchCount = 0;
-    const dayPanelMap = {'day-fri': 'fri', 'day-sat': 'sat', 'day-sun': 'sun'};
-    
-    sections.forEach(el => {
-        const names = (el.getAttribute("data-names") || "").toLowerCase();
-        if (names.includes(filter)) {
-            el.classList.remove("filtered-out");
-            el.classList.add("highlighted");
-            matchCount++;
-            // Find which day panel this section belongs to
-            let parent = el.closest('.day-panel');
-            if (parent && parent.id in dayPanelMap) {
-                dayMatches[dayPanelMap[parent.id]]++;
-            } else {
-                // Counters/special are visible on all days — count for all
-                dayMatches.fri++;
-                dayMatches.sat++;
-                dayMatches.sun++;
-            }
-        } else {
-            el.classList.add("filtered-out");
-            el.classList.remove("highlighted");
-        }
-    });
-
-    // Auto-switch to the day with the most matches
-    if (matchCount > 0) {
-        let bestDay = activeDay;
-        let bestCount = 0;
-        for (const [d, cnt] of Object.entries(dayMatches)) {
-            if (cnt > bestCount) {
-                bestCount = cnt;
-                bestDay = d;
-            }
-        }
-        if (bestDay !== activeDay) {
-            showDay(bestDay);
-        }
-    }
-
-    if (matchCount > 0) {
-        status.innerHTML = 'Showing <strong>' + matchCount + '</strong> section(s) for "<strong>' +
-            escHtml(filter) + '</strong>" <span class="clear-link" onclick="clearSearch()">Show all</span>';
-    } else {
-        status.innerHTML = 'No sections found for "<strong>' +
-            escHtml(filter) + '</strong>" <span class="clear-link" onclick="clearSearch()">Clear</span>';
-    }
-}
-
-function clearSearch() {
-    document.getElementById("searchInput").value = '';
-    searchNames();
-    document.getElementById("searchInput").focus();
-}
-
-function escHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-}
-</script>"""
+JS = '<script>\n' + (
+    'let activeDay = \'fri\';\n'
+    '\n'
+    'const VOLUNTEER_NAMES = [\n'
+    '    ' + volunteer_names_str + ',\n'
+    '];\n'
+    '\n'
+    'function showDay(day) {\n'
+    '    activeDay = day;\n'
+    '    document.querySelectorAll(".day-panel").forEach(p => p.classList.remove("active"));\n'
+    '    document.querySelectorAll(".tab-btn").forEach(b => {\n'
+    '        b.classList.remove("tab-active");\n'
+    '        b.setAttribute("aria-selected", "false");\n'
+    '    });\n'
+    '    document.getElementById("day-" + day).classList.add("active");\n'
+    '    const tabs = document.querySelectorAll(".tab-btn");\n'
+    '    const tabMap = {fri: 0, sat: 1, sun: 2};\n'
+    '    const idx = tabMap[day];\n'
+    '    if (idx !== undefined && tabs[idx]) {\n'
+    '        tabs[idx].classList.add("tab-active");\n'
+    '        tabs[idx].setAttribute("aria-selected", "true");\n'
+    '    }\n'
+    '    // Re-run search on day switch to keep filtered state\n'
+    '    searchNames();\n'
+    '}\n'
+    '\n'
+    '// Show first day panel by default\n'
+    'document.addEventListener("DOMContentLoaded", function() {\n'
+    '    document.getElementById("day-fri").classList.add("active");\n'
+    '    const tabs = document.querySelectorAll(".tab-btn");\n'
+    '    if (tabs[0]) { tabs[0].classList.add("tab-active"); tabs[0].setAttribute("aria-selected", "true"); }\n'
+    '});\n'
+    '\n'
+    'function searchNames() {\n'
+    '    const input = document.getElementById("searchInput");\n'
+    '    const filter = input.value.trim().toLowerCase();\n'
+    '    const status = document.getElementById("searchStatus");\n'
+    '    const clearBtn = document.getElementById("searchClear");\n'
+    '    const nameHeading = document.getElementById("searchResultName");\n'
+    '    const nameDisplay = document.getElementById("searchNameDisplay");\n'
+    '\n'
+    '    // Show/hide clear button\n'
+    '    clearBtn.classList.toggle("visible", filter.length > 0);\n'
+    '\n'
+    '    // Target all filterable sections\n'
+    '    const sections = document.querySelectorAll(\n'
+    '        ".shift-card, .counters-section, .special-roles-section"\n'
+    '    );\n'
+    '\n'
+    '    if (!filter) {\n'
+    '        // Show everything\n'
+    '        sections.forEach(el => {\n'
+    '            el.classList.remove("filtered-out", "highlighted");\n'
+    '        });\n'
+    '        status.innerHTML = \'\';\n'
+    '        nameHeading.classList.remove("visible");\n'
+    '        return;\n'
+    '    }\n'
+    '\n'
+    '    // Check for exact volunteer name match\n'
+    '    const exactMatch = VOLUNTEER_NAMES.find(\n'
+    '        name => name.toLowerCase() === filter\n'
+    '    );\n'
+    '    if (exactMatch) {\n'
+    '        nameDisplay.textContent = exactMatch;\n'
+    '        nameHeading.classList.add("visible");\n'
+    '    } else {\n'
+    '        nameHeading.classList.remove("visible");\n'
+    '    }\n'
+    '\n'
+    '    // Count matches per day panel\n'
+    '    const dayMatches = {fri: 0, sat: 0, sun: 0};\n'
+    '    let matchCount = 0;\n'
+    '    const dayPanelMap = {\'day-fri\': \'fri\', \'day-sat\': \'sat\', \'day-sun\': \'sun\'};\n'
+    '    \n'
+    '    sections.forEach(el => {\n'
+    '        const names = (el.getAttribute("data-names") || "").toLowerCase();\n'
+    '        if (names.includes(filter)) {\n'
+    '            el.classList.remove("filtered-out");\n'
+    '            el.classList.add("highlighted");\n'
+    '            matchCount++;\n'
+    '            // Find which day panel this section belongs to\n'
+    '            let parent = el.closest(\'.day-panel\');\n'
+    '            if (parent && parent.id in dayPanelMap) {\n'
+    '                dayMatches[dayPanelMap[parent.id]]++;\n'
+    '            } else {\n'
+    '                // Counters/special are visible on all days — count for all\n'
+    '                dayMatches.fri++;\n'
+    '                dayMatches.sat++;\n'
+    '                dayMatches.sun++;\n'
+    '            }\n'
+    '        } else {\n'
+    '            el.classList.add("filtered-out");\n'
+    '            el.classList.remove("highlighted");\n'
+    '        }\n'
+    '    });\n'
+    '\n'
+    '    // Auto-switch to the day with the most matches\n'
+    '    if (matchCount > 0) {\n'
+    '        let bestDay = activeDay;\n'
+    '        let bestCount = 0;\n'
+    '        for (const [d, cnt] of Object.entries(dayMatches)) {\n'
+    '            if (cnt > bestCount) {\n'
+    '                bestCount = cnt;\n'
+    '                bestDay = d;\n'
+    '            }\n'
+    '        }\n'
+    '        if (bestDay !== activeDay) {\n'
+    '            showDay(bestDay);\n'
+    '        }\n'
+    '    }\n'
+    '\n'
+    '    if (matchCount > 0) {\n'
+    '        status.innerHTML = \'Showing <strong>\' + matchCount + \'</strong> section(s) for "<strong>\' +\n'
+    '            escHtml(filter) + \'</strong>" <span class="clear-link" onclick="clearSearch()">Show all</span>\';\n'
+    '    } else {\n'
+    '        status.innerHTML = \'No sections found for "<strong>\' +\n'
+    '            escHtml(filter) + \'</strong>" <span class="clear-link" onclick="clearSearch()">Clear</span>\';\n'
+    '    }\n'
+    '}\n'
+    '\n'
+    'function clearSearch() {\n'
+    '    document.getElementById("searchInput").value = \'\';\n'
+    '    document.getElementById("searchResultName").classList.remove("visible");\n'
+    '    searchNames();\n'
+    '    document.getElementById("searchInput").focus();\n'
+    '}\n'
+    '\n'
+    'function escHtml(str) {\n'
+    '    const div = document.createElement(\'div\');\n'
+    '    div.textContent = str;\n'
+    '    return div.innerHTML;\n'
+    '}\n'
+    '</script>'
+)
 
 
 # ── Build HTML ────────────────────────────────────────────────────────────────
@@ -1173,17 +1223,7 @@ parts.append('<div class="container">')
 # ── Header ──
 parts.append('<header>')
 parts.append('    <h1>Accounts Department Volunteers</h1>')
-parts.append('    <p class="subtitle">July 10&ndash;12, 2026 &middot; Three-Day Program</p>')
-parts.append('    <div class="badge"><span class="badge-dot"></span> <span><span class="brother-count">' + str(final_brothers) + '</span> Brothers</span> <span>&middot;</span> <span><span class="sister-count">' + str(final_sisters) + '</span> Sisters</span></div>')
 parts.append('</header>')
-
-# ── Stats Row ──
-parts.append('<div class="stats">')
-parts.append('<div class="stat-card blue"><div class="num">' + str(len(all_person_set)) + '</div><div class="lbl">Total Volunteers</div></div>')
-parts.append('<div class="stat-card"><div class="num">' + str(final_brothers) + '</div><div class="lbl">Brothers</div></div>')
-parts.append('<div class="stat-card"><div class="num">' + str(final_sisters) + '</div><div class="lbl">Sisters</div></div>')
-parts.append('<div class="stat-card"><div class="num">18</div><div class="lbl">Shifts</div></div>')
-parts.append('</div>')
 
 # ── Search ──
 parts.append('<div class="search-bar">')
@@ -1193,6 +1233,9 @@ parts.append('        <input type="text" id="searchInput" oninput="searchNames()
 parts.append('        <button class="search-clear" id="searchClear" onclick="clearSearch()">&times;</button>')
 parts.append('    </div>')
 parts.append('    <div class="search-status" id="searchStatus"></div>')
+parts.append('    <div class="search-result-name" id="searchResultName">')
+parts.append('      <h2>Showing schedule for: <span id="searchNameDisplay"></span></h2>')
+parts.append('    </div>')
 parts.append('</div>')
 
 # ── Tab Navigation ──
