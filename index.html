@@ -8,60 +8,23 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{font-size:16px;-webkit-text-size-adjust:100%}
 body{
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    background:#f8f9fa;
-    color:#1e293b;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;
+    background:#f0f2f5;
+    color:#0d1b2a;
     line-height:1.5;
 }
 .container{max-width:1040px;margin:0 auto;padding:24px 16px}
 
-/* ── Header ── */
-.topbar{
-    background:#fff;
-    border-bottom:1px solid #e2e8f0;
-    padding:16px 32px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:8px;
+/* ── Header with Teal-to-Purple Gradient ── */
+header{
+    text-align:center;
+    padding:48px 0 32px;
 }
-.topbar h1{font-size:18px;font-weight:600;color:#0f172a}
-.topbar h1 span{color:#2563eb}
-.topbar .sub{font-size:13px;color:#64748b}
-header{text-align:center;padding:32px 0 8px}
-header h1{font-size:20px;font-weight:600;color:#0f172a}
-header .subtitle{font-size:13px;color:#64748b;margin-top:4px}
-header .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    margin-top:12px;
-    padding:4px 14px;
-    background:#f1f5f9;
-    border-radius:100px;
-    font-size:12px;
-    color:#64748b;
-    font-weight:500;
+header h1{
+    font-size:24px;font-weight:700;color:#0d1b2a;
+    margin-bottom:4px;
 }
-header .badge-dot{
-    display:inline-block;
-    width:6px;height:6px;
-    border-radius:50%;
-    background:#2563eb;
-}
-header .badge .brother-count{color:#2563eb;font-weight:600}
-header .badge .sister-count{color:#2563eb;font-weight:600}
-
-/* ── Stats Row ── */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
-.stat-card{
-    background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;
-}
-.stat-card .num{font-size:24px;font-weight:700;letter-spacing:-.02em;color:#0f172a}
-.stat-card .lbl{font-size:12px;color:#64748b;margin-top:2px}
-.stat-card.blue .num{color:#2563eb}
-@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+header .subtitle{font-size:14px;color:#64748b;margin-top:4px}
 
 /* ── Search ── */
 .search-bar{max-width:480px;margin:0 auto 28px}
@@ -70,20 +33,20 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     align-items:center;
     gap:8px;
     background:#fff;
-    border-radius:10px;
+    border-radius:12px;
     padding:0 14px;
     transition:box-shadow 0.2s;
     border:1px solid #e2e8f0;
 }
 .search-input-wrap:focus-within{
-    box-shadow:0 0 0 3px rgba(37,99,235,0.15);
-    border-color:#93c5fd;
+    box-shadow:0 0 0 3px rgba(0,199,183,0.15);
+    border-color:#00c7b7;
 }
 .search-input-wrap .icon{font-size:14px;color:#94a3b8;flex-shrink:0}
 .search-input-wrap input{
     flex:1;border:none;background:transparent;
     padding:12px 0;font-size:14px;
-    font-family:inherit;outline:none;color:#1e293b;
+    font-family:inherit;outline:none;color:#0d1b2a;
 }
 .search-input-wrap input::placeholder{color:#94a3b8}
 .search-clear{
@@ -97,35 +60,60 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     font-size:12px;color:#64748b;
     margin-top:10px;min-height:1.4em;text-align:center;
 }
-.search-status strong{color:#0f172a;font-weight:600}
+.search-status strong{color:#0d1b2a;font-weight:600}
 .search-status .clear-link{
-    color:#2563eb;cursor:pointer;font-weight:500;
+    color:#00c7b7;cursor:pointer;font-weight:500;
     margin-left:8px;
 }
 .search-status .clear-link:hover{text-decoration:underline}
 
-/* ── Tabs ── */
+/* ── Search Name Display ── */
+.search-result-name{
+    text-align:center;
+    margin:0 auto 20px;
+    min-height:0;
+    overflow:hidden;
+    transition:min-height 0.25s ease,margin 0.25s ease,opacity 0.2s ease;
+    opacity:0;
+    max-height:0;
+}
+.search-result-name.visible{
+    opacity:1;
+    max-height:60px;
+    min-height:32px;
+}
+.search-result-name h2{
+    font-size:22px;font-weight:700;color:#0d1b2a;
+    margin:0;
+}
+.search-result-name h2 span{
+    background:linear-gradient(135deg,#00c7b7,#7c3aed);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+}
+
+/* ── Tabs (Netlify Pill Style) ── */
 .nav-bar{
-    display:flex;gap:4px;margin-bottom:24px;
-    background:#fff;border-radius:10px;padding:4px;
-    border:1px solid #e2e8f0;
+    display:flex;gap:6px;margin-bottom:24px;justify-content:center;
 }
 .tab-btn{
-    flex:1;padding:10px 14px;
-    background:transparent;border:none;border-radius:8px;
+    padding:10px 28px;
+    background:#fff;border:1px solid #e2e8f0;border-radius:100px;
     cursor:pointer;font-size:13px;font-weight:500;
     font-family:inherit;color:#64748b;
-    transition:all 0.15s;text-align:center;
+    transition:all 0.2s;text-align:center;
 }
 .tab-btn small{
     font-weight:400;font-size:11px;color:#94a3b8;display:block;margin-top:2px;
 }
 .tab-btn.tab-active{
-    background:#2563eb;
-    color:#fff;
+    background:linear-gradient(135deg,#00c7b7,#7c3aed);
+    color:#fff;border-color:transparent;
+    box-shadow:0 4px 14px rgba(0,199,183,0.25);
 }
-.tab-btn.tab-active small{color:#bfdbfe}
-.tab-btn:hover:not(.tab-active){background:#f1f5f9;color:#334155}
+.tab-btn.tab-active small{color:rgba(255,255,255,0.8)}
+.tab-btn:hover:not(.tab-active){border-color:#00c7b7;color:#0d1b2a}
 
 /* ── Day Panels ── */
 .day-panel{display:none}
@@ -138,7 +126,7 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
 
 /* ── Shift Cards ── */
 .shift-card{
-    background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+    background:#fff;border:1px solid #e2e8f0;border-radius:12px;
     margin-bottom:10px;overflow:hidden;
     transition:opacity 0.2s,transform 0.2s,max-height 0.35s,margin 0.25s,padding 0.25s;
 }
@@ -147,17 +135,17 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     margin-bottom:0;overflow:hidden;pointer-events:none;padding:0;
 }
 .shift-card.highlighted{
-    border-color:#2563eb;
-    box-shadow:0 0 0 2px rgba(37,99,235,0.12);
+    border-color:#00c7b7;
+    box-shadow:0 0 0 2px rgba(0,199,183,0.15);
 }
 .shift-header{
     display:flex;align-items:center;gap:8px;
     padding:12px 18px;font-weight:600;
-    font-size:13px;color:#0f172a;
-    background:#f8fafc;
+    font-size:13px;color:#0d1b2a;
+    background:linear-gradient(135deg,rgba(0,199,183,0.06),rgba(124,58,237,0.06));
     border-bottom:1px solid #e2e8f0;
 }
-.shift-header .shift-clock{color:#2563eb;font-size:14px}
+.shift-header .shift-clock{color:#7c3aed;font-size:14px}
 .shift-body{padding:14px 18px 16px}
 .shift-body-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 @media(max-width:560px){.shift-body-grid{grid-template-columns:1fr;gap:10px}}
@@ -173,12 +161,12 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     font-size:13px;font-weight:500;line-height:1.4;
 }
 .brother-tag{
-    background:#eff6ff;color:#1e40af;
-    border:1px solid #bfdbfe;
+    background:rgba(0,199,183,0.08);color:#0f5e5a;
+    border:1px solid rgba(0,199,183,0.25);
 }
 .sister-tag{
-    background:#faf5ff;color:#6b21a8;
-    border:1px solid #e9d5ff;
+    background:rgba(124,58,237,0.08);color:#5b21b6;
+    border:1px solid rgba(124,58,237,0.2);
 }
 
 /* ── Box Grid ── */
@@ -198,7 +186,7 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
 
 /* ── Counters Section ── */
 .counters-section{
-    background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+    background:#fff;border:1px solid #e2e8f0;border-radius:12px;
     padding:16px 18px 18px;margin:14px 0;
     transition:opacity 0.2s,transform 0.2s,max-height 0.35s,margin 0.25s,padding 0.25s;
 }
@@ -207,18 +195,18 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     margin:0!important;overflow:hidden;pointer-events:none;padding:0!important;
 }
 .counters-section.highlighted{
-    border-color:#2563eb;
-    box-shadow:0 0 0 2px rgba(37,99,235,0.12);
+    border-color:#00c7b7;
+    box-shadow:0 0 0 2px rgba(0,199,183,0.12);
 }
 .counters-section .section-title{
-    font-size:13px;font-weight:600;color:#0f172a;margin-bottom:2px;
+    font-size:13px;font-weight:600;color:#0d1b2a;margin-bottom:2px;
 }
-.counters-section .section-title .counter-icon{color:#2563eb}
+.counters-section .section-title .counter-icon{color:#7c3aed}
 .section-desc{font-size:12px;color:#64748b;margin-bottom:10px}
 
 /* ── Special Roles ── */
 .special-roles-section{
-    background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+    background:#fff;border:1px solid #e2e8f0;border-radius:12px;
     padding:16px 18px 18px;margin:14px 0;
     transition:opacity 0.2s,transform 0.2s,max-height 0.35s,margin 0.25s,padding 0.25s;
 }
@@ -227,11 +215,11 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     margin:0!important;overflow:hidden;pointer-events:none;padding:0!important;
 }
 .special-roles-section.highlighted{
-    border-color:#2563eb;
-    box-shadow:0 0 0 2px rgba(37,99,235,0.12);
+    border-color:#00c7b7;
+    box-shadow:0 0 0 2px rgba(0,199,183,0.12);
 }
 .special-roles-section .section-title{
-    font-size:13px;font-weight:600;color:#0f172a;margin-bottom:2px;
+    font-size:13px;font-weight:600;color:#0d1b2a;margin-bottom:2px;
 }
 .special-roles-grid{display:flex;flex-wrap:wrap;gap:8px}
 .special-role-item{display:flex;align-items:center;gap:4px}
@@ -253,13 +241,12 @@ footer{
     .container{max-width:100%;padding:0 10px}
     header{padding:20px 0 8px}
     header h1{font-size:16px}
-    header .subtitle,.search-bar,.search-status,.nav-bar{display:none!important}
-    header .badge{background:#f1f1f1!important;color:#333!important;border:1px solid #ddd!important}
+    header .subtitle,.search-bar,.search-status,.search-result-name,.nav-bar{display:none!important}
     .day-panel{display:block!important}
-    .shift-card{break-inside:avoid;border:1px solid #ccc!important;border-radius:6px!important}
+    .shift-card{break-inside:avoid;border:1px solid #ccc!important;border-radius:8px!important}
     .shift-header{background:#f8f8f8!important;border-bottom:1px solid #ccc!important}
-    .brother-tag{background:#e8eeff!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    .sister-tag{background:#f0e6ff!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .brother-tag{background:rgba(0,199,183,0.08)!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .sister-tag{background:rgba(124,58,237,0.08)!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .box-num{background:#eee!important;color:#333!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .counters-section,.special-roles-section{break-inside:avoid;border:1px solid #ccc!important}
     .shift-card.filtered-out,.counters-section.filtered-out,.special-roles-section.filtered-out{
@@ -291,6 +278,9 @@ footer{
         <button class="search-clear" id="searchClear" onclick="clearSearch()">&times;</button>
     </div>
     <div class="search-status" id="searchStatus"></div>
+    <div class="search-result-name" id="searchResultName">
+      <h2>Showing schedule for: <span id="searchNameDisplay"></span></h2>
+    </div>
 </div>
 <nav class="nav-bar" role="tablist">
 <button class="tab-btn" role="tab" aria-selected="false" onclick="showDay('fri')">Friday<br><small>July 10, 2026</small></button>
@@ -560,6 +550,77 @@ footer{
 <script>
 let activeDay = 'fri';
 
+const VOLUNTEER_NAMES = [
+    "Analyn Clemente",
+    "Andie Balicastro",
+    "Andrea Joyce Gulay",
+    "Anja Raye Casicas",
+    "Ashley Balaga",
+    "Ashley Faith Cacao",
+    "Cameron Diaz",
+    "Carina Labra",
+    "Caroline Labra",
+    "Charles Russel Sanico",
+    "Cyra Mae Pagalan",
+    "Cyros Rexes Madura",
+    "Dahlia Villaruel",
+    "Danelyn Casicas",
+    "Daveryl Quiban",
+    "Elah Manto",
+    "Elexie Balaga",
+    "Ellah Tangog De Paz",
+    "Erhian Gail Razon",
+    "Erika Mae Malbas",
+    "Ethan Razon",
+    "Faith Talavera",
+    "Freuss Reign Ponce",
+    "Haidee Bulanon",
+    "Idylla Ando",
+    "Jalel Villamor",
+    "Jamilah Karen Mausisa",
+    "Jaye Kayla Rosal",
+    "Jeddan Jusay",
+    "Jedloyd Rosalejos",
+    "Jemrel Besere",
+    "Jeorgiana Rose Butalon",
+    "Jera Butalon",
+    "Jercel Butalon",
+    "Jerian Nituda",
+    "Jerlie Mae Morandante",
+    "Jesyl Salinas",
+    "John Carlo Jusay",
+    "Johna Mae Eme",
+    "Jona Mae Case Palero",
+    "Jonamae Degamon",
+    "Joshe Miguel Panonce",
+    "Karylle Altura",
+    "Keziah Bautista",
+    "Kristel Joy Pagalan",
+    "Kristel Serena",
+    "Kyla Marie Pagaran",
+    "Lady Jane Gay",
+    "Lymarie Sermillas",
+    "Marithony Clemente",
+    "Mary Grace Dasal",
+    "Merlie Jean Matunog",
+    "Michelle Balaga",
+    "Nicole  Altura",
+    "Princess Nikee Xyle Aves",
+    "Quenette Jean De Paz",
+    "Relyn Carino",
+    "Remdrant Mepania",
+    "Reslie Carino",
+    "Rinard Fandiño",
+    "Rovelyn Pagaran",
+    "Rozyville Miro",
+    "Ruel Ryan Rosal",
+    "Scheirylene Cacao",
+    "Schiera Jane Cacao",
+    "Vea Quiban",
+    "Vince Syriel Sanico",
+    "Zared Mae Laran",
+];
+
 function showDay(day) {
     activeDay = day;
     document.querySelectorAll(".day-panel").forEach(p => p.classList.remove("active"));
@@ -591,6 +652,8 @@ function searchNames() {
     const filter = input.value.trim().toLowerCase();
     const status = document.getElementById("searchStatus");
     const clearBtn = document.getElementById("searchClear");
+    const nameHeading = document.getElementById("searchResultName");
+    const nameDisplay = document.getElementById("searchNameDisplay");
 
     // Show/hide clear button
     clearBtn.classList.toggle("visible", filter.length > 0);
@@ -606,7 +669,19 @@ function searchNames() {
             el.classList.remove("filtered-out", "highlighted");
         });
         status.innerHTML = '';
+        nameHeading.classList.remove("visible");
         return;
+    }
+
+    // Check for exact volunteer name match
+    const exactMatch = VOLUNTEER_NAMES.find(
+        name => name.toLowerCase() === filter
+    );
+    if (exactMatch) {
+        nameDisplay.textContent = exactMatch;
+        nameHeading.classList.add("visible");
+    } else {
+        nameHeading.classList.remove("visible");
     }
 
     // Count matches per day panel
@@ -662,6 +737,7 @@ function searchNames() {
 
 function clearSearch() {
     document.getElementById("searchInput").value = '';
+    document.getElementById("searchResultName").classList.remove("visible");
     searchNames();
     document.getElementById("searchInput").focus();
 }
