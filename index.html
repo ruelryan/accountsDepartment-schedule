@@ -24,7 +24,6 @@ header h1{
     font-size:24px;font-weight:700;color:#0d1b2a;
     margin-bottom:4px;
 }
-header .subtitle{font-size:14px;color:#64748b;margin-top:4px}
 
 /* ── Search ── */
 .search-bar{max-width:480px;margin:0 auto 28px}
@@ -157,8 +156,9 @@ header .subtitle{font-size:14px;color:#64748b;margin-top:4px}
 .name-list{display:flex;flex-wrap:wrap;gap:5px}
 .name-tag{
     display:inline-flex;align-items:center;
-    padding:4px 10px;border-radius:6px;
+    padding:6px 14px;border-radius:8px;
     font-size:13px;font-weight:500;line-height:1.4;
+    min-width:0;height:auto;
 }
 .brother-tag{
     background:rgba(0,199,183,0.08);color:#0f5e5a;
@@ -241,7 +241,7 @@ footer{
     .container{max-width:100%;padding:0 10px}
     header{padding:20px 0 8px}
     header h1{font-size:16px}
-    header .subtitle,.search-bar,.search-status,.search-result-name,.nav-bar{display:none!important}
+    header .search-bar,.search-status,.search-result-name,.nav-bar{display:none!important}
     .day-panel{display:block!important}
     .shift-card{break-inside:avoid;border:1px solid #ccc!important;border-radius:8px!important}
     .shift-header{background:#f8f8f8!important;border-bottom:1px solid #ccc!important}
@@ -262,15 +262,7 @@ footer{
 <div class="container">
 <header>
     <h1>Accounts Department Volunteers</h1>
-    <p class="subtitle">July 10&ndash;12, 2026 &middot; Three-Day Program</p>
-    <div class="badge"><span class="badge-dot"></span> <span><span class="brother-count">13</span> Brothers</span> <span>&middot;</span> <span><span class="sister-count">39</span> Sisters</span></div>
 </header>
-<div class="stats">
-<div class="stat-card blue"><div class="num">52</div><div class="lbl">Total Volunteers</div></div>
-<div class="stat-card"><div class="num">13</div><div class="lbl">Brothers</div></div>
-<div class="stat-card"><div class="num">39</div><div class="lbl">Sisters</div></div>
-<div class="stat-card"><div class="num">18</div><div class="lbl">Shifts</div></div>
-</div>
 <div class="search-bar">
     <div class="search-input-wrap">
         <span class="icon">&#x1F50D;</span>
@@ -302,15 +294,15 @@ footer{
 </div>
 </div>
 
-<div class="shift-card" data-names="jeddan jusay vince syriel sanico jesyl salinas jamilah karen mausisa jona mae case palero">
+<div class="shift-card" data-names="daveryl quiban jemrel besere princess nikee xyle aves jeorgiana rose butalon haidee bulanon">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Morning Session</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Jeddan Jusay</span><span class="name-tag brother-tag">Vince Syriel Sanico</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Daveryl Quiban</span><span class="name-tag brother-tag">Jemrel Besere</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jesyl Salinas</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jamilah Karen Mausisa</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Jona Mae Case Palero</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Princess Nikee Xyle Aves</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jeorgiana Rose Butalon</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Haidee Bulanon</span></div></div></div>
 </div>
 </div>
 </div>
@@ -341,30 +333,30 @@ footer{
 </div>
 </div>
 
-<div class="shift-card" data-names="jedloyd rosalejos jemrel besere schiera jane cacao vea quiban jerian nituda">
+<div class="shift-card" data-names="vince syriel sanico charles russel sanico haidee bulanon schiera jane cacao jerian nituda">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Afternoon Session</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Jedloyd Rosalejos</span><span class="name-tag brother-tag">Jemrel Besere</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Vince Syriel Sanico</span><span class="name-tag brother-tag">Charles Russel Sanico</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Schiera Jane Cacao</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Vea Quiban</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Jerian Nituda</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Haidee Bulanon</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Schiera Jane Cacao</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Jerian Nituda</span></div></div></div>
 </div>
 </div>
 </div>
 
-<div class="shift-card" data-names="cyros rexes madura joshe miguel panonce quenette jean de paz elexie balaga jona mae case palero mary grace dasal scheirylene cacao anja raye casicas faith talavera cyra mae pagalan lymarie sermillas jerlie mae morandante jaye kayla rosal ethan razon rinard fandiño jeddan jusay remdrant mepania marithony clemente kristel serena erika mae malbas">
+<div class="shift-card" data-names="jedloyd rosalejos cyros rexes madura faith talavera lymarie sermillas vea quiban lady jane gay elah manto jona mae case palero anja raye casicas jamilah karen mausisa mary grace dasal merlie jean matunog jaye kayla rosal jemrel besere ethan razon rinard fandiño jeddan jusay marithony clemente kristel serena erika mae malbas">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Afternoon) - End</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Cyros Rexes Madura</span><span class="name-tag brother-tag">Joshe Miguel Panonce</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Jedloyd Rosalejos</span><span class="name-tag brother-tag">Cyros Rexes Madura</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Quenette Jean De Paz</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Jona Mae Case Palero</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Scheirylene Cacao</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Anja Raye Casicas</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Faith Talavera</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Cyra Mae Pagalan</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Lymarie Sermillas</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Jerlie Mae Morandante</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Faith Talavera</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Lymarie Sermillas</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Vea Quiban</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Lady Jane Gay</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Elah Manto</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Jona Mae Case Palero</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Anja Raye Casicas</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jamilah Karen Mausisa</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Merlie Jean Matunog</span></div></div></div>
 <div class="role-section"><h4><span class="role-accent amber"></span>Counters</h4>
-<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Ethan Razon</span><span class="name-tag brother-tag">Rinard Fandiño</span><span class="name-tag brother-tag">Jeddan Jusay</span><span class="name-tag brother-tag">Remdrant Mepania</span><span class="name-tag sister-tag">Marithony Clemente</span><span class="name-tag sister-tag">Kristel Serena</span><span class="name-tag sister-tag">Erika Mae Malbas</span></div></div>
+<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Ethan Razon</span><span class="name-tag brother-tag">Rinard Fandiño</span><span class="name-tag brother-tag">Jeddan Jusay</span><span class="name-tag sister-tag">Marithony Clemente</span><span class="name-tag sister-tag">Kristel Serena</span><span class="name-tag sister-tag">Erika Mae Malbas</span></div></div>
 </div>
 </div>
 </div>
@@ -372,82 +364,82 @@ footer{
 </div>
 <div id="day-sat" class="day-panel" role="tabpanel">
 <div class="section-title">Saturday &mdash; July 11, 2026</div>
-<div class="shift-card" data-names="ethan razon charles russel sanico quenette jean de paz anja raye casicas danelyn casicas jeorgiana rose butalon scheirylene cacao princess nikee xyle aves vea quiban jera butalon kyla marie pagaran lady jane gay">
+<div class="shift-card" data-names="cyros rexes madura ethan razon freuss reign ponce anja raye casicas vea quiban jonamae degamon jeorgiana rose butalon lymarie sermillas jona mae case palero haidee bulanon jerian nituda jercel butalon">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">8:20am - Opening Song (Morning)</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Ethan Razon</span><span class="name-tag brother-tag">Charles Russel Sanico</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Cyros Rexes Madura</span><span class="name-tag brother-tag">Ethan Razon</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Quenette Jean De Paz</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Anja Raye Casicas</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Danelyn Casicas</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Jeorgiana Rose Butalon</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Scheirylene Cacao</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Princess Nikee Xyle Aves</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Vea Quiban</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jera Butalon</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Kyla Marie Pagaran</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Lady Jane Gay</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Freuss Reign Ponce</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Anja Raye Casicas</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Vea Quiban</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Jonamae Degamon</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Jeorgiana Rose Butalon</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Lymarie Sermillas</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Jona Mae Case Palero</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Haidee Bulanon</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jerian Nituda</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Jercel Butalon</span></div></div></div>
 </div>
 </div>
 </div>
 
-<div class="shift-card" data-names="jemrel besere vince syriel sanico jerian nituda schiera jane cacao ellah tangog de paz">
+<div class="shift-card" data-names="cyros rexes madura ethan razon schiera jane cacao jamilah karen mausisa danelyn casicas">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Morning Session</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Vince Syriel Sanico</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Cyros Rexes Madura</span><span class="name-tag brother-tag">Ethan Razon</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jerian Nituda</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Schiera Jane Cacao</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Ellah Tangog De Paz</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Schiera Jane Cacao</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jamilah Karen Mausisa</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Danelyn Casicas</span></div></div></div>
 </div>
 </div>
 </div>
 
-<div class="shift-card" data-names="jeddan jusay joshe miguel panonce rozyville miro princess nikee xyle aves johna mae eme jona mae case palero freuss reign ponce jonamae degamon haidee bulanon faith talavera jerlie mae morandante nicole  altura">
+<div class="shift-card" data-names="jeddan jusay jemrel besere haidee bulanon marithony clemente johna mae eme merlie jean matunog zared mae laran quenette jean de paz lady jane gay jerlie mae morandante cyra mae pagalan nicole  altura">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Morning) - 12:55pm</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Jeddan Jusay</span><span class="name-tag brother-tag">Joshe Miguel Panonce</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Jeddan Jusay</span><span class="name-tag brother-tag">Jemrel Besere</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Rozyville Miro</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Princess Nikee Xyle Aves</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Johna Mae Eme</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Jona Mae Case Palero</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Freuss Reign Ponce</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Jonamae Degamon</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Haidee Bulanon</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Faith Talavera</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jerlie Mae Morandante</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Nicole  Altura</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Haidee Bulanon</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Marithony Clemente</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Johna Mae Eme</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Merlie Jean Matunog</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Zared Mae Laran</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Quenette Jean De Paz</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Lady Jane Gay</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jerlie Mae Morandante</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Cyra Mae Pagalan</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Nicole  Altura</span></div></div></div>
 </div>
 </div>
 </div>
 
-<div class="shift-card" data-names="daveryl quiban cyros rexes madura marithony clemente cyra mae pagalan elexie balaga mary grace dasal merlie jean matunog analyn clemente erhian gail razon elah manto zared mae laran lady jane gay">
+<div class="shift-card" data-names="joshe miguel panonce charles russel sanico princess nikee xyle aves elexie balaga erhian gail razon elah manto mary grace dasal rozyville miro jona mae case palero faith talavera analyn clemente ellah tangog de paz">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">12:55pm - Opening Song (Afternoon)</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Daveryl Quiban</span><span class="name-tag brother-tag">Cyros Rexes Madura</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Joshe Miguel Panonce</span><span class="name-tag brother-tag">Charles Russel Sanico</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Marithony Clemente</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Cyra Mae Pagalan</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Merlie Jean Matunog</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Analyn Clemente</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Erhian Gail Razon</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Elah Manto</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Zared Mae Laran</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Lady Jane Gay</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Princess Nikee Xyle Aves</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Erhian Gail Razon</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Elah Manto</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Rozyville Miro</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Jona Mae Case Palero</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Faith Talavera</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Analyn Clemente</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Ellah Tangog De Paz</span></div></div></div>
 </div>
 </div>
 </div>
 
-<div class="shift-card" data-names="jedloyd rosalejos vince syriel sanico jamilah karen mausisa kyla marie pagaran jercel butalon">
+<div class="shift-card" data-names="joshe miguel panonce charles russel sanico jesyl salinas jonamae degamon jera butalon">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Afternoon Session</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Jedloyd Rosalejos</span><span class="name-tag brother-tag">Vince Syriel Sanico</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Joshe Miguel Panonce</span><span class="name-tag brother-tag">Charles Russel Sanico</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jamilah Karen Mausisa</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Kyla Marie Pagaran</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Jercel Butalon</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jesyl Salinas</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jonamae Degamon</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Jera Butalon</span></div></div></div>
 </div>
 </div>
 </div>
 
-<div class="shift-card" data-names="daveryl quiban joshe miguel panonce jesyl salinas anja raye casicas erhian gail razon nicole  altura scheirylene cacao jera butalon jerian nituda jonamae degamon lymarie sermillas mary grace dasal jaye kayla rosal jemrel besere andie balicastro john carlo jusay charles russel sanico jona mae case palero haidee bulanon relyn carino">
+<div class="shift-card" data-names="jedloyd rosalejos daveryl quiban marithony clemente jercel butalon johna mae eme elexie balaga scheirylene cacao elah manto quenette jean de paz merlie jean matunog princess nikee xyle aves kyla marie pagaran jaye kayla rosal remdrant mepania andie balicastro cyros rexes madura john carlo jusay cyra mae pagalan relyn carino jeorgiana rose butalon">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Afternoon) - End</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Daveryl Quiban</span><span class="name-tag brother-tag">Joshe Miguel Panonce</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Jedloyd Rosalejos</span><span class="name-tag brother-tag">Daveryl Quiban</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Jesyl Salinas</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Anja Raye Casicas</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Erhian Gail Razon</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Nicole  Altura</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Scheirylene Cacao</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Jera Butalon</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Jerian Nituda</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jonamae Degamon</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Lymarie Sermillas</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Marithony Clemente</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Jercel Butalon</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Johna Mae Eme</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Scheirylene Cacao</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Elah Manto</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Quenette Jean De Paz</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Merlie Jean Matunog</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Princess Nikee Xyle Aves</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Kyla Marie Pagaran</span></div></div></div>
 <div class="role-section"><h4><span class="role-accent amber"></span>Counters</h4>
-<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Andie Balicastro</span><span class="name-tag brother-tag">John Carlo Jusay</span><span class="name-tag brother-tag">Charles Russel Sanico</span><span class="name-tag sister-tag">Jona Mae Case Palero</span><span class="name-tag sister-tag">Haidee Bulanon</span><span class="name-tag sister-tag">Relyn Carino</span></div></div>
+<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Remdrant Mepania</span><span class="name-tag brother-tag">Andie Balicastro</span><span class="name-tag brother-tag">Cyros Rexes Madura</span><span class="name-tag brother-tag">John Carlo Jusay</span><span class="name-tag sister-tag">Cyra Mae Pagalan</span><span class="name-tag sister-tag">Relyn Carino</span><span class="name-tag sister-tag">Jeorgiana Rose Butalon</span></div></div>
 </div>
 </div>
 </div>
@@ -455,46 +447,46 @@ footer{
 </div>
 <div id="day-sun" class="day-panel" role="tabpanel">
 <div class="section-title">Sunday &mdash; July 12, 2026</div>
-<div class="shift-card" data-names="charles russel sanico joshe miguel panonce vea quiban jonamae degamon lymarie sermillas anja raye casicas jamilah karen mausisa elexie balaga lady jane gay jona mae case palero jerian nituda schiera jane cacao">
+<div class="shift-card" data-names="jemrel besere joshe miguel panonce jonamae degamon jercel butalon jerian nituda jesyl salinas lady jane gay scheirylene cacao anja raye casicas danelyn casicas lymarie sermillas cyra mae pagalan">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">8:20am - Opening Song (Morning)</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Charles Russel Sanico</span><span class="name-tag brother-tag">Joshe Miguel Panonce</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Joshe Miguel Panonce</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Vea Quiban</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Jonamae Degamon</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Lymarie Sermillas</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Anja Raye Casicas</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Jamilah Karen Mausisa</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Lady Jane Gay</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jona Mae Case Palero</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jerian Nituda</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Schiera Jane Cacao</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Jonamae Degamon</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Jercel Butalon</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Jerian Nituda</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Jesyl Salinas</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Lady Jane Gay</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Scheirylene Cacao</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Anja Raye Casicas</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Danelyn Casicas</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Lymarie Sermillas</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Cyra Mae Pagalan</span></div></div></div>
 </div>
 </div>
 </div>
 
-<div class="shift-card" data-names="cyros rexes madura vince syriel sanico jesyl salinas jeorgiana rose butalon cyra mae pagalan">
+<div class="shift-card" data-names="jemrel besere joshe miguel panonce jamilah karen mausisa jeorgiana rose butalon jona mae case palero">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Morning Session</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Cyros Rexes Madura</span><span class="name-tag brother-tag">Vince Syriel Sanico</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Joshe Miguel Panonce</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jesyl Salinas</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jeorgiana Rose Butalon</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Cyra Mae Pagalan</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jamilah Karen Mausisa</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jeorgiana Rose Butalon</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Jona Mae Case Palero</span></div></div></div>
 </div>
 </div>
 </div>
 
-<div class="shift-card" data-names="jeddan jusay ethan razon princess nikee xyle aves merlie jean matunog nicole  altura jonamae degamon elah manto jercel butalon mary grace dasal haidee bulanon marithony clemente jerlie mae morandante">
+<div class="shift-card" data-names="jeddan jusay cyros rexes madura elah manto elexie balaga princess nikee xyle aves rozyville miro johna mae eme erhian gail razon danelyn casicas merlie jean matunog haidee bulanon analyn clemente">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Morning) - 12:55pm</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Jeddan Jusay</span><span class="name-tag brother-tag">Ethan Razon</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Jeddan Jusay</span><span class="name-tag brother-tag">Cyros Rexes Madura</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Princess Nikee Xyle Aves</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Merlie Jean Matunog</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Nicole  Altura</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Jonamae Degamon</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Elah Manto</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Jercel Butalon</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Haidee Bulanon</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Marithony Clemente</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Jerlie Mae Morandante</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Elah Manto</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Princess Nikee Xyle Aves</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Rozyville Miro</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Johna Mae Eme</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Erhian Gail Razon</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Danelyn Casicas</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Merlie Jean Matunog</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Haidee Bulanon</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Analyn Clemente</span></div></div></div>
 </div>
 </div>
 </div>
 
-<div class="shift-card" data-names="jedloyd rosalejos daveryl quiban erhian gail razon elexie balaga johna mae eme faith talavera zared mae laran analyn clemente freuss reign ponce quenette jean de paz ellah tangog de paz rozyville miro">
+<div class="shift-card" data-names="jedloyd rosalejos daveryl quiban zared mae laran jerlie mae morandante marithony clemente faith talavera mary grace dasal jercel butalon ellah tangog de paz nicole  altura quenette jean de paz freuss reign ponce">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">12:55pm - Opening Song (Afternoon)</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
@@ -502,35 +494,35 @@ footer{
 <div class="name-list"><span class="name-tag brother-tag">Jedloyd Rosalejos</span><span class="name-tag brother-tag">Daveryl Quiban</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Erhian Gail Razon</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Johna Mae Eme</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Faith Talavera</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Zared Mae Laran</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Analyn Clemente</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Freuss Reign Ponce</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Quenette Jean De Paz</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Ellah Tangog De Paz</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Rozyville Miro</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Zared Mae Laran</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Jerlie Mae Morandante</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Marithony Clemente</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Faith Talavera</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Jercel Butalon</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Ellah Tangog De Paz</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Nicole  Altura</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Quenette Jean De Paz</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Freuss Reign Ponce</span></div></div></div>
 </div>
 </div>
 </div>
 
-<div class="shift-card" data-names="jeddan jusay jemrel besere jera butalon scheirylene cacao lymarie sermillas">
+<div class="shift-card" data-names="jedloyd rosalejos daveryl quiban kyla marie pagaran schiera jane cacao jera butalon">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Afternoon Session</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Jeddan Jusay</span><span class="name-tag brother-tag">Jemrel Besere</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Jedloyd Rosalejos</span><span class="name-tag brother-tag">Daveryl Quiban</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jera Butalon</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Scheirylene Cacao</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Lymarie Sermillas</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Kyla Marie Pagaran</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Schiera Jane Cacao</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Jera Butalon</span></div></div></div>
 </div>
 </div>
 </div>
 
-<div class="shift-card" data-names="daveryl quiban jedloyd rosalejos johna mae eme faith talavera mary grace dasal erhian gail razon marithony clemente jamilah karen mausisa jerlie mae morandante analyn clemente zared mae laran vea quiban jaye kayla rosal joshe miguel panonce cyros rexes madura vince syriel sanico ethan razon cyra mae pagalan jeorgiana rose butalon jercel butalon">
+<div class="shift-card" data-names="jemrel besere jeddan jusay zared mae laran jona mae case palero jerlie mae morandante marithony clemente vea quiban lymarie sermillas mary grace dasal elexie balaga scheirylene cacao jamilah karen mausisa jaye kayla rosal joshe miguel panonce vince syriel sanico charles russel sanico ethan razon erhian gail razon haidee bulanon cameron diaz">
 <div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Afternoon) - End</span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Daveryl Quiban</span><span class="name-tag brother-tag">Jedloyd Rosalejos</span></div></div>
+<div class="name-list"><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Jeddan Jusay</span></div></div>
 <div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
 <div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Johna Mae Eme</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Faith Talavera</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Erhian Gail Razon</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Marithony Clemente</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Jamilah Karen Mausisa</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Jerlie Mae Morandante</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Analyn Clemente</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Zared Mae Laran</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Vea Quiban</span></div></div></div>
+<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Zared Mae Laran</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Jona Mae Case Palero</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Jerlie Mae Morandante</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Marithony Clemente</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Vea Quiban</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Lymarie Sermillas</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Scheirylene Cacao</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Jamilah Karen Mausisa</span></div></div></div>
 <div class="role-section"><h4><span class="role-accent amber"></span>Counters</h4>
-<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Joshe Miguel Panonce</span><span class="name-tag brother-tag">Cyros Rexes Madura</span><span class="name-tag brother-tag">Vince Syriel Sanico</span><span class="name-tag brother-tag">Ethan Razon</span><span class="name-tag sister-tag">Cyra Mae Pagalan</span><span class="name-tag sister-tag">Jeorgiana Rose Butalon</span><span class="name-tag sister-tag">Jercel Butalon</span></div></div>
+<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Joshe Miguel Panonce</span><span class="name-tag brother-tag">Vince Syriel Sanico</span><span class="name-tag brother-tag">Charles Russel Sanico</span><span class="name-tag brother-tag">Ethan Razon</span><span class="name-tag sister-tag">Erhian Gail Razon</span><span class="name-tag sister-tag">Haidee Bulanon</span><span class="name-tag sister-tag">Cameron Diaz</span></div></div>
 </div>
 </div>
 </div>
