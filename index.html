@@ -9,58 +9,103 @@
 html{font-size:16px;-webkit-text-size-adjust:100%}
 body{
     font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    background:#f8f9fa;
-    color:#1e293b;
+    background:#f0f2f5;
+    color:#1a1a2e;
     line-height:1.5;
 }
 .container{max-width:1040px;margin:0 auto;padding:24px 16px}
 
-/* ── Header ── */
-.topbar{
-    background:#fff;
-    border-bottom:1px solid #e2e8f0;
-    padding:16px 32px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:8px;
+/* ── Navy + Gold Colors ── */
+:root{
+    --navy:#1a2744;
+    --navy-light:#233053;
+    --navy-lighter:#2d3d66;
+    --gold:#c9a84c;
+    --gold-light:#e0c568;
+    --gold-dark:#a88a2e;
+    --gold-bg:rgba(201,168,76,0.08);
+    --gold-bg-hover:rgba(201,168,76,0.15);
 }
-.topbar h1{font-size:18px;font-weight:600;color:#0f172a}
-.topbar h1 span{color:#2563eb}
-.topbar .sub{font-size:13px;color:#64748b}
-header{text-align:center;padding:32px 0 8px}
-header h1{font-size:20px;font-weight:600;color:#0f172a}
-header .subtitle{font-size:13px;color:#64748b;margin-top:4px}
+
+/* ── Header ── */
+header{text-align:center;padding:28px 0 8px}
+header h1{font-size:20px;font-weight:700;color:#1a2744}
+header .subtitle{font-size:13px;color:#6b7280;margin-top:4px}
 header .badge{
     display:inline-flex;
     align-items:center;
     gap:8px;
     margin-top:12px;
-    padding:4px 14px;
-    background:#f1f5f9;
+    padding:5px 16px;
+    background:var(--gold-bg);
+    border:1px solid var(--gold);
     border-radius:100px;
     font-size:12px;
-    color:#64748b;
+    color:#1a2744;
     font-weight:500;
 }
 header .badge-dot{
     display:inline-block;
-    width:6px;height:6px;
+    width:8px;height:8px;
     border-radius:50%;
-    background:#2563eb;
+    background:var(--gold);
 }
-header .badge .brother-count{color:#2563eb;font-weight:600}
-header .badge .sister-count{color:#2563eb;font-weight:600}
+header .badge .brother-count{color:var(--navy);font-weight:700}
+header .badge .sister-count{color:var(--navy);font-weight:700}
+
+/* ── Action Bar ── */
+.action-bar{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin:20px 0 28px;
+    flex-wrap:wrap;
+}
+.btn-print{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 22px;
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    transition:background 0.2s,transform 0.1s;
+}
+.btn-print:hover{background:var(--navy-light);transform:translateY(-1px)}
+.btn-print:active{transform:translateY(0)}
+.btn-print .icon{font-size:16px}
+.btn-share{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 22px;
+    background:var(--gold);
+    color:var(--navy);
+    border:none;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    transition:background 0.2s,transform 0.1s;
+}
+.btn-share:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-share:active{transform:translateY(0)}
 
 /* ── Stats Row ── */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
 .stat-card{
-    background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;
+    background:#fff;border:1px solid #d1d5db;border-radius:10px;padding:16px 20px;
 }
-.stat-card .num{font-size:24px;font-weight:700;letter-spacing:-.02em;color:#0f172a}
-.stat-card .lbl{font-size:12px;color:#64748b;margin-top:2px}
-.stat-card.blue .num{color:#2563eb}
+.stat-card .num{font-size:24px;font-weight:700;letter-spacing:-.02em;color:var(--navy)}
+.stat-card .lbl{font-size:12px;color:#6b7280;margin-top:2px}
+.stat-card.gold .num{color:var(--gold-dark)}
 @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
 
 /* ── Search ── */
@@ -73,72 +118,122 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     border-radius:10px;
     padding:0 14px;
     transition:box-shadow 0.2s;
-    border:1px solid #e2e8f0;
+    border:2px solid #d1d5db;
 }
 .search-input-wrap:focus-within{
-    box-shadow:0 0 0 3px rgba(37,99,235,0.15);
-    border-color:#93c5fd;
+    box-shadow:0 0 0 3px rgba(201,168,76,0.2);
+    border-color:var(--gold);
 }
-.search-input-wrap .icon{font-size:14px;color:#94a3b8;flex-shrink:0}
+.search-input-wrap .icon{font-size:14px;color:#9ca3af;flex-shrink:0}
 .search-input-wrap input{
     flex:1;border:none;background:transparent;
     padding:12px 0;font-size:14px;
-    font-family:inherit;outline:none;color:#1e293b;
+    font-family:inherit;outline:none;color:#1a1a2e;
 }
-.search-input-wrap input::placeholder{color:#94a3b8}
+.search-input-wrap input::placeholder{color:#9ca3af}
 .search-clear{
     display:none;background:none;border:none;
-    color:#94a3b8;font-size:20px;cursor:pointer;
+    color:#9ca3af;font-size:20px;cursor:pointer;
     padding:2px;line-height:1;
 }
-.search-clear:hover{color:#475569}
+.search-clear:hover{color:#4b5563}
 .search-clear.visible{display:block}
 .search-status{
-    font-size:12px;color:#64748b;
+    font-size:12px;color:#6b7280;
     margin-top:10px;min-height:1.4em;text-align:center;
 }
-.search-status strong{color:#0f172a;font-weight:600}
+.search-status strong{color:var(--navy);font-weight:700}
 .search-status .clear-link{
-    color:#2563eb;cursor:pointer;font-weight:500;
+    color:var(--gold-dark);cursor:pointer;font-weight:600;
     margin-left:8px;
 }
 .search-status .clear-link:hover{text-decoration:underline}
 
+/* ── Search Summary Card ── */
+.search-summary{
+    display:none;
+    background:var(--gold-bg);
+    border:1px solid var(--gold);
+    border-radius:12px;
+    padding:18px 22px;
+    margin:0 auto 24px;
+    max-width:600px;
+}
+.search-summary.visible{display:block;animation:fadeIn 0.3s ease}
+.search-summary .summary-name{
+    font-size:18px;font-weight:700;color:var(--navy);margin-bottom:4px;
+}
+.search-summary .summary-count{
+    font-size:14px;color:var(--navy-lighter);margin-bottom:10px;
+}
+.search-summary .summary-count strong{color:var(--navy)}
+.search-summary .summary-list{list-style:none;padding:0;margin:0}
+.search-summary .summary-item{
+    display:flex;align-items:center;gap:10px;
+    padding:8px 12px;background:#fff;border-radius:8px;
+    margin-bottom:6px;border:1px solid rgba(201,168,76,0.2);
+    font-size:13px;color:var(--navy);
+}
+.search-summary .summary-item:last-child{margin-bottom:0}
+.summary-item .sum-day{
+    font-weight:700;color:var(--navy);min-width:70px;
+}
+.summary-item .sum-time{color:#4b5563;flex:1}
+.summary-item .sum-role{
+    font-size:11px;font-weight:600;
+    padding:2px 8px;border-radius:4px;
+    background:var(--gold-bg);color:var(--gold-dark);
+    white-space:nowrap;
+}
+.summary-view-full{
+    display:inline-block;
+    margin-top:10px;
+    font-size:12px;
+    color:var(--gold-dark);
+    font-weight:600;
+    cursor:pointer;
+}
+.summary-view-full:hover{text-decoration:underline}
+
 /* ── Tabs ── */
 .nav-bar{
-    display:flex;gap:4px;margin-bottom:24px;
-    background:#fff;border-radius:10px;padding:4px;
-    border:1px solid #e2e8f0;
+    display:flex;gap:6px;margin-bottom:24px;
+    background:var(--navy);
+    border-radius:12px;
+    padding:6px;
+    box-shadow:0 2px 8px rgba(26,39,68,0.12);
 }
 .tab-btn{
-    flex:1;padding:10px 14px;
+    flex:1;padding:14px 12px;
     background:transparent;border:none;border-radius:8px;
-    cursor:pointer;font-size:13px;font-weight:500;
-    font-family:inherit;color:#64748b;
-    transition:all 0.15s;text-align:center;
+    cursor:pointer;font-size:14px;font-weight:600;
+    font-family:inherit;color:rgba(255,255,255,0.6);
+    transition:all 0.2s;text-align:center;
 }
 .tab-btn small{
-    font-weight:400;font-size:11px;color:#94a3b8;display:block;margin-top:2px;
+    font-weight:400;font-size:11px;color:rgba(255,255,255,0.4);display:block;margin-top:3px;
 }
 .tab-btn.tab-active{
-    background:#2563eb;
-    color:#fff;
+    background:var(--gold);
+    color:var(--navy);
+    box-shadow:0 1px 4px rgba(0,0,0,0.1);
 }
-.tab-btn.tab-active small{color:#bfdbfe}
-.tab-btn:hover:not(.tab-active){background:#f1f5f9;color:#334155}
+.tab-btn.tab-active small{color:var(--navy);font-weight:500}
+.tab-btn:hover:not(.tab-active){background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.85)}
+.tab-btn:hover:not(.tab-active) small{color:rgba(255,255,255,0.6)}
 
 /* ── Day Panels ── */
 .day-panel{display:none}
 .day-panel.active{display:block;animation:fadeIn 0.25s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .section-title{
-    font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
-    color:#94a3b8;margin:24px 0 10px;
+    font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+    color:#6b7280;margin:24px 0 10px;
 }
 
 /* ── Shift Cards ── */
 .shift-card{
-    background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+    background:#fff;border:1px solid #d1d5db;border-radius:10px;
     margin-bottom:10px;overflow:hidden;
     transition:opacity 0.2s,transform 0.2s,max-height 0.35s,margin 0.25s,padding 0.25s;
 }
@@ -147,29 +242,40 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     margin-bottom:0;overflow:hidden;pointer-events:none;padding:0;
 }
 .shift-card.highlighted{
-    border-color:#2563eb;
-    box-shadow:0 0 0 2px rgba(37,99,235,0.12);
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(201,168,76,0.15);
 }
 .shift-header{
-    display:flex;align-items:center;gap:8px;
-    padding:12px 18px;font-weight:600;
-    font-size:13px;color:#0f172a;
-    background:#f8fafc;
-    border-bottom:1px solid #e2e8f0;
+    display:flex;align-items:center;gap:10px;
+    padding:14px 18px;font-weight:700;
+    font-size:13px;color:#fff;
+    background:var(--navy);
+    border-bottom:3px solid var(--gold);
 }
-.shift-header .shift-clock{color:#2563eb;font-size:14px}
+.shift-header .shift-clock{color:var(--gold);font-size:15px;flex-shrink:0}
+.shift-header .shift-time{flex:1}
+.shift-header .shift-time-range{
+    font-weight:400;font-size:11px;color:rgba(255,255,255,0.6);
+    display:block;margin-top:1px;
+}
 .shift-body{padding:14px 18px 16px}
 .shift-body-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 @media(max-width:560px){.shift-body-grid{grid-template-columns:1fr;gap:10px}}
 
 .role-section h4{
-    font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;
-    color:#64748b;margin-bottom:8px;
+    font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    color:#6b7280;margin-bottom:8px;
 }
+.role-section h4 .role-accent{
+    display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;
+}
+.role-section h4 .role-accent.blue{background:var(--navy)}
+.role-section h4 .role-accent.purple{background:var(--gold-dark)}
+.role-section h4 .role-accent.amber{background:var(--gold)}
 .name-list{display:flex;flex-wrap:wrap;gap:5px}
 .name-tag{
     display:inline-flex;align-items:center;
-    padding:4px 10px;border-radius:6px;
+    padding:5px 11px;border-radius:6px;
     font-size:13px;font-weight:500;line-height:1.4;
 }
 .brother-tag{
@@ -190,15 +296,15 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
 }
 .box-num{
     display:inline-flex;align-items:center;justify-content:center;
-    background:#f1f5f9;color:#64748b;font-weight:600;
+    background:#f3f4f6;color:#6b7280;font-weight:700;
     font-size:10px;padding:1px 6px;border-radius:5px;
     min-width:34px;text-align:center;flex-shrink:0;height:18px;
 }
-.box-name{color:#334155}
+.box-name{color:#374151}
 
 /* ── Counters Section ── */
 .counters-section{
-    background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+    background:#fff;border:1px solid #d1d5db;border-radius:10px;
     padding:16px 18px 18px;margin:14px 0;
     transition:opacity 0.2s,transform 0.2s,max-height 0.35s,margin 0.25s,padding 0.25s;
 }
@@ -207,18 +313,18 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     margin:0!important;overflow:hidden;pointer-events:none;padding:0!important;
 }
 .counters-section.highlighted{
-    border-color:#2563eb;
-    box-shadow:0 0 0 2px rgba(37,99,235,0.12);
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(201,168,76,0.15);
 }
 .counters-section .section-title{
-    font-size:13px;font-weight:600;color:#0f172a;margin-bottom:2px;
+    font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;
 }
-.counters-section .section-title .counter-icon{color:#2563eb}
-.section-desc{font-size:12px;color:#64748b;margin-bottom:10px}
+.counters-section .section-title .counter-icon{color:var(--gold-dark)}
+.section-desc{font-size:12px;color:#6b7280;margin-bottom:10px}
 
 /* ── Special Roles ── */
 .special-roles-section{
-    background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+    background:#fff;border:1px solid #d1d5db;border-radius:10px;
     padding:16px 18px 18px;margin:14px 0;
     transition:opacity 0.2s,transform 0.2s,max-height 0.35s,margin 0.25s,padding 0.25s;
 }
@@ -227,24 +333,24 @@ header .badge .sister-count{color:#2563eb;font-weight:600}
     margin:0!important;overflow:hidden;pointer-events:none;padding:0!important;
 }
 .special-roles-section.highlighted{
-    border-color:#2563eb;
-    box-shadow:0 0 0 2px rgba(37,99,235,0.12);
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(201,168,76,0.15);
 }
 .special-roles-section .section-title{
-    font-size:13px;font-weight:600;color:#0f172a;margin-bottom:2px;
+    font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;
 }
 .special-roles-grid{display:flex;flex-wrap:wrap;gap:8px}
 .special-role-item{display:flex;align-items:center;gap:4px}
-.special-role-desc{font-size:12px;color:#64748b}
+.special-role-desc{font-size:12px;color:#6b7280}
 
 /* ── Footer ── */
 footer{
     text-align:center;
     padding:24px 16px 12px;
-    color:#94a3b8;
+    color:#9ca3af;
     font-size:12px;
     margin-top:24px;
-    border-top:1px solid #e2e8f0;
+    border-top:1px solid #d1d5db;
 }
 
 /* ── Print ── */
@@ -253,11 +359,13 @@ footer{
     .container{max-width:100%;padding:0 10px}
     header{padding:20px 0 8px}
     header h1{font-size:16px}
-    header .subtitle,.search-bar,.search-status,.nav-bar{display:none!important}
-    header .badge{background:#f1f1f1!important;color:#333!important;border:1px solid #ddd!important}
+    header .subtitle,.search-bar,.search-status,.search-summary,.action-bar,.nav-bar{display:none!important}
+    header .badge{background:#f1f1f1!important;color:#333!important;border:1px solid #ddd!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    header .badge-dot{background:#999!important}
     .day-panel{display:block!important}
     .shift-card{break-inside:avoid;border:1px solid #ccc!important;border-radius:6px!important}
-    .shift-header{background:#f8f8f8!important;border-bottom:1px solid #ccc!important}
+    .shift-header{background:var(--navy)!important;color:#fff!important;border-bottom:2px solid var(--gold)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .shift-clock{color:var(--gold)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .brother-tag{background:#e8eeff!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .sister-tag{background:#f0e6ff!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .box-num{background:#eee!important;color:#333!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -279,10 +387,14 @@ footer{
     <div class="badge"><span class="badge-dot"></span> <span><span class="brother-count">9</span> Brothers</span> <span>&middot;</span> <span><span class="sister-count">36</span> Sisters</span></div>
 </header>
 <div class="stats">
-<div class="stat-card blue"><div class="num">45</div><div class="lbl">Total Volunteers</div></div>
+<div class="stat-card gold"><div class="num">45</div><div class="lbl">Total Volunteers</div></div>
 <div class="stat-card"><div class="num">9</div><div class="lbl">Brothers</div></div>
 <div class="stat-card"><div class="num">36</div><div class="lbl">Sisters</div></div>
 <div class="stat-card"><div class="num">18</div><div class="lbl">Shifts</div></div>
+</div>
+<div class="action-bar">
+<button class="btn-print" onclick="printSchedule()"><span class="icon">&#x1f5a8;&#xfe0f;</span> Print Schedule</button>
+<button class="btn-share" onclick="showMySchedule()"><span class="icon">&#x1f464;</span> My Schedule</button>
 </div>
 <div class="search-bar">
     <div class="search-input-wrap">
@@ -292,6 +404,7 @@ footer{
     </div>
     <div class="search-status" id="searchStatus"></div>
 </div>
+<div class="search-summary" id="searchSummary"></div>
 <nav class="nav-bar" role="tablist">
 <button class="tab-btn" role="tab" aria-selected="false" onclick="showDay('fri')">Friday<br><small>July 10, 2026</small></button>
 <button class="tab-btn" role="tab" aria-selected="false" onclick="showDay('sat')">Saturday<br><small>July 11, 2026</small></button>
@@ -300,7 +413,7 @@ footer{
 <div id="day-fri" class="day-panel" role="tabpanel">
 <div class="section-title">Friday &mdash; July 10, 2026</div>
 <div class="shift-card" data-names="daveryl quiban jemrel besere lymarie sermillas kyla marie pagaran rozyville miro jonamae degamon johna mae eme ellah tangog de paz zared mae laran scheirylene cacao danelyn casicas vea quiban">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">8:20am - Opening Song (Morning)</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">8:20am - Opening Song (Morning)<span class="shift-time-range">8:20 AM start</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -313,7 +426,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="jedloyd rosalejos jeddan jusay jeorgiana rose butalon faith talavera jerlie mae morandante">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Morning Session</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Morning Session<span class="shift-time-range">During Morning Session</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -326,7 +439,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="daveryl quiban ethan razon lady jane gay johna mae eme merlie jean matunog freuss reign ponce elah manto marithony clemente kyla marie pagaran analyn clemente jercel butalon jera butalon">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Morning) - 12:55pm</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Morning) - 12:55pm<span class="shift-time-range">Before 12:55 PM</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -339,7 +452,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="vince syriel sanico charles russel sanico elexie balaga ellah tangog de paz jonamae degamon zared mae laran rozyville miro quenette jean de paz erhian gail razon princess nikee xyle aves jesyl salinas danelyn casicas">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">12:55pm - Opening Song (Afternoon)</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">12:55pm - Opening Song (Afternoon)<span class="shift-time-range">12:55 PM start</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -352,7 +465,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="jemrel besere cyros rexes madura mary grace dasal lady jane gay jona mae case palero">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Afternoon Session</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Afternoon Session<span class="shift-time-range">During Afternoon Session</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -365,7 +478,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="joshe miguel panonce ethan razon jercel butalon cyra mae quenette jean de paz scheirylene cacao faith talavera jerian nituda jamilah karen mausisa schiera jane cacao erhian gail razon anja raye casicas jaye kayla rosal jedloyd rosalejos marithony clemente merlie jean matunog jerlie mae morandante elah manto analyn clemente vea quiban">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Afternoon) - End</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Afternoon) - End<span class="shift-time-range">Until closing</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -383,7 +496,7 @@ footer{
 <div id="day-sat" class="day-panel" role="tabpanel">
 <div class="section-title">Saturday &mdash; July 11, 2026</div>
 <div class="shift-card" data-names="vince syriel sanico joshe miguel panonce jercel butalon marithony clemente anja raye casicas haidee bulanon kyla marie pagaran jesyl salinas ellah tangog de paz scheirylene cacao elah manto vea quiban">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">8:20am - Opening Song (Morning)</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">8:20am - Opening Song (Morning)<span class="shift-time-range">8:20 AM start</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -396,7 +509,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="jemrel besere charles russel sanico jamilah karen mausisa jeorgiana rose butalon danelyn casicas">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Morning Session</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Morning Session<span class="shift-time-range">During Morning Session</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -409,7 +522,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="jedloyd rosalejos cyros rexes madura nicole  altura jona mae case palero princess nikee xyle aves johna mae eme rozyville miro haidee bulanon jonamae degamon cyra mae quenette jean de paz jerian nituda">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Morning) - 12:55pm</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Morning) - 12:55pm<span class="shift-time-range">Before 12:55 PM</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -422,7 +535,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="charles russel sanico ethan razon ellah tangog de paz erhian gail razon freuss reign ponce faith talavera jerlie mae morandante zared mae laran mary grace dasal analyn clemente lady jane gay merlie jean matunog">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">12:55pm - Opening Song (Afternoon)</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">12:55pm - Opening Song (Afternoon)<span class="shift-time-range">12:55 PM start</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -435,7 +548,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="jeddan jusay daveryl quiban lymarie sermillas jera butalon schiera jane cacao">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Afternoon Session</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Afternoon Session<span class="shift-time-range">During Afternoon Session</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -448,7 +561,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="ethan razon jedloyd rosalejos analyn clemente johna mae eme merlie jean matunog elexie balaga jamilah karen mausisa jerlie mae morandante danelyn casicas cyra mae jercel butalon elah manto jaye kayla rosal jemrel besere joshe miguel panonce cyros rexes madura scheirylene cacao jerian nituda nicole  altura kyla marie pagaran">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Afternoon) - End</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Afternoon) - End<span class="shift-time-range">Until closing</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -466,7 +579,7 @@ footer{
 <div id="day-sun" class="day-panel" role="tabpanel">
 <div class="section-title">Sunday &mdash; July 12, 2026</div>
 <div class="shift-card" data-names="jemrel besere daveryl quiban lymarie sermillas jamilah karen mausisa johna mae eme princess nikee xyle aves vea quiban scheirylene cacao faith talavera jona mae case palero danelyn casicas jesyl salinas">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">8:20am - Opening Song (Morning)</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">8:20am - Opening Song (Morning)<span class="shift-time-range">8:20 AM start</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -479,7 +592,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="cyros rexes madura vince syriel sanico jera butalon kyla marie pagaran anja raye casicas">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Morning Session</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Morning Session<span class="shift-time-range">During Morning Session</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -492,7 +605,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="jeddan jusay jedloyd rosalejos mary grace dasal analyn clemente jerlie mae morandante faith talavera princess nikee xyle aves johna mae eme erhian gail razon marithony clemente elexie balaga zared mae laran">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Morning) - 12:55pm</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Morning) - 12:55pm<span class="shift-time-range">Before 12:55 PM</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -505,7 +618,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="charles russel sanico ethan razon freuss reign ponce merlie jean matunog nicole  altura jonamae degamon ellah tangog de paz haidee bulanon elah manto jercel butalon rozyville miro quenette jean de paz">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">12:55pm - Opening Song (Afternoon)</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">12:55pm - Opening Song (Afternoon)<span class="shift-time-range">12:55 PM start</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -518,7 +631,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="jedloyd rosalejos daveryl quiban jerlie mae morandante scheirylene cacao analyn clemente">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Afternoon Session</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Afternoon Session<span class="shift-time-range">During Afternoon Session</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -531,7 +644,7 @@ footer{
 </div>
 
 <div class="shift-card" data-names="jemrel besere jeddan jusay lymarie sermillas vea quiban jaye kayla rosal zared mae laran elexie balaga erhian gail razon mary grace dasal jamilah karen mausisa jona mae case palero marithony clemente">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Afternoon) - End</span></div>
+<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Afternoon) - End<span class="shift-time-range">Until closing</span></span></div>
 <div class="shift-body">
 <div class="shift-body-grid">
 <div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
@@ -551,6 +664,9 @@ footer{
 </div>
 <script>
 let activeDay = 'fri';
+
+// Pre-built person schedule lookup
+const personSchedule = {'daveryl quiban':[{d:'fri',dl:'Friday',t:'8:20am - Opening Song (Morning)',r:'brother'},{d:'fri',dl:'Friday',t:'Closing Song (Morning) - 12:55pm',r:'brother'},{d:'sat',dl:'Saturday',t:'Afternoon Session',r:'brother'},{d:'sun',dl:'Sunday',t:'Afternoon Session',r:'brother'},{d:'sun',dl:'Sunday',t:'8:20am - Opening Song (Morning)',r:'brother'}],'jemrel besere':[{d:'fri',dl:'Friday',t:'8:20am - Opening Song (Morning)',r:'brother'},{d:'fri',dl:'Friday',t:'Afternoon Session',r:'brother'},{d:'sat',dl:'Saturday',t:'Morning Session',r:'brother'},{d:'sat',dl:'Saturday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'8:20am - Opening Song (Morning)',r:'brother'},{d:'sun',dl:'Sunday',t:'Closing Song (Afternoon) - End',r:'brother'}],'lymarie sermillas':[{d:'fri',dl:'Friday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sat',dl:'Saturday',t:'Afternoon Session',r:'box'},{d:'sun',dl:'Sunday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sun',dl:'Sunday',t:'Closing Song (Afternoon) - End',r:'box'}],'kyla marie pagaran':[{d:'fri',dl:'Friday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'fri',dl:'Friday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sat',dl:'Saturday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sat',dl:'Saturday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'Morning Session',r:'box'}],'rozyville miro':[{d:'fri',dl:'Friday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'fri',dl:'Friday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sun',dl:'Sunday',t:'12:55pm - Opening Song (Afternoon)',r:'box'}],'jonamae degamon':[{d:'fri',dl:'Friday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'fri',dl:'Friday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sun',dl:'Sunday',t:'12:55pm - Opening Song (Afternoon)',r:'box'}],'johna mae eme':[{d:'fri',dl:'Friday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'fri',dl:'Friday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sun',dl:'Sunday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sun',dl:'Sunday',t:'8:20am - Opening Song (Morning)',r:'box'}],'ellah tangog de paz':[{d:'fri',dl:'Friday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'fri',dl:'Friday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sat',dl:'Saturday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sat',dl:'Saturday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sun',dl:'Sunday',t:'12:55pm - Opening Song (Afternoon)',r:'box'}],'zared mae laran':[{d:'fri',dl:'Friday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'fri',dl:'Friday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sat',dl:'Saturday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sun',dl:'Sunday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'Closing Song (Morning) - 12:55pm',r:'box'}],'scheirylene cacao':[{d:'fri',dl:'Friday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'fri',dl:'Friday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sat',dl:'Saturday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sat',dl:'Saturday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'Afternoon Session',r:'box'},{d:'sun',dl:'Sunday',t:'8:20am - Opening Song (Morning)',r:'box'}],'danelyn casicas':[{d:'fri',dl:'Friday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'fri',dl:'Friday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sat',dl:'Saturday',t:'Morning Session',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sun',dl:'Sunday',t:'8:20am - Opening Song (Morning)',r:'box'}],'vea quiban':[{d:'fri',dl:'Friday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'fri',dl:'Friday',t:'Counters',r:'counter'},{d:'sat',dl:'Saturday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sun',dl:'Sunday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sun',dl:'Sunday',t:'Closing Song (Afternoon) - End',r:'box'}],'ethan razon':[{d:'fri',dl:'Friday',t:'Closing Song (Morning) - 12:55pm',r:'brother'},{d:'fri',dl:'Friday',t:'Closing Song (Afternoon) - End',r:'brother'},{d:'sat',dl:'Saturday',t:'12:55pm - Opening Song (Afternoon)',r:'brother'},{d:'sat',dl:'Saturday',t:'Closing Song (Afternoon) - End',r:'brother'},{d:'sun',dl:'Sunday',t:'12:55pm - Opening Song (Afternoon)',r:'brother'}],'lady jane gay':[{d:'fri',dl:'Friday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'fri',dl:'Friday',t:'Afternoon Session',r:'box'},{d:'sat',dl:'Saturday',t:'12:55pm - Opening Song (Afternoon)',r:'box'}],'merlie jean matunog':[{d:'fri',dl:'Friday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'fri',dl:'Friday',t:'Counters',r:'counter'},{d:'sat',dl:'Saturday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sun',dl:'Sunday',t:'12:55pm - Opening Song (Afternoon)',r:'box'}],'freuss reign ponce':[{d:'fri',dl:'Friday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sat',dl:'Saturday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sun',dl:'Sunday',t:'12:55pm - Opening Song (Afternoon)',r:'box'}],'elah manto':[{d:'fri',dl:'Friday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'fri',dl:'Friday',t:'Counters',r:'counter'},{d:'sat',dl:'Saturday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sun',dl:'Sunday',t:'12:55pm - Opening Song (Afternoon)',r:'box'}],'marithony clemente':[{d:'fri',dl:'Friday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'fri',dl:'Friday',t:'Counters',r:'counter'},{d:'sat',dl:'Saturday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sun',dl:'Sunday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'Closing Song (Morning) - 12:55pm',r:'box'}],'analyn clemente':[{d:'fri',dl:'Friday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'fri',dl:'Friday',t:'Counters',r:'counter'},{d:'sat',dl:'Saturday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sun',dl:'Sunday',t:'Afternoon Session',r:'box'},{d:'sun',dl:'Sunday',t:'Closing Song (Morning) - 12:55pm',r:'box'}],'jercel butalon':[{d:'fri',dl:'Friday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'fri',dl:'Friday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sat',dl:'Saturday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sun',dl:'Sunday',t:'12:55pm - Opening Song (Afternoon)',r:'box'}],'jera butalon':[{d:'fri',dl:'Friday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sat',dl:'Saturday',t:'Afternoon Session',r:'box'},{d:'sun',dl:'Sunday',t:'Morning Session',r:'box'}],'vince syriel sanico':[{d:'fri',dl:'Friday',t:'12:55pm - Opening Song (Afternoon)',r:'brother'},{d:'sat',dl:'Saturday',t:'8:20am - Opening Song (Morning)',r:'brother'},{d:'sun',dl:'Sunday',t:'Morning Session',r:'brother'}],'charles russel sanico':[{d:'fri',dl:'Friday',t:'12:55pm - Opening Song (Afternoon)',r:'brother'},{d:'sat',dl:'Saturday',t:'12:55pm - Opening Song (Afternoon)',r:'brother'},{d:'sat',dl:'Saturday',t:'Morning Session',r:'brother'},{d:'sun',dl:'Sunday',t:'12:55pm - Opening Song (Afternoon)',r:'brother'}],'elexie balaga':[{d:'fri',dl:'Friday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sun',dl:'Sunday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'Closing Song (Morning) - 12:55pm',r:'box'}],'quenette jean de paz':[{d:'fri',dl:'Friday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'fri',dl:'Friday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sun',dl:'Sunday',t:'12:55pm - Opening Song (Afternoon)',r:'box'}],'erhian gail razon':[{d:'fri',dl:'Friday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'fri',dl:'Friday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sat',dl:'Saturday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sun',dl:'Sunday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'Closing Song (Morning) - 12:55pm',r:'box'}],'princess nikee xyle aves':[{d:'fri',dl:'Friday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sun',dl:'Sunday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sun',dl:'Sunday',t:'8:20am - Opening Song (Morning)',r:'box'}],'jesyl salinas':[{d:'fri',dl:'Friday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sat',dl:'Saturday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sun',dl:'Sunday',t:'8:20am - Opening Song (Morning)',r:'box'}],'cyros rexes madura':[{d:'fri',dl:'Friday',t:'Afternoon Session',r:'brother'},{d:'sat',dl:'Saturday',t:'Closing Song (Morning) - 12:55pm',r:'brother'},{d:'sat',dl:'Saturday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'Morning Session',r:'brother'}],'mary grace dasal':[{d:'fri',dl:'Friday',t:'Afternoon Session',r:'box'},{d:'sat',dl:'Saturday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sun',dl:'Sunday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'Closing Song (Morning) - 12:55pm',r:'box'}],'jona mae case palero':[{d:'fri',dl:'Friday',t:'Afternoon Session',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sun',dl:'Sunday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'8:20am - Opening Song (Morning)',r:'box'}],'jedloyd rosalejos':[{d:'fri',dl:'Friday',t:'Morning Session',r:'brother'},{d:'fri',dl:'Friday',t:'Counters',r:'counter'},{d:'sat',dl:'Saturday',t:'Closing Song (Morning) - 12:55pm',r:'brother'},{d:'sat',dl:'Saturday',t:'Closing Song (Afternoon) - End',r:'brother'},{d:'sun',dl:'Sunday',t:'Afternoon Session',r:'brother'},{d:'sun',dl:'Sunday',t:'Closing Song (Morning) - 12:55pm',r:'brother'}],'jeddan jusay':[{d:'fri',dl:'Friday',t:'Morning Session',r:'brother'},{d:'sat',dl:'Saturday',t:'Afternoon Session',r:'brother'},{d:'sun',dl:'Sunday',t:'Closing Song (Morning) - 12:55pm',r:'brother'},{d:'sun',dl:'Sunday',t:'Closing Song (Afternoon) - End',r:'brother'}],'jeorgiana rose butalon':[{d:'fri',dl:'Friday',t:'Morning Session',r:'box'},{d:'sat',dl:'Saturday',t:'Morning Session',r:'box'}],'faith talavera':[{d:'fri',dl:'Friday',t:'Morning Session',r:'box'},{d:'fri',dl:'Friday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sat',dl:'Saturday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sun',dl:'Sunday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sun',dl:'Sunday',t:'8:20am - Opening Song (Morning)',r:'box'}],'jerlie mae morandante':[{d:'fri',dl:'Friday',t:'Morning Session',r:'box'},{d:'fri',dl:'Friday',t:'Counters',r:'counter'},{d:'sat',dl:'Saturday',t:'12:55pm - Opening Song (Afternoon)',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sun',dl:'Sunday',t:'Afternoon Session',r:'box'},{d:'sun',dl:'Sunday',t:'Closing Song (Morning) - 12:55pm',r:'box'}],'joshe miguel panonce':[{d:'fri',dl:'Friday',t:'Closing Song (Afternoon) - End',r:'brother'},{d:'sat',dl:'Saturday',t:'8:20am - Opening Song (Morning)',r:'brother'},{d:'sat',dl:'Saturday',t:'Counters',r:'counter'}],'cyra mae':[{d:'fri',dl:'Friday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Afternoon) - End',r:'box'}],'jerian nituda':[{d:'fri',dl:'Friday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sat',dl:'Saturday',t:'Counters',r:'counter'}],'jamilah karen mausisa':[{d:'fri',dl:'Friday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sat',dl:'Saturday',t:'Morning Session',r:'box'},{d:'sat',dl:'Saturday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sun',dl:'Sunday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'8:20am - Opening Song (Morning)',r:'box'}],'schiera jane cacao':[{d:'fri',dl:'Friday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sat',dl:'Saturday',t:'Afternoon Session',r:'box'}],'anja raye casicas':[{d:'fri',dl:'Friday',t:'Closing Song (Afternoon) - End',r:'box'},{d:'sat',dl:'Saturday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sun',dl:'Sunday',t:'Morning Session',r:'box'}],'jaye kayla rosal':[{d:'fri',dl:'Friday',t:'Counters',r:'counter'},{d:'sat',dl:'Saturday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'Counters',r:'counter'}],'nicole  altura':[{d:'sat',dl:'Saturday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sat',dl:'Saturday',t:'Counters',r:'counter'},{d:'sun',dl:'Sunday',t:'12:55pm - Opening Song (Afternoon)',r:'box'}],'haidee bulanon':[{d:'sat',dl:'Saturday',t:'Closing Song (Morning) - 12:55pm',r:'box'},{d:'sat',dl:'Saturday',t:'8:20am - Opening Song (Morning)',r:'box'},{d:'sun',dl:'Sunday',t:'12:55pm - Opening Song (Afternoon)',r:'box'}]};
 
 function showDay(day) {
     activeDay = day;
@@ -576,11 +692,31 @@ document.addEventListener("DOMContentLoaded", function() {
     if (tabs[0]) { tabs[0].classList.add("tab-active"); tabs[0].setAttribute("aria-selected", "true"); }
 });
 
+function printSchedule() {
+    window.print();
+}
+
+function showMySchedule() {
+    const input = document.getElementById("searchInput");
+    const val = input.value.trim();
+    if (!val) {
+        document.getElementById("searchInput").focus();
+        return;
+    }
+    searchNames();
+    // Scroll to summary if visible
+    const summary = document.getElementById("searchSummary");
+    if (summary && summary.classList.contains("visible")) {
+        summary.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+}
+
 function searchNames() {
     const input = document.getElementById("searchInput");
     const filter = input.value.trim().toLowerCase();
     const status = document.getElementById("searchStatus");
     const clearBtn = document.getElementById("searchClear");
+    const summary = document.getElementById("searchSummary");
 
     clearBtn.classList.toggle("visible", filter.length > 0);
 
@@ -593,6 +729,8 @@ function searchNames() {
             el.classList.remove("filtered-out", "highlighted");
         });
         status.innerHTML = '';
+        summary.classList.remove("visible");
+        summary.innerHTML = '';
         return;
     }
 
@@ -632,6 +770,54 @@ function searchNames() {
         if (bestDay !== activeDay) {
             showDay(bestDay);
         }
+    }
+
+    // Build summary card for exact person match
+    let exactPerson = null;
+    const personKeys = Object.keys(personSchedule);
+    for (const key of personKeys) {
+        // Check exact match or first/last name match
+        if (key === filter || key.includes(filter) || filter.includes(key)) {
+            if (!exactPerson || key.length < exactPerson.length) {
+                exactPerson = key;
+            }
+        }
+    }
+
+    if (exactPerson && personSchedule[exactPerson] && personSchedule[exactPerson].length > 0) {
+        const assignments = personSchedule[exactPerson];
+        // Build display name (title case)
+        const displayName = assignments[0].dl + ' ' + assignments[0].t;
+        const nameParts = exactPerson.split(' ');
+        const properName = nameParts.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+        
+        let html = '<div class="summary-name">' + escHtml(properName) + '</div>';
+        html += '<div class="summary-count">You have <strong>' + assignments.length + ' shift(s)</strong>:</div>';
+        html += '<ul class="summary-list">';
+        
+        // Sort by day order
+        const dayOrder = {'fri': 0, 'sat': 1, 'sun': 2};
+        assignments.sort((a, b) => dayOrder[a.d] - dayOrder[b.d]);
+        
+        for (const a of assignments) {
+            let roleLabel = '';
+            if (a.r === 'brother') roleLabel = 'Key Brother';
+            else if (a.r === 'counter') roleLabel = 'Counter';
+            else roleLabel = 'Box Attendant';
+            html += '<li class="summary-item">';
+            html += '<span class="sum-day">' + escHtml(a.dl) + '</span>';
+            html += '<span class="sum-time">' + escHtml(a.t) + '</span>';
+            html += '<span class="sum-role">' + roleLabel + '</span>';
+            html += '</li>';
+        }
+        html += '</ul>';
+        html += '<span class="summary-view-full" onclick="showDay(\'' + assignments[0].d + '\')">View full schedule &rarr;</span>';
+        
+        summary.innerHTML = html;
+        summary.classList.add("visible");
+    } else {
+        summary.classList.remove("visible");
+        summary.innerHTML = '';
     }
 
     if (matchCount > 0) {
