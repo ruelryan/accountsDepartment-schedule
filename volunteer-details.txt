@@ -1,7 +1,7 @@
 ====================================================================================================
 ACCOUNTS DEPARTMENT PUBLISHERS — NOT AVAILABLE SCHEDULE + WEBSITE SCHEDULE
 Source: Google Sheet tabs Volunteer List, Schedule conflict, Assignments | Updated 2026-07-04
-Total publishers: 68
+Total publishers: 69
 ====================================================================================================
 
 ── Jedloyd Rosalejos (Brother) ──
@@ -674,9 +674,13 @@ Total publishers: 68
       ▸ Sun | 8:20am - Opening Song (Morning) — Key Brother
       ▸ Sun | Morning Session — Key Brother
 
+── Noren Cruzada (Sister) ──
+   ✅ NO NOT-AVAILABLE SCHEDULE LISTED
+   ❌ NO WEBSITE SCHEDULE
+
 ====================================================================================================
 SUMMARY
 Publishers with at least one not-available entry: 59
 Publishers with website schedule: 67
-Publishers without website schedule: 1
+Publishers without website schedule: 2
 ====================================================================================================
