@@ -216,9 +216,8 @@ Total publishers: 69
 
 ── Zared Mae Laran (Sister) ──
    ✅ NO NOT-AVAILABLE SCHEDULE LISTED
-   📋 WEBSITE SCHEDULE (4 duties):
+   📋 WEBSITE SCHEDULE (3 duties):
       ▸ Fri | 12:55pm - Opening Song (Afternoon) — Box Attendant Box 1
-      ▸ Sat | Closing Song (Morning) - 12:55pm — Box Attendant Box 8
       ▸ Sun | Closing Song (Morning) - 12:55pm — Box Attendant Box 7
       ▸ Sun | Closing Song (Afternoon) - End — Box Attendant Box 4
 
@@ -591,8 +590,7 @@ Total publishers: 69
 
 ── Johna Mae Eme (Sister) ──
    ✅ NO NOT-AVAILABLE SCHEDULE LISTED
-   📋 WEBSITE SCHEDULE (4 duties):
-      ▸ Fri | 8:20am - Opening Song (Morning) — Box Attendant Box 7
+   📋 WEBSITE SCHEDULE (3 duties):
       ▸ Sat | 8:20am - Opening Song (Morning) — Box Attendant Box 6
       ▸ Sun | Closing Song (Morning) - 12:55pm — Box Attendant Box 6
       ▸ Sun | Closing Song (Afternoon) - End — Counter
@@ -600,11 +598,10 @@ Total publishers: 69
 ── Faith Talavera (Sister) ──
    ❌ NOT AVAILABLE:
       • Friday Morning (Shift 1)
-   📋 WEBSITE SCHEDULE (4 duties):
+   📋 WEBSITE SCHEDULE (3 duties):
       ▸ Fri | 12:55pm - Opening Song (Afternoon) — Box Attendant Box 8
       ▸ Sat | Morning Session — Box Attendant Box 10
       ▸ Sun | 12:55pm - Opening Song (Afternoon) — Box Attendant Box 2
-      ▸ Sun | Closing Song (Afternoon) - End — Box Attendant Box 10
 
 ── Jonamae Degamon (Sister) ──
    ❌ NOT AVAILABLE:
@@ -676,11 +673,14 @@ Total publishers: 69
 
 ── Noren Cruzada (Sister) ──
    ✅ NO NOT-AVAILABLE SCHEDULE LISTED
-   ❌ NO WEBSITE SCHEDULE
+   📋 WEBSITE SCHEDULE (3 duties):
+      ▸ Fri | 8:20am - Opening Song (Morning) — Box Attendant Box 7
+      ▸ Sat | Closing Song (Morning) - 12:55pm — Box Attendant Box 8
+      ▸ Sun | Closing Song (Afternoon) - End — Box Attendant Box 10
 
 ====================================================================================================
 SUMMARY
 Publishers with at least one not-available entry: 59
-Publishers with website schedule: 67
-Publishers without website schedule: 2
+Publishers with website schedule: 68
+Publishers without website schedule: 1
 ====================================================================================================
