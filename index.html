@@ -4,741 +4,224 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Accounts Department Volunteers &mdash; July 10-12, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{font-size:16px;-webkit-text-size-adjust:100%}
-body{
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;
-    background:#f0f2f5;
-    color:#0d1b2a;
-    line-height:1.5;
+:root{
+  --bg:#FAFAF7; --surface:#FFFFFF; --ink:#1B2420; --muted:#68716C;
+  --faint:#9AA29D; --line:#E6E6DF; --accent:#2E6B4F; --accent-soft:#EDF3EF;
+  --sister:#8A6230; --sister-soft:#F6F0E7;
 }
-.container{max-width:1040px;margin:0 auto;padding:24px 16px}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Public Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.55;font-size:15px;
+}
+.mono{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+.container{max-width:880px;margin:0 auto;padding:0 20px 64px}
 
-/* ── Header with Teal-to-Purple Gradient ── */
-header{
-    text-align:center;
-    padding:48px 0 32px;
+/* ── Header ── */
+header{padding:56px 0 28px;border-bottom:1px solid var(--line)}
+.eyebrow{
+  font-family:'IBM Plex Mono',ui-monospace,monospace;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;
 }
 header h1{
-    font-size:24px;font-weight:700;color:#0d1b2a;
-    margin-bottom:4px;
+  font-family:'Sora',sans-serif;font-weight:600;
+  font-size:clamp(24px,4.6vw,34px);letter-spacing:-0.02em;line-height:1.15;
 }
+.header-meta{margin-top:8px;font-size:13px;color:var(--muted)}
+.legend{display:flex;gap:18px;margin-top:16px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0}
+.dot-b{background:var(--accent)} .dot-s{background:var(--sister)}
 
-/* ── Search ── */
-.search-bar{max-width:480px;margin:0 auto 28px}
+/* ── Controls ── */
+.controls{
+  position:sticky;top:0;z-index:10;background:var(--bg);
+  padding:16px 0 14px;border-bottom:1px solid var(--line);
+}
+.controls-inner{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.nav-bar{display:inline-flex;border:1px solid var(--line);border-radius:8px;background:var(--surface);overflow:hidden}
+.tab-btn{
+  padding:9px 18px;border:none;background:transparent;cursor:pointer;
+  font-family:inherit;font-size:13px;font-weight:500;color:var(--muted);
+  border-right:1px solid var(--line);transition:background .15s,color .15s;
+}
+.tab-btn:last-child{border-right:none}
+.tab-btn small{display:block;font-size:10.5px;font-weight:400;color:var(--faint);margin-top:1px}
+.tab-btn:hover:not(.tab-active){color:var(--ink)}
+.tab-btn.tab-active{background:var(--ink);color:#fff}
+.tab-btn.tab-active small{color:rgba(255,255,255,.65)}
+.tab-btn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+.search-bar{flex:1;min-width:220px}
 .search-input-wrap{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    background:#fff;
-    border-radius:12px;
-    padding:0 14px;
-    transition:box-shadow 0.2s;
-    border:1px solid #e2e8f0;
+  display:flex;align-items:center;gap:8px;background:var(--surface);
+  border:1px solid var(--line);border-radius:8px;padding:0 12px;
+  transition:border-color .15s,box-shadow .15s;
 }
-.search-input-wrap:focus-within{
-    box-shadow:0 0 0 3px rgba(0,199,183,0.15);
-    border-color:#00c7b7;
-}
-.search-input-wrap .icon{font-size:14px;color:#94a3b8;flex-shrink:0}
+.search-input-wrap:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.search-input-wrap .icon{color:var(--faint);flex-shrink:0;display:flex}
 .search-input-wrap input{
-    flex:1;border:none;background:transparent;
-    padding:12px 0;font-size:14px;
-    font-family:inherit;outline:none;color:#0d1b2a;
+  flex:1;border:none;background:transparent;padding:10px 0;
+  font-size:14px;font-family:inherit;outline:none;color:var(--ink);
 }
-.search-input-wrap input::placeholder{color:#94a3b8}
+.search-input-wrap input::placeholder{color:var(--faint)}
 .search-clear{
-    display:none;background:none;border:none;
-    color:#94a3b8;font-size:20px;cursor:pointer;
-    padding:2px;line-height:1;
+  display:none;background:none;border:none;color:var(--faint);
+  font-size:18px;cursor:pointer;padding:2px;line-height:1;
 }
-.search-clear:hover{color:#475569}
+.search-clear:hover{color:var(--ink)}
 .search-clear.visible{display:block}
-.search-status{
-    font-size:12px;color:#64748b;
-    margin-top:10px;min-height:1.4em;text-align:center;
-}
-.search-status strong{color:#0d1b2a;font-weight:600}
-.search-status .clear-link{
-    color:#00c7b7;cursor:pointer;font-weight:500;
-    margin-left:8px;
-}
+.search-status{font-size:12.5px;color:var(--muted);margin-top:8px;min-height:1.4em}
+.search-status strong{color:var(--ink);font-weight:600}
+.search-status .clear-link{color:var(--accent);cursor:pointer;font-weight:500;margin-left:6px}
 .search-status .clear-link:hover{text-decoration:underline}
 
-/* ── Search Name Display ── */
 .search-result-name{
-    text-align:center;
-    margin:0 auto 20px;
-    min-height:0;
-    overflow:hidden;
-    transition:min-height 0.25s ease,margin 0.25s ease,opacity 0.2s ease;
-    opacity:0;
-    max-height:0;
+  overflow:hidden;transition:max-height .25s ease,opacity .2s ease,margin .25s ease;
+  opacity:0;max-height:0;
 }
-.search-result-name.visible{
-    opacity:1;
-    max-height:60px;
-    min-height:32px;
-}
-.search-result-name h2{
-    font-size:22px;font-weight:700;color:#0d1b2a;
-    margin:0;
-}
-.search-result-name h2 span{
-    background:linear-gradient(135deg,#00c7b7,#7c3aed);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-}
+.search-result-name.visible{opacity:1;max-height:60px;margin-top:6px}
+.search-result-name h2{font-family:'Sora',sans-serif;font-size:16px;font-weight:600}
+.search-result-name h2 span{color:var(--accent)}
 
-/* ── Tabs (Netlify Pill Style) ── */
-.nav-bar{
-    display:flex;gap:6px;margin-bottom:24px;justify-content:center;
-}
-.tab-btn{
-    padding:10px 28px;
-    background:#fff;border:1px solid #e2e8f0;border-radius:100px;
-    cursor:pointer;font-size:13px;font-weight:500;
-    font-family:inherit;color:#64748b;
-    transition:all 0.2s;text-align:center;
-}
-.tab-btn small{
-    font-weight:400;font-size:11px;color:#94a3b8;display:block;margin-top:2px;
-}
-.tab-btn.tab-active{
-    background:linear-gradient(135deg,#00c7b7,#7c3aed);
-    color:#fff;border-color:transparent;
-    box-shadow:0 4px 14px rgba(0,199,183,0.25);
-}
-.tab-btn.tab-active small{color:rgba(255,255,255,0.8)}
-.tab-btn:hover:not(.tab-active){border-color:#00c7b7;color:#0d1b2a}
-
-/* ── Day Panels ── */
+/* ── Day panels ── */
 .day-panel{display:none}
-.day-panel.active{display:block;animation:fadeIn 0.25s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.day-panel.active{display:block;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  .day-panel.active{animation:none}
+  .search-result-name,.shift-card,.special-roles-section{transition:none}
+}
 .section-title{
-    font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
-    color:#94a3b8;margin:24px 0 10px;
+  font-family:'IBM Plex Mono',ui-monospace,monospace;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--faint);margin:32px 0 4px;
 }
 
-/* ── Shift Cards ── */
+/* ── Shift rows ── */
 .shift-card{
-    background:#fff;border:1px solid #e2e8f0;border-radius:12px;
-    margin-bottom:10px;overflow:hidden;
-    transition:opacity 0.2s,transform 0.2s,max-height 0.35s,margin 0.25s,padding 0.25s;
+  border-bottom:1px solid var(--line);padding:22px 0 24px;
+  transition:opacity .2s,max-height .3s,padding .25s;
 }
-.shift-card.filtered-out{
-    opacity:0;transform:translateY(-4px) scale(0.98);max-height:0!important;
-    margin-bottom:0;overflow:hidden;pointer-events:none;padding:0;
+.shift-card.filtered-out,.special-roles-section.filtered-out{
+  opacity:0;max-height:0!important;padding:0!important;margin:0!important;
+  overflow:hidden;pointer-events:none;border-bottom:none;
 }
-.shift-card.highlighted{
-    border-color:#00c7b7;
-    box-shadow:0 0 0 2px rgba(0,199,183,0.15);
+.shift-card.highlighted .shift-num{
+  display:inline-block;color:var(--accent);font-weight:500;
+  margin-right:12px;padding-right:12px;border-right:1px solid var(--line);
 }
-.shift-header{
-    display:flex;align-items:center;gap:8px;
-    padding:12px 18px;font-weight:600;
-    font-size:13px;color:#0d1b2a;
-    background:linear-gradient(135deg,rgba(0,199,183,0.06),rgba(124,58,237,0.06));
-    border-bottom:1px solid #e2e8f0;
+.shift-time{color:var(--accent)}
+.shift-card.highlighted{box-shadow:inset 3px 0 0 var(--accent);padding-left:16px}
+.shift-num{
+  display:inline-block;color:var(--accent);font-weight:500;
+  margin-right:12px;padding-right:12px;border-right:1px solid var(--line);
 }
-.shift-header .shift-clock{color:#7c3aed;font-size:14px}
-.shift-body{padding:14px 18px 16px}
-.shift-body-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
-@media(max-width:560px){.shift-body-grid{grid-template-columns:1fr;gap:10px}}
-
+.shift-time{
+  font-family:'IBM Plex Mono',ui-monospace,monospace;
+  font-size:13px;font-weight:500;color:var(--ink);
+  display:block;margin-bottom:14px;letter-spacing:.01em;
+}
+.shift-body-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:28px;align-items:start}
+@media(max-width:600px){.shift-body-grid{grid-template-columns:1fr;gap:16px}}
 .role-section h4{
-    font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;
-    color:#64748b;margin-bottom:8px;
+  font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted);margin-bottom:8px;
 }
-.name-list{display:flex;flex-wrap:wrap;gap:5px}
-.name-tag{
-    display:inline-flex;align-items:center;
-    padding:6px 14px;border-radius:8px;
-    font-size:13px;font-weight:500;line-height:1.4;
-    min-width:0;height:auto;
+.name-list{display:flex;flex-wrap:wrap;gap:4px 14px}
+.name-tag{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;color:var(--ink)}
+.name-tag::before{content:"";width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.name-tag.name-hit{
+  background:#FFF3C4;border-radius:4px;padding:1px 6px 1px 4px;
+  box-shadow:0 0 0 1px #EBD98A;font-weight:600;
 }
-.brother-tag{
-    background:rgba(0,199,183,0.08);color:#0f5e5a;
-    border:1px solid rgba(0,199,183,0.25);
-}
-.sister-tag{
-    background:rgba(124,58,237,0.08);color:#5b21b6;
-    border:1px solid rgba(124,58,237,0.2);
-}
+.brother-tag::before{background:var(--accent)}
+.sister-tag::before{background:var(--sister)}
 
-/* ── Box Grid ── */
-.box-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px}
-@media(max-width:380px){.box-grid{grid-template-columns:1fr}}
-.box-row{
-    display:flex;align-items:center;gap:5px;
-    padding:2px 0;font-size:13px;
-}
+.box-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px 18px}
+@media(max-width:420px){.box-grid{grid-template-columns:1fr}}
+.box-row{display:flex;align-items:baseline;gap:8px;font-size:13.5px}
 .box-num{
-    display:inline-flex;align-items:center;justify-content:center;
-    background:#f1f5f9;color:#64748b;font-weight:600;
-    font-size:10px;padding:1px 6px;border-radius:5px;
-    min-width:34px;text-align:center;flex-shrink:0;height:18px;
+  font-family:'IBM Plex Mono',ui-monospace,monospace;
+  font-size:11px;color:var(--faint);min-width:22px;flex-shrink:0;
 }
-.box-name{color:#334155}
+.box-row .name-tag{font-size:13.5px}
 
-/* ── Counters Section ── */
-.counters-section{
-    background:#fff;border:1px solid #e2e8f0;border-radius:12px;
-    padding:16px 18px 18px;margin:14px 0;
-    transition:opacity 0.2s,transform 0.2s,max-height 0.35s,margin 0.25s,padding 0.25s;
-}
-.counters-section.filtered-out{
-    opacity:0;transform:translateY(-4px) scale(0.98);max-height:0!important;
-    margin:0!important;overflow:hidden;pointer-events:none;padding:0!important;
-}
-.counters-section.highlighted{
-    border-color:#00c7b7;
-    box-shadow:0 0 0 2px rgba(0,199,183,0.12);
-}
-.counters-section .section-title{
-    font-size:13px;font-weight:600;color:#0d1b2a;margin-bottom:2px;
-}
-.counters-section .section-title .counter-icon{color:#7c3aed}
-.section-desc{font-size:12px;color:#64748b;margin-bottom:10px}
-
-/* ── Special Roles ── */
+/* ── Special roles ── */
 .special-roles-section{
-    background:#fff;border:1px solid #e2e8f0;border-radius:12px;
-    padding:16px 18px 18px;margin:14px 0;
-    transition:opacity 0.2s,transform 0.2s,max-height 0.35s,margin 0.25s,padding 0.25s;
+  margin-top:40px;padding:20px 22px;background:var(--surface);
+  border:1px solid var(--line);border-radius:10px;
+  transition:opacity .2s,max-height .3s,padding .25s,margin .25s;
 }
-.special-roles-section.filtered-out{
-    opacity:0;transform:translateY(-4px) scale(0.98);max-height:0!important;
-    margin:0!important;overflow:hidden;pointer-events:none;padding:0!important;
-}
-.special-roles-section.highlighted{
-    border-color:#00c7b7;
-    box-shadow:0 0 0 2px rgba(0,199,183,0.12);
-}
-.special-roles-section .section-title{
-    font-size:13px;font-weight:600;color:#0d1b2a;margin-bottom:2px;
-}
-.special-roles-grid{display:flex;flex-wrap:wrap;gap:8px}
-.special-role-item{display:flex;align-items:center;gap:4px}
-.special-role-desc{font-size:12px;color:#64748b}
-
-/* ── Footer ── */
-footer{
-    text-align:center;
-    padding:24px 16px 12px;
-    color:#94a3b8;
-    font-size:12px;
-    margin-top:24px;
-    border-top:1px solid #e2e8f0;
-}
+.special-roles-section.highlighted{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.special-roles-section .section-title{margin:0 0 2px}
+.section-desc{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+.special-roles-grid{display:flex;flex-direction:column;gap:6px}
+.special-role-item{display:flex;align-items:baseline;gap:8px;font-size:13.5px}
+.special-role-desc{color:var(--muted);font-size:12.5px}
 
 /* ── Print ── */
 @media print{
-    body{background:#fff!important;color:#000!important}
-    .container{max-width:100%;padding:0 10px}
-    header{padding:20px 0 8px}
-    header h1{font-size:16px}
-    header .search-bar,.search-status,.search-result-name,.nav-bar{display:none!important}
-    .day-panel{display:block!important}
-    .shift-card{break-inside:avoid;border:1px solid #ccc!important;border-radius:8px!important}
-    .shift-header{background:#f8f8f8!important;border-bottom:1px solid #ccc!important}
-    .brother-tag{background:rgba(0,199,183,0.08)!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    .sister-tag{background:rgba(124,58,237,0.08)!important;color:#000!important;border-color:#ccc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    .box-num{background:#eee!important;color:#333!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    .counters-section,.special-roles-section{break-inside:avoid;border:1px solid #ccc!important}
-    .shift-card.filtered-out,.counters-section.filtered-out,.special-roles-section.filtered-out{
-        opacity:1!important;transform:none!important;max-height:none!important;
-        margin:inherit!important;overflow:visible!important;pointer-events:auto!important;
-        padding:inherit!important;
-    }
-    footer{color:#999!important;border-top-color:#ccc!important}
+  body{background:#fff;font-size:12px}
+  .controls,.search-status,.search-result-name{display:none!important}
+  header{padding:10px 0}
+  .day-panel{display:block!important}
+  .shift-card{break-inside:avoid;padding:12px 0}
+  .special-roles-section{break-inside:avoid;border:1px solid #ccc}
+  .shift-card.filtered-out,.special-roles-section.filtered-out{
+    opacity:1!important;max-height:none!important;overflow:visible!important;
+    padding:12px 0!important;margin:0!important;pointer-events:auto!important;
+    border-bottom:1px solid #ddd!important;
+  }
+  .name-tag::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .name-tag.name-hit{background:#FFF3C4!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
 </head>
 <body>
 <div class="container">
 <header>
-    <h1>Accounts Department Volunteers</h1>
+  <div class="eyebrow">Convention &middot; July 10&ndash;12, 2026</div>
+  <h1>Accounts Department<br>Volunteer Schedule</h1>
+  <div class="header-meta">Shift assignments for key brothers, box attendants, and counters</div>
+  <div class="legend">
+    <span><span class="dot dot-b"></span>Brothers</span>
+    <span><span class="dot dot-s"></span>Sisters</span>
+  </div>
 </header>
-<div class="search-bar">
-    <div class="search-input-wrap">
-        <span class="icon">&#x1F50D;</span>
+
+<div class="controls">
+  <div class="controls-inner">
+    <nav class="nav-bar" role="tablist">
+      <button class="tab-btn tab-active" data-day="fri" role="tab" aria-selected="true" onclick="showDay('fri')">Friday<br><small>July 10, 2026</small></button>
+      <button class="tab-btn" data-day="sat" role="tab" aria-selected="false" onclick="showDay('sat')">Saturday<br><small>July 11, 2026</small></button>
+      <button class="tab-btn" data-day="sun" role="tab" aria-selected="false" onclick="showDay('sun')">Sunday<br><small>July 12, 2026</small></button>
+    </nav>
+    <div class="search-bar">
+      <div class="search-input-wrap">
+        <span class="icon" aria-hidden="true">&#x1F50D;</span>
         <input type="text" id="searchInput" oninput="searchNames()" placeholder="Search for a name&hellip;" autocomplete="off">
-        <button class="search-clear" id="searchClear" onclick="clearSearch()">&times;</button>
+        <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="Clear search">&times;</button>
+      </div>
+      <div class="search-status" id="searchStatus">Loading live schedule from Google Sheets&hellip;</div>
+      <div class="search-result-name" id="searchResultName">
+        <h2>Showing schedule for: <span id="searchNameDisplay"></span></h2>
+      </div>
     </div>
-    <div class="search-status" id="searchStatus"></div>
-    <div class="search-result-name" id="searchResultName">
-      <h2>Showing schedule for: <span id="searchNameDisplay"></span></h2>
-    </div>
-</div>
-<nav class="nav-bar" role="tablist">
-<button class="tab-btn" role="tab" aria-selected="false" onclick="showDay('fri')">Friday<br><small>July 10, 2026</small></button>
-<button class="tab-btn" role="tab" aria-selected="false" onclick="showDay('sat')">Saturday<br><small>July 11, 2026</small></button>
-<button class="tab-btn" role="tab" aria-selected="false" onclick="showDay('sun')">Sunday<br><small>July 12, 2026</small></button>
-</nav>
-<div id="day-fri" class="day-panel" role="tabpanel">
-<div class="section-title">Friday &mdash; July 10, 2026</div>
-<div class="shift-card" data-names="cyros rexes madura daveryl quiban jerlie mae morandante quenette jean de paz keziah bautista rozyville miro jesyl salinas merlie jean matunog jerian nituda elah manto kyla marie pagaran schiera jane cacao">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">8:20am - Opening Song (Morning)</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Cyros Rexes Madura</span><span class="name-tag brother-tag">Daveryl Quiban</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Jerlie Mae Morandante</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Quenette Jean De Paz</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Keziah Bautista</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Rozyville Miro</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Jesyl Salinas</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Merlie Jean Matunog</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Jerian Nituda</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Elah Manto</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Kyla Marie Pagaran</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Schiera Jane Cacao</span></div></div></div>
-</div>
-</div>
+  </div>
 </div>
 
-<div class="shift-card" data-names="cyros rexes madura daveryl quiban lady jane gay jonamae degamon jona mae case palero">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Morning Session</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Cyros Rexes Madura</span><span class="name-tag brother-tag">Daveryl Quiban</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Lady Jane Gay</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jonamae Degamon</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Jona Mae Case Palero</span></div></div></div>
+<div id="day-fri" class="day-panel active" role="tabpanel"><div class="shift-card">Loading Friday schedule&hellip;</div></div>
+<div id="day-sat" class="day-panel" role="tabpanel"><div class="shift-card">Loading Saturday schedule&hellip;</div></div>
+<div id="day-sun" class="day-panel" role="tabpanel"><div class="shift-card">Loading Sunday schedule&hellip;</div></div>
+<div class="special-roles-section" id="oversight-section" data-names=""></div>
 </div>
-</div>
-</div>
-
-<div class="shift-card" data-names="charles russel sanico jedloyd rosalejos freuss reign ponce danelyn casicas jerlie mae morandante mary grace dasal elah manto princess nikee xyle aves kristel serena marithony clemente elexie balaga cyra mae pagalan">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Morning) - 12:55pm</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Charles Russel Sanico</span><span class="name-tag brother-tag">Jedloyd Rosalejos</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Freuss Reign Ponce</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Danelyn Casicas</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Jerlie Mae Morandante</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Elah Manto</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Princess Nikee Xyle Aves</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Kristel Serena</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Marithony Clemente</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Cyra Mae Pagalan</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="jemrel besere cyros rexes madura ellah tangog de paz anja raye casicas erhian gail razon jerian nituda relyn carino jesyl salinas johna mae eme reslie carino quenette jean de paz lady jane gay">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">12:55pm - Opening Song (Afternoon)</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Cyros Rexes Madura</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Ellah Tangog De Paz</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Anja Raye Casicas</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Erhian Gail Razon</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Jerian Nituda</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Relyn Carino</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Jesyl Salinas</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Johna Mae Eme</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Reslie Carino</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Quenette Jean De Paz</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Lady Jane Gay</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="jemrel besere cyros rexes madura vea quiban caroline labra cameron diaz">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Afternoon Session</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Cyros Rexes Madura</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Vea Quiban</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Caroline Labra</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Cameron Diaz</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="remdrant mepania ethan razon elexie balaga princess nikee xyle aves rovelyn pagaran jamilah karen mausisa ashley balaga ellah tangog de paz scheirylene cacao andrea joyce gulay johna mae eme carina labra jaye kayla rosal jedloyd rosalejos joshe miguel panonce daveryl quiban john carlo jusay jona mae case palero marithony clemente cyra mae pagalan">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Afternoon) - End</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Remdrant Mepania</span><span class="name-tag brother-tag">Ethan Razon</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Princess Nikee Xyle Aves</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Rovelyn Pagaran</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Jamilah Karen Mausisa</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Ashley Balaga</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Ellah Tangog De Paz</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Scheirylene Cacao</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Andrea Joyce Gulay</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Johna Mae Eme</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Carina Labra</span></div></div></div>
-<div class="role-section"><h4><span class="role-accent amber"></span>Counters</h4>
-<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Jedloyd Rosalejos</span><span class="name-tag brother-tag">Joshe Miguel Panonce</span><span class="name-tag brother-tag">Daveryl Quiban</span><span class="name-tag brother-tag">John Carlo Jusay</span><span class="name-tag sister-tag">Jona Mae Case Palero</span><span class="name-tag sister-tag">Marithony Clemente</span><span class="name-tag sister-tag">Cyra Mae Pagalan</span></div></div>
-</div>
-</div>
-</div>
-
-</div>
-<div id="day-sat" class="day-panel" role="tabpanel">
-<div class="section-title">Saturday &mdash; July 11, 2026</div>
-<div class="shift-card" data-names="vince syriel sanico jemrel besere jeorgiana rose butalon jera butalon ellah tangog de paz johna mae eme freuss reign ponce erhian gail razon jerlie mae morandante lymarie sermillas jercel butalon zared mae laran">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">8:20am - Opening Song (Morning)</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Vince Syriel Sanico</span><span class="name-tag brother-tag">Jemrel Besere</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Jeorgiana Rose Butalon</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Jera Butalon</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Ellah Tangog De Paz</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Johna Mae Eme</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Freuss Reign Ponce</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Erhian Gail Razon</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Jerlie Mae Morandante</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Lymarie Sermillas</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jercel Butalon</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Zared Mae Laran</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="vince syriel sanico jemrel besere mary grace dasal schiera jane cacao kyla marie pagaran">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Morning Session</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Vince Syriel Sanico</span><span class="name-tag brother-tag">Jemrel Besere</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Schiera Jane Cacao</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Kyla Marie Pagaran</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="andie balicastro ethan razon erika mae malbas jona mae case palero elah manto nicole  altura zared mae laran quenette jean de paz lady jane gay carina labra haidee bulanon caroline labra">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Morning) - 12:55pm</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Andie Balicastro</span><span class="name-tag brother-tag">Ethan Razon</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Erika Mae Malbas</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Jona Mae Case Palero</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Elah Manto</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Nicole  Altura</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Zared Mae Laran</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Quenette Jean De Paz</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Lady Jane Gay</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Carina Labra</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Haidee Bulanon</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Caroline Labra</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="rinard fandiño jeddan jusay faith talavera idylla ando marithony clemente jerian nituda kristel joy pagalan jonamae degamon analyn clemente erhian gail razon cyra mae pagalan keziah bautista">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">12:55pm - Opening Song (Afternoon)</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Rinard Fandiño</span><span class="name-tag brother-tag">Jeddan Jusay</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Faith Talavera</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Idylla Ando</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Marithony Clemente</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Jerian Nituda</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Kristel Joy Pagalan</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Jonamae Degamon</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Analyn Clemente</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Erhian Gail Razon</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Cyra Mae Pagalan</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Keziah Bautista</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="rinard fandiño jeddan jusay ashley balaga danelyn casicas michelle balaga">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Afternoon Session</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Rinard Fandiño</span><span class="name-tag brother-tag">Jeddan Jusay</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Ashley Balaga</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Danelyn Casicas</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Michelle Balaga</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="ethan razon john carlo jusay ashley faith cacao lady jane gay karylle altura anja raye casicas dahlia villaruel jalel villamor ellah tangog de paz schiera jane cacao vea quiban mary grace dasal jaye kayla rosal jemrel besere remdrant mepania cyros rexes madura jedloyd rosalejos relyn carino jercel butalon cameron diaz">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Afternoon) - End</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Ethan Razon</span><span class="name-tag brother-tag">John Carlo Jusay</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Ashley Faith Cacao</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Lady Jane Gay</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Karylle Altura</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Anja Raye Casicas</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Dahlia Villaruel</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Jalel Villamor</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Ellah Tangog De Paz</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Schiera Jane Cacao</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Vea Quiban</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div></div></div>
-<div class="role-section"><h4><span class="role-accent amber"></span>Counters</h4>
-<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Remdrant Mepania</span><span class="name-tag brother-tag">Cyros Rexes Madura</span><span class="name-tag brother-tag">Jedloyd Rosalejos</span><span class="name-tag sister-tag">Relyn Carino</span><span class="name-tag sister-tag">Jercel Butalon</span><span class="name-tag sister-tag">Cameron Diaz</span></div></div>
-</div>
-</div>
-</div>
-
-</div>
-<div id="day-sun" class="day-panel" role="tabpanel">
-<div class="section-title">Sunday &mdash; July 12, 2026</div>
-<div class="shift-card" data-names="jemrel besere jeddan jusay rozyville miro anja raye casicas jamilah karen mausisa jesyl salinas quenette jean de paz jera butalon cyra mae pagalan ellah tangog de paz vea quiban schiera jane cacao">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">8:20am - Opening Song (Morning)</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Jeddan Jusay</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Rozyville Miro</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Anja Raye Casicas</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Jamilah Karen Mausisa</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Jesyl Salinas</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Quenette Jean De Paz</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Jera Butalon</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Cyra Mae Pagalan</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Ellah Tangog De Paz</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Vea Quiban</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Schiera Jane Cacao</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="jemrel besere jeddan jusay haidee bulanon jonamae degamon lymarie sermillas">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Morning Session</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag brother-tag">Jeddan Jusay</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Haidee Bulanon</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jonamae Degamon</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Lymarie Sermillas</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="ethan razon joshe miguel panonce caroline labra faith talavera erika mae malbas freuss reign ponce jerlie mae morandante merlie jean matunog princess nikee xyle aves danelyn casicas mary grace dasal idylla ando">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Morning) - 12:55pm</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Ethan Razon</span><span class="name-tag brother-tag">Joshe Miguel Panonce</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Caroline Labra</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Faith Talavera</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Erika Mae Malbas</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Freuss Reign Ponce</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Jerlie Mae Morandante</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Merlie Jean Matunog</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Princess Nikee Xyle Aves</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Danelyn Casicas</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Idylla Ando</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="daveryl quiban jedloyd rosalejos johna mae eme carina labra elexie balaga analyn clemente erhian gail razon rozyville miro nicole  altura jercel butalon cameron diaz elah manto">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">12:55pm - Opening Song (Afternoon)</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Daveryl Quiban</span><span class="name-tag brother-tag">Jedloyd Rosalejos</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Johna Mae Eme</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Carina Labra</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Analyn Clemente</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Erhian Gail Razon</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Rozyville Miro</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Nicole  Altura</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jercel Butalon</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Cameron Diaz</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Elah Manto</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="jona mae case palero zared mae laran marithony clemente">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Afternoon Session</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Jona Mae Case Palero</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Zared Mae Laran</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Marithony Clemente</span></div></div></div>
-</div>
-</div>
-</div>
-
-<div class="shift-card" data-names="remdrant mepania daveryl quiban ashley faith cacao andrea joyce gulay mary grace dasal faith talavera rovelyn pagaran scheirylene cacao princess nikee xyle aves erhian gail razon jamilah karen mausisa elexie balaga jaye kayla rosal jeddan jusay jemrel besere jerlie mae morandante vea quiban caroline labra lymarie sermillas">
-<div class="shift-header"><span class="shift-clock">&#x1f552;</span><span class="shift-time">Closing Song (Afternoon) - End</span></div>
-<div class="shift-body">
-<div class="shift-body-grid">
-<div class="role-section"><h4><span class="role-accent blue"></span>Key Brothers</h4>
-<div class="name-list"><span class="name-tag brother-tag">Remdrant Mepania</span><span class="name-tag brother-tag">Daveryl Quiban</span></div></div>
-<div class="role-section"><h4><span class="role-accent purple"></span>Box Attendants</h4>
-<div class="box-grid">
-<div class="box-row"><span class="box-num">Box 1</span><span class="box-name name-tag sister-tag">Ashley Faith Cacao</span></div><div class="box-row"><span class="box-num">Box 2</span><span class="box-name name-tag sister-tag">Andrea Joyce Gulay</span></div><div class="box-row"><span class="box-num">Box 3</span><span class="box-name name-tag sister-tag">Mary Grace Dasal</span></div><div class="box-row"><span class="box-num">Box 4</span><span class="box-name name-tag sister-tag">Faith Talavera</span></div><div class="box-row"><span class="box-num">Box 5</span><span class="box-name name-tag sister-tag">Rovelyn Pagaran</span></div><div class="box-row"><span class="box-num">Box 6</span><span class="box-name name-tag sister-tag">Scheirylene Cacao</span></div><div class="box-row"><span class="box-num">Box 7</span><span class="box-name name-tag sister-tag">Princess Nikee Xyle Aves</span></div><div class="box-row"><span class="box-num">Box 8</span><span class="box-name name-tag sister-tag">Erhian Gail Razon</span></div><div class="box-row"><span class="box-num">Box 9</span><span class="box-name name-tag sister-tag">Jamilah Karen Mausisa</span></div><div class="box-row"><span class="box-num">Box 10</span><span class="box-name name-tag sister-tag">Elexie Balaga</span></div></div></div>
-<div class="role-section"><h4><span class="role-accent amber"></span>Counters</h4>
-<div class="name-list"><span class="name-tag sister-tag">Jaye Kayla Rosal</span><span class="name-tag brother-tag">Jeddan Jusay</span><span class="name-tag brother-tag">Jemrel Besere</span><span class="name-tag sister-tag">Jerlie Mae Morandante</span><span class="name-tag sister-tag">Vea Quiban</span><span class="name-tag sister-tag">Caroline Labra</span><span class="name-tag sister-tag">Lymarie Sermillas</span></div></div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="special-roles-section" data-names="dale lao flores gomer dohiling">
-<h2 class="section-title">&#x1f6ce;&#xfe0f; Special Roles</h2>
-<p class="section-desc">These volunteers serve in non-shift capacities</p>
-<div class="special-roles-grid">
-<div class="special-role-item"><span class="name-tag brother-tag">Dale Lao Flores</span> <span class="special-role-desc">— Transport &amp; Messenger</span></div>
-<div class="special-role-item"><span class="name-tag brother-tag">Gomer Dohiling</span> <span class="special-role-desc">— Transport &amp; Messenger</span></div>
-</div>
-</div>
-
-<footer>Generated with conflict checking &mdash; Accounts Department</footer>
-</div>
-<script>
-let activeDay = 'fri';
-
-const VOLUNTEER_NAMES = [
-    "Analyn Clemente",
-    "Andie Balicastro",
-    "Andrea Joyce Gulay",
-    "Anja Raye Casicas",
-    "Ashley Balaga",
-    "Ashley Faith Cacao",
-    "Cameron Diaz",
-    "Carina Labra",
-    "Caroline Labra",
-    "Charles Russel Sanico",
-    "Cyra Mae Pagalan",
-    "Cyros Rexes Madura",
-    "Dahlia Villaruel",
-    "Danelyn Casicas",
-    "Daveryl Quiban",
-    "Elah Manto",
-    "Elexie Balaga",
-    "Ellah Tangog De Paz",
-    "Erhian Gail Razon",
-    "Erika Mae Malbas",
-    "Ethan Razon",
-    "Faith Talavera",
-    "Freuss Reign Ponce",
-    "Haidee Bulanon",
-    "Idylla Ando",
-    "Jalel Villamor",
-    "Jamilah Karen Mausisa",
-    "Jaye Kayla Rosal",
-    "Jeddan Jusay",
-    "Jedloyd Rosalejos",
-    "Jemrel Besere",
-    "Jeorgiana Rose Butalon",
-    "Jera Butalon",
-    "Jercel Butalon",
-    "Jerian Nituda",
-    "Jerlie Mae Morandante",
-    "Jesyl Salinas",
-    "John Carlo Jusay",
-    "Johna Mae Eme",
-    "Jona Mae Case Palero",
-    "Jonamae Degamon",
-    "Joshe Miguel Panonce",
-    "Karylle Altura",
-    "Keziah Bautista",
-    "Kristel Joy Pagalan",
-    "Kristel Serena",
-    "Kyla Marie Pagaran",
-    "Lady Jane Gay",
-    "Lymarie Sermillas",
-    "Marithony Clemente",
-    "Mary Grace Dasal",
-    "Merlie Jean Matunog",
-    "Michelle Balaga",
-    "Nicole  Altura",
-    "Princess Nikee Xyle Aves",
-    "Quenette Jean De Paz",
-    "Relyn Carino",
-    "Remdrant Mepania",
-    "Reslie Carino",
-    "Rinard Fandiño",
-    "Rovelyn Pagaran",
-    "Rozyville Miro",
-    "Ruel Ryan Rosal",
-    "Scheirylene Cacao",
-    "Schiera Jane Cacao",
-    "Vea Quiban",
-    "Vince Syriel Sanico",
-    "Zared Mae Laran",
-];
-
-function showDay(day) {
-    activeDay = day;
-    document.querySelectorAll(".day-panel").forEach(p => p.classList.remove("active"));
-    document.querySelectorAll(".tab-btn").forEach(b => {
-        b.classList.remove("tab-active");
-        b.setAttribute("aria-selected", "false");
-    });
-    document.getElementById("day-" + day).classList.add("active");
-    const tabs = document.querySelectorAll(".tab-btn");
-    const tabMap = {fri: 0, sat: 1, sun: 2};
-    const idx = tabMap[day];
-    if (idx !== undefined && tabs[idx]) {
-        tabs[idx].classList.add("tab-active");
-        tabs[idx].setAttribute("aria-selected", "true");
-    }
-    // Re-run search on day switch to keep filtered state
-    searchNames();
-}
-
-// Show first day panel by default
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("day-fri").classList.add("active");
-    const tabs = document.querySelectorAll(".tab-btn");
-    if (tabs[0]) { tabs[0].classList.add("tab-active"); tabs[0].setAttribute("aria-selected", "true"); }
-});
-
-function searchNames() {
-    const input = document.getElementById("searchInput");
-    const filter = input.value.trim().toLowerCase();
-    const status = document.getElementById("searchStatus");
-    const clearBtn = document.getElementById("searchClear");
-    const nameHeading = document.getElementById("searchResultName");
-    const nameDisplay = document.getElementById("searchNameDisplay");
-
-    // Show/hide clear button
-    clearBtn.classList.toggle("visible", filter.length > 0);
-
-    // Target all filterable sections
-    const sections = document.querySelectorAll(
-        ".shift-card, .counters-section, .special-roles-section"
-    );
-
-    if (!filter) {
-        // Show everything
-        sections.forEach(el => {
-            el.classList.remove("filtered-out", "highlighted");
-        });
-        status.innerHTML = '';
-        nameHeading.classList.remove("visible");
-        return;
-    }
-
-    // Check for exact volunteer name match
-    const exactMatch = VOLUNTEER_NAMES.find(
-        name => name.toLowerCase() === filter
-    );
-    if (exactMatch) {
-        nameDisplay.textContent = exactMatch;
-        nameHeading.classList.add("visible");
-    } else {
-        nameHeading.classList.remove("visible");
-    }
-
-    // Count matches per day panel
-    const dayMatches = {fri: 0, sat: 0, sun: 0};
-    let matchCount = 0;
-    const dayPanelMap = {'day-fri': 'fri', 'day-sat': 'sat', 'day-sun': 'sun'};
-    
-    sections.forEach(el => {
-        const names = (el.getAttribute("data-names") || "").toLowerCase();
-        if (names.includes(filter)) {
-            el.classList.remove("filtered-out");
-            el.classList.add("highlighted");
-            matchCount++;
-            // Find which day panel this section belongs to
-            let parent = el.closest('.day-panel');
-            if (parent && parent.id in dayPanelMap) {
-                dayMatches[dayPanelMap[parent.id]]++;
-            } else {
-                // Counters/special are visible on all days — count for all
-                dayMatches.fri++;
-                dayMatches.sat++;
-                dayMatches.sun++;
-            }
-        } else {
-            el.classList.add("filtered-out");
-            el.classList.remove("highlighted");
-        }
-    });
-
-    // Auto-switch to the day with the most matches
-    if (matchCount > 0) {
-        let bestDay = activeDay;
-        let bestCount = 0;
-        for (const [d, cnt] of Object.entries(dayMatches)) {
-            if (cnt > bestCount) {
-                bestCount = cnt;
-                bestDay = d;
-            }
-        }
-        if (bestDay !== activeDay) {
-            showDay(bestDay);
-        }
-    }
-
-    if (matchCount > 0) {
-        status.innerHTML = 'Showing <strong>' + matchCount + '</strong> section(s) for "<strong>' +
-            escHtml(filter) + '</strong>" <span class="clear-link" onclick="clearSearch()">Show all</span>';
-    } else {
-        status.innerHTML = 'No sections found for "<strong>' +
-            escHtml(filter) + '</strong>" <span class="clear-link" onclick="clearSearch()">Clear</span>';
-    }
-}
-
-function clearSearch() {
-    document.getElementById("searchInput").value = '';
-    document.getElementById("searchResultName").classList.remove("visible");
-    searchNames();
-    document.getElementById("searchInput").focus();
-}
-
-function escHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-}
-</script>
+<script src="app.js"></script>
 </body>
 </html>
