@@ -7,7 +7,7 @@ const SHIFT_LABEL={shift1:"8:20am - Opening Song (Morning)",morningsession:"Morn
 const SHIFT_PREFIX={shift1:"Shift 1",morningsession:"Special Shift",shift2:"Shift 2",shift3:"Shift 3",afternoonsession:"Special Shift",shift4:"Shift 4"};
 const SHIFT_CONFLICT={shift1:"shift1",morningsession:"shift1",shift2:"shift23",shift3:"shift23",afternoonsession:"shift4counters",shift4:"shift4counters"};
 const CONFLICT_COLS=[["fri","shift1"],["fri","shift23"],["fri","shift4counters"],["sat","shift1"],["sat","shift23"],["sat","shift4counters"],["sun","shift1"],["sun","shift23"],["sun","shift4counters"]];
-const SESSION_BOXES=[8,9,10], FULL_BOXES=[1,2,3,4,5,6,7,8,9,10], NUM_BROTHERS=2, NUM_COUNTERS=8;
+const SESSION_BOXES=[8,9,10], FULL_BOXES=[1,2,3,4,5,6,7,8,9,10], NUM_BROTHERS=2, NUM_COUNTERS=7;
 const SPECIAL_ROLES={"Dale Lao Flores":"Counting Overseer","Gomer Dohiling":"Box Overseer","Ruel Ryan Rosal":"Accounts Overseer"};
 const EXCLUDED=new Set(Object.keys(SPECIAL_ROLES)), RESTRICTED_TO_COUNTERS=new Set(["Jaye Kayla Rosal"]);
 let activeDay="fri", VOLUNTEER_NAMES=[];
